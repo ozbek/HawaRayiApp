@@ -26,7 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.android.sunshine.app.R;
-import com.shagalalab.weather.sync.SunshineSyncAdapter;
+import com.shagalalab.weather.sync.HawaRayiSyncAdapter;
 
 public class MainActivity extends ActionBarActivity implements ForecastFragment.Callback {
 
@@ -58,7 +58,7 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
         // The OpenWeather API update the data every 3 hours.
         // Since we are automatate the data loading, a periodic sync is scheduled and every 3 hours
         // the data is retrieved.
-        SunshineSyncAdapter.initializeSyncAdapter(this);
+        HawaRayiSyncAdapter.initializeSyncAdapter(this);
     }
 
     @Override

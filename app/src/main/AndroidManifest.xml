@@ -50,7 +50,7 @@
             android:syncable="true" />
 
         <!-- SyncAdapter's dummy authentication service -->
-        <service android:name="com.shagalalab.weather.sync.SunshineAuthenticatorService">
+        <service android:name="com.shagalalab.weather.sync.HawaRayiAuthenticatorService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
             </intent-filter>
@@ -61,7 +61,7 @@
 
         <!-- The syncadapter service -->
         <service
-            android:name="com.shagalalab.weather.sync.SunshineSyncService"
+            android:name="com.shagalalab.weather.sync.HawaRayiSyncService"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.content.SyncAdapter" />

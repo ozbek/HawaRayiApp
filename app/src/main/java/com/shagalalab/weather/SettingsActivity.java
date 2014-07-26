@@ -23,7 +23,7 @@ import android.preference.PreferenceManager;
 
 import com.example.android.sunshine.app.R;
 import com.shagalalab.weather.data.WeatherContract;
-import com.shagalalab.weather.sync.SunshineSyncAdapter;
+import com.shagalalab.weather.sync.HawaRayiSyncAdapter;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings.
@@ -79,7 +79,7 @@ public class SettingsActivity extends PreferenceActivity
 
         if (!mBindingPreference) {
             if ( preference.getKey().equals(getString(R.string.pref_location_key))) {
-                SunshineSyncAdapter.syncImmediately(this);
+                HawaRayiSyncAdapter.syncImmediately(this);
             } else {
                 // notify code that weather may be effected
                 getContentResolver().notifyChange(WeatherContract.WeatherEntry.CONTENT_URI, null);

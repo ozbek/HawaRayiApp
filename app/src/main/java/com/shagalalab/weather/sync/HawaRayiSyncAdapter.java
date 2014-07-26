@@ -42,10 +42,10 @@ import java.net.URL;
 import java.util.Date;
 import java.util.Vector;
 
-public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
+public class HawaRayiSyncAdapter extends AbstractThreadedSyncAdapter {
     private static final long DAY_IN_MILLIS = 1000 * 60 * 60 * 24;
     private static final int WEATHER_NOTIFICATION_ID = 3004;
-    public final String LOG_TAG = SunshineSyncAdapter.class.getSimpleName();
+    public final String LOG_TAG = HawaRayiSyncAdapter.class.getSimpleName();
 
     // Interval at which to sync with the weather, in milliseconds.
     // 1000 milliseconds (1 second) * 60 seconds (1 minute) * 180 = 3 hours
@@ -54,7 +54,7 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
 
     private final Context mContext;
 
-    public SunshineSyncAdapter(Context context, boolean autoInitialize) {
+    public HawaRayiSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
         Log.d(LOG_TAG, "Creating SyncAdapter");
         mContext = context;
@@ -454,7 +454,7 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
     private static void onAccountCreated(Account newAccount, Context context) {
 
         // Schedule the sync for periodic execution
-        SunshineSyncAdapter.configurePeriodicSync(context, SYNC_INTERVAL, SYNC_FLEXTIME);
+        HawaRayiSyncAdapter.configurePeriodicSync(context, SYNC_INTERVAL, SYNC_FLEXTIME);
 
         // Without calling setSyncAutomatically, our periodic sync will not be enabled.
         ContentResolver.setSyncAutomatically(newAccount, context.getString(R.string.content_authority), true);

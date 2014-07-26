@@ -33,7 +33,7 @@ import android.widget.ListView;
 
 import com.example.android.sunshine.app.R;
 import com.shagalalab.weather.data.WeatherContract;
-import com.shagalalab.weather.sync.SunshineSyncAdapter;
+import com.shagalalab.weather.sync.HawaRayiSyncAdapter;
 
 import java.util.Date;
 
@@ -221,7 +221,7 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (data.getCount() == 0) {
-            SunshineSyncAdapter.syncImmediately(getActivity());
+            HawaRayiSyncAdapter.syncImmediately(getActivity());
         }
         mForecastAdapter.swapCursor(data);
         if (mPosition != ListView.INVALID_POSITION) {
