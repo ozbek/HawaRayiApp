@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.android.sunshine.app.data;
+package com.shagalalab.weather.data;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;

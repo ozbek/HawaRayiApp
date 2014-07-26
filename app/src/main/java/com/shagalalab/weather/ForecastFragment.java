@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.android.sunshine.app;
+package com.shagalalab.weather;
 
 import android.database.Cursor;
 import android.net.Uri;
@@ -31,10 +31,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.android.sunshine.app.data.WeatherContract;
-import com.example.android.sunshine.app.data.WeatherContract.LocationEntry;
-import com.example.android.sunshine.app.data.WeatherContract.WeatherEntry;
-import com.example.android.sunshine.app.sync.SunshineSyncAdapter;
+import com.example.android.sunshine.app.R;
+import com.shagalalab.weather.data.WeatherContract;
+import com.shagalalab.weather.sync.SunshineSyncAdapter;
 
 import java.util.Date;
 
@@ -63,13 +62,13 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
             // On the one hand, that's annoying.  On the other, you can search the weather table
             // using the location set by the user, which is only in the Location table.
             // So the convenience is worth it.
-            WeatherEntry.TABLE_NAME + "." + WeatherEntry._ID,
-            WeatherEntry.COLUMN_DATETEXT,
-            WeatherEntry.COLUMN_SHORT_DESC,
-            WeatherEntry.COLUMN_MAX_TEMP,
-            WeatherEntry.COLUMN_MIN_TEMP,
-            LocationEntry.COLUMN_LOCATION_SETTING,
-            WeatherEntry.COLUMN_WEATHER_ID
+            WeatherContract.WeatherEntry.TABLE_NAME + "." + WeatherContract.WeatherEntry._ID,
+            WeatherContract.WeatherEntry.COLUMN_DATETEXT,
+            WeatherContract.WeatherEntry.COLUMN_SHORT_DESC,
+            WeatherContract.WeatherEntry.COLUMN_MAX_TEMP,
+            WeatherContract.WeatherEntry.COLUMN_MIN_TEMP,
+            WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING,
+            WeatherContract.WeatherEntry.COLUMN_WEATHER_ID
     };
 
 
@@ -201,10 +200,10 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
         String startDate = WeatherContract.getDbDateString(new Date());
 
         // Sort order:  Ascending, by date.
-        String sortOrder = WeatherEntry.COLUMN_DATETEXT + " ASC";
+        String sortOrder = WeatherContract.WeatherEntry.COLUMN_DATETEXT + " ASC";
 
         mLocation = Utility.getPreferredLocation(getActivity());
-        Uri weatherForLocationUri = WeatherEntry.buildWeatherLocationWithStartDate(
+        Uri weatherForLocationUri = WeatherContract.WeatherEntry.buildWeatherLocationWithStartDate(
                 mLocation, startDate);
 
         // Now create and return a CursorLoader that will take care of

@@ -1,4 +1,4 @@
-package com.example.android.sunshine.app.sync;
+package com.shagalalab.weather.sync;
 
 import android.app.Service;
 import android.content.Intent;

@@ -21,9 +21,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.test.AndroidTestCase;
 import android.util.Log;
 
-import com.example.android.sunshine.app.data.WeatherContract.LocationEntry;
-import com.example.android.sunshine.app.data.WeatherContract.WeatherEntry;
-import com.example.android.sunshine.app.data.WeatherDbHelper;
+import com.shagalalab.weather.data.WeatherContract.LocationEntry;
+import com.shagalalab.weather.data.WeatherContract.WeatherEntry;
+import com.shagalalab.weather.data.WeatherDbHelper;
 
 import java.util.Map;
 import java.util.Set;

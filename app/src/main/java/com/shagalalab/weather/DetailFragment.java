@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.android.sunshine.app;
+package com.shagalalab.weather;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -35,8 +35,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.sunshine.app.data.WeatherContract;
-import com.example.android.sunshine.app.data.WeatherContract.WeatherEntry;
+import com.example.android.sunshine.app.R;
+import com.shagalalab.weather.data.WeatherContract;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -57,16 +57,16 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     private static final int DETAIL_LOADER = 0;
 
     private static final String[] FORECAST_COLUMNS = {
-            WeatherEntry.TABLE_NAME + "." + WeatherEntry._ID,
-            WeatherEntry.COLUMN_DATETEXT,
-            WeatherEntry.COLUMN_SHORT_DESC,
-            WeatherEntry.COLUMN_MAX_TEMP,
-            WeatherEntry.COLUMN_MIN_TEMP,
-            WeatherEntry.COLUMN_HUMIDITY,
-            WeatherEntry.COLUMN_PRESSURE,
-            WeatherEntry.COLUMN_WIND_SPEED,
-            WeatherEntry.COLUMN_DEGREES,
-            WeatherEntry.COLUMN_WEATHER_ID,
+            WeatherContract.WeatherEntry.TABLE_NAME + "." + WeatherContract.WeatherEntry._ID,
+            WeatherContract.WeatherEntry.COLUMN_DATETEXT,
+            WeatherContract.WeatherEntry.COLUMN_SHORT_DESC,
+            WeatherContract.WeatherEntry.COLUMN_MAX_TEMP,
+            WeatherContract.WeatherEntry.COLUMN_MIN_TEMP,
+            WeatherContract.WeatherEntry.COLUMN_HUMIDITY,
+            WeatherContract.WeatherEntry.COLUMN_PRESSURE,
+            WeatherContract.WeatherEntry.COLUMN_WIND_SPEED,
+            WeatherContract.WeatherEntry.COLUMN_DEGREES,
+            WeatherContract.WeatherEntry.COLUMN_WEATHER_ID,
             // This works because the WeatherProvider returns location data joined with
             // weather data, even though they're stored in two different tables.
             WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING
@@ -191,12 +191,12 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (data != null && data.moveToFirst()) {
             // Read weather condition ID from cursor
-            int weatherId = data.getInt(data.getColumnIndex(WeatherEntry.COLUMN_WEATHER_ID));
+            int weatherId = data.getInt(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_WEATHER_ID));
             // Use weather art image
             mIconView.setImageResource(Utility.getArtResourceForWeatherCondition(weatherId));
 
             // Read date from cursor and update views for day of week and date
-            String date = data.getString(data.getColumnIndex(WeatherEntry.COLUMN_DATETEXT));
+            String date = data.getString(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_DATETEXT));
             String friendlyDateText = Utility.getDayName(getActivity(), date);
             String dateText = Utility.getFormattedMonthDay(getActivity(), date);
             mFriendlyDateView.setText(friendlyDateText);
@@ -204,32 +204,32 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
             // Read description from cursor and update view
             String description = data.getString(data.getColumnIndex(
-                    WeatherEntry.COLUMN_SHORT_DESC));
+                    WeatherContract.WeatherEntry.COLUMN_SHORT_DESC));
             mDescriptionView.setText(description);
 
             // Read high temperature from cursor and update view
             boolean isMetric = Utility.isMetric(getActivity());
 
-            double high = data.getDouble(data.getColumnIndex(WeatherEntry.COLUMN_MAX_TEMP));
+            double high = data.getDouble(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_MAX_TEMP));
             String highString = Utility.formatTemperature(getActivity(), high, isMetric);
             mHighTempView.setText(highString);
 
             // Read low temperature from cursor and update view
-            double low = data.getDouble(data.getColumnIndex(WeatherEntry.COLUMN_MIN_TEMP));
+            double low = data.getDouble(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_MIN_TEMP));
             String lowString = Utility.formatTemperature(getActivity(), low, isMetric);
             mLowTempView.setText(lowString);
 
             // Read humidity from cursor and update view
-            float humidity = data.getFloat(data.getColumnIndex(WeatherEntry.COLUMN_HUMIDITY));
+            float humidity = data.getFloat(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_HUMIDITY));
             mHumidityView.setText(getActivity().getString(R.string.format_humidity, humidity));
 
             // Read wind speed and direction from cursor and update view
-            float windSpeedStr = data.getFloat(data.getColumnIndex(WeatherEntry.COLUMN_WIND_SPEED));
-            float windDirStr = data.getFloat(data.getColumnIndex(WeatherEntry.COLUMN_DEGREES));
+            float windSpeedStr = data.getFloat(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_WIND_SPEED));
+            float windDirStr = data.getFloat(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_DEGREES));
             mWindView.setText(Utility.getFormattedWind(getActivity(), windSpeedStr, windDirStr));
 
             // Read pressure from cursor and update view
-            float pressure = data.getFloat(data.getColumnIndex(WeatherEntry.COLUMN_PRESSURE));
+            float pressure = data.getFloat(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_PRESSURE));
             mPressureView.setText(getActivity().getString(R.string.format_pressure, pressure));
 
             mForecastStr = String.format("%s - %s - %s/%s",

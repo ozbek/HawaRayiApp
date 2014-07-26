@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.android.sunshine.app;
+package com.shagalalab.weather;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,7 +25,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.android.sunshine.app.sync.SunshineSyncAdapter;
+import com.example.android.sunshine.app.R;
+import com.shagalalab.weather.sync.SunshineSyncAdapter;
 
 public class MainActivity extends ActionBarActivity implements ForecastFragment.Callback {
 

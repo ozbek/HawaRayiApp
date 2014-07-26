@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.android.sunshine.app;
+package com.shagalalab.weather;
 
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -21,8 +21,9 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 
-import com.example.android.sunshine.app.data.WeatherContract;
-import com.example.android.sunshine.app.sync.SunshineSyncAdapter;
+import com.example.android.sunshine.app.R;
+import com.shagalalab.weather.data.WeatherContract;
+import com.shagalalab.weather.sync.SunshineSyncAdapter;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings.
