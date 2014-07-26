@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.sunshine.app.R;
+import com.shagalalab.weather.R;
 
 /**
  * {@link ForecastAdapter} exposes a list of weather forecasts
@@ -102,16 +102,13 @@ public class ForecastAdapter extends CursorAdapter {
         // Find TextView and set weather forecast on it
         viewHolder.descriptionView.setText(description);
 
-        // Read user preference for metric or imperial temperature units
-        boolean isMetric = Utility.isMetric(context);
-
         // Read high temperature from cursor
         double high = cursor.getDouble(ForecastFragment.COL_WEATHER_MAX_TEMP);
-        viewHolder.highTempView.setText(Utility.formatTemperature(context, high, isMetric));
+        viewHolder.highTempView.setText(Utility.formatTemperature(context, high));
 
         // Read low temperature from cursor
         double low = cursor.getDouble(ForecastFragment.COL_WEATHER_MIN_TEMP);
-        viewHolder.lowTempView.setText(Utility.formatTemperature(context, low, isMetric));
+        viewHolder.lowTempView.setText(Utility.formatTemperature(context, low));
     }
 
     public void setUseTodayLayout(boolean useTodayLayout) {

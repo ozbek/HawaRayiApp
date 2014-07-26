@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.android.sunshine.app" >
+    package="com.shagalalab.weather" >
 
     <!-- This permission is necessary in order for Sunshine to perform network access. -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -33,7 +33,7 @@
             android:parentActivityName="com.shagalalab.weather.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.sunshine.app.MainActivity" />
+                android:value="com.shagalalab.weather.MainActivity" />
         </activity>
         <activity
             android:label="@string/title_activity_settings"
@@ -41,7 +41,7 @@
             android:parentActivityName="com.shagalalab.weather.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.sunshine.app.MainActivity" />
+                android:value="com.shagalalab.weather.MainActivity" />
         </activity>
         <provider
             android:authorities="@string/content_authority"

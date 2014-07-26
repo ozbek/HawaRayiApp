@@ -35,7 +35,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.sunshine.app.R;
+import com.shagalalab.weather.R;
 import com.shagalalab.weather.data.WeatherContract;
 
 /**
@@ -208,15 +208,13 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             mDescriptionView.setText(description);
 
             // Read high temperature from cursor and update view
-            boolean isMetric = Utility.isMetric(getActivity());
-
             double high = data.getDouble(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_MAX_TEMP));
-            String highString = Utility.formatTemperature(getActivity(), high, isMetric);
+            String highString = Utility.formatTemperature(getActivity(), high);
             mHighTempView.setText(highString);
 
             // Read low temperature from cursor and update view
             double low = data.getDouble(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_MIN_TEMP));
-            String lowString = Utility.formatTemperature(getActivity(), low, isMetric);
+            String lowString = Utility.formatTemperature(getActivity(), low);
             mLowTempView.setText(lowString);
 
             // Read humidity from cursor and update view

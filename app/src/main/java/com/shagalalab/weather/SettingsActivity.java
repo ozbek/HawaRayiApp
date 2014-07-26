@@ -21,7 +21,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 
-import com.example.android.sunshine.app.R;
+import com.shagalalab.weather.R;
 import com.shagalalab.weather.data.WeatherContract;
 import com.shagalalab.weather.sync.HawaRayiSyncAdapter;
 
@@ -49,7 +49,6 @@ public class SettingsActivity extends PreferenceActivity
         // For all preferences, attach an OnPreferenceChangeListener so the UI summary can be
         // updated when the preference changes.
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_location_key)));
-        bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_units_key)));
     }
 
     /**

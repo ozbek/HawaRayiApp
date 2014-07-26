@@ -31,7 +31,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.android.sunshine.app.R;
+import com.shagalalab.weather.R;
 import com.shagalalab.weather.data.WeatherContract;
 import com.shagalalab.weather.sync.HawaRayiSyncAdapter;
 

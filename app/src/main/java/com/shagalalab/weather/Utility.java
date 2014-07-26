@@ -19,7 +19,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.example.android.sunshine.app.R;
+import com.shagalalab.weather.R;
 import com.shagalalab.weather.data.WeatherContract;
 
 import java.text.DateFormat;
@@ -35,21 +35,8 @@ public class Utility {
                 context.getString(R.string.pref_location_default));
     }
 
-    public static boolean isMetric(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return prefs.getString(context.getString(R.string.pref_units_key),
-                context.getString(R.string.pref_units_metric))
-                .equals(context.getString(R.string.pref_units_metric));
-    }
-
-    public static String formatTemperature(Context context, double temperature, boolean isMetric) {
-        double temp;
-        if ( !isMetric ) {
-            temp = 9*temperature/5+32;
-        } else {
-            temp = temperature;
-        }
-        return context.getString(R.string.format_temperature, temp);
+    public static String formatTemperature(Context context, double temperature) {
+        return context.getString(R.string.format_temperature, temperature);
     }
 
     static String formatDate(String dateString) {
@@ -169,12 +156,7 @@ public class Utility {
 
     public static String getFormattedWind(Context context, float windSpeed, float degrees) {
         int windFormat;
-        if (Utility.isMetric(context)) {
-            windFormat = R.string.format_wind_kmh;
-        } else {
-            windFormat = R.string.format_wind_mph;
-            windSpeed = .621371192237334f * windSpeed;
-        }
+        windFormat = R.string.format_wind_kmh;
 
         // From wind direction in degrees, determine compass direction as a string (e.g NW)
         // You know what's fun, writing really long if/else statements with tons of possible

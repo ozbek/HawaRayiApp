@@ -24,7 +24,7 @@ import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
 import com.shagalalab.weather.MainActivity;
-import com.example.android.sunshine.app.R;
+import com.shagalalab.weather.R;
 import com.shagalalab.weather.Utility;
 import com.shagalalab.weather.data.WeatherContract;
 
@@ -295,13 +295,11 @@ public class HawaRayiSyncAdapter extends AbstractThreadedSyncAdapter {
             int iconId = Utility.getIconResourceForWeatherCondition(weatherId);
             String title = mContext.getString(R.string.app_name);
 
-            boolean isMetric = Utility.isMetric(mContext);
-
             // Define the text of the forecast.
             String contentText = String.format(mContext.getString(R.string.format_notification),
                     description,
-                    Utility.formatTemperature(mContext, high, isMetric),
-                    Utility.formatTemperature(mContext, low, isMetric));
+                    Utility.formatTemperature(mContext, high),
+                    Utility.formatTemperature(mContext, low));
 
             // NotificationCompatBuilder is a very convenient way to build backward-compatible
             // notifications.  Just throw in some data.
