@@ -12,12 +12,12 @@
          By convention, "action" denotes that this String will be used as the label for an Action,
          typically from the action bar.  The ActionBar is limited real estate, so shorter is better.
     -->
-    <string name="action_settings">Settings</string>
-    <string name="action_share">Share</string>
-    <string name="action_refresh">Refresh</string>
+    <string name="action_settings">Сазлаўлар</string>
+    <string name="action_share">Бөлисиў</string>
+    <string name="action_refresh">Жаңалаў</string>
 
-    <string name="title_activity_detail">Details</string>
-    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_detail">Толық</string>
+    <string name="title_activity_settings">Сазлаўлар</string>
 
     <!-- Label for the location preference [CHAR LIMIT=30] -->
     <string name="pref_location_label">Location</string>
@@ -39,17 +39,17 @@
 
      <!-- Strings related to Notification Enabled preference -->
      <string name="pref_enable_notifications_key" translatable="false">enable_notifications</string>
-     <string name="pref_enable_notifications_label">Weather Notifications</string>
+     <string name="pref_enable_notifications_label">Ҳаўа райы </string>
 
-     <string name="pref_enable_notifications_true">Enabled</string>
-     <string name="pref_enable_notifications_false">Not Enabled</string>
+     <string name="pref_enable_notifications_true">Қосылған</string>
+     <string name="pref_enable_notifications_false">Өширилген</string>
      <string name="pref_enable_notifications_default" translatable="false">true</string>
 
     <!-- Language-specific constants -->
-    <string name="today">Today</string>
+    <string name="today">Бүгүн</string>
 
     <!-- For labelling tomorrow's forecast [CHAR LIMIT=15] -->
-    <string name="tomorrow">Tomorrow</string>
+    <string name="tomorrow">Ертең</string>
 
     <!-- Date format [CHAR LIMIT=NONE] -->
     <string name="format_full_friendly_date">
@@ -61,20 +61,16 @@
     <string name="format_temperature"><xliff:g id="temp">%1.0f</xliff:g>\u00B0</string>
 
     <!-- Windspeed formats -->
-    <!-- Wind in mph [CHAR LIMIT=25] -->
-    <string name="format_wind_mph">
-        Wind: <xliff:g id="speed">%1$1.0f</xliff:g> mph <xliff:g id="direction">%2$s</xliff:g>
-    </string>
     <!-- Wind in kph [CHAR LIMIT=25] -->
     <string name="format_wind_kmh">
-        Wind: <xliff:g id="speed">%1$1.0f</xliff:g> km/h <xliff:g id="direction">%2$s</xliff:g>
+        Самал: <xliff:g id="speed">%1$1.0f</xliff:g> км/саат <xliff:g id="direction">%2$s</xliff:g>
     </string>
 
     <!-- Pressure format CHAR LIMIT=25] -->
-    <string name="format_pressure">Pressure: <xliff:g id="pressure">%1.0f</xliff:g> hPa</string>
+    <string name="format_pressure">Басым: <xliff:g id="pressure">%1.0f</xliff:g> hPa</string>
 
     <!-- Humidity format CHAR LIMIT=25]-->
-    <string name="format_humidity">Humidity: <xliff:g id="humidity">%1.0f</xliff:g> %%</string>
+    <string name="format_humidity">ығаллық: <xliff:g id="humidity">%1.0f</xliff:g> %%</string>
 
     <!-- Share format [CHAR LIMIT=NONE]-->
     <string name="format_share">

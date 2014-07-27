@@ -39,10 +39,10 @@ public class Utility {
         return context.getString(R.string.format_temperature, temperature);
     }
 
-    static String formatDate(String dateString) {
+    /*static String formatDate(String dateString) {
         Date date = WeatherContract.getDateFromDb(dateString);
         return DateFormat.getDateInstance().format(date);
-    }
+    }*/
 
     // Format used for storing dates in the database.  ALso used for converting those strings
     // back into date objects for comparison/processing.
@@ -87,9 +87,7 @@ public class Utility {
                 // If the input date is less than a week in the future, just return the day name.
                 return getDayName(context, dateStr);
             } else {
-                // Otherwise, use the form "Mon Jun 3"
-                SimpleDateFormat shortenedDateFormat = new SimpleDateFormat("EEE MMM dd");
-                return shortenedDateFormat.format(inputDate);
+                return getFormattedMonthDay(context, dateStr);
             }
         }
     }
@@ -104,34 +102,11 @@ public class Utility {
      * @return
      */
     public static String getDayName(Context context, String dateStr) {
-        SimpleDateFormat dbDateFormat = new SimpleDateFormat(Utility.DATE_FORMAT);
-        try {
-            Date inputDate = dbDateFormat.parse(dateStr);
-            Date todayDate = new Date();
-            // If the date is today, return the localized version of "Today" instead of the actual
-            // day name.
-            if (WeatherContract.getDbDateString(todayDate).equals(dateStr)) {
-                return context.getString(R.string.today);
-            } else {
-                // If the date is set for tomorrow, the format is "Tomorrow".
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(todayDate);
-                cal.add(Calendar.DATE, 1);
-                Date tomorrowDate = cal.getTime();
-                if (WeatherContract.getDbDateString(tomorrowDate).equals(
-                        dateStr)) {
-                    return context.getString(R.string.tomorrow);
-                } else {
-                    // Otherwise, the format is just the day of the week (e.g "Wednesday".
-                    SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
-                    return dayFormat.format(inputDate);
-                }
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-            // It couldn't process the date correctly.
-            return "";
-        }
+        Date date = WeatherContract.getDateFromDb(dateStr);
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        String[] dayOfWeeks = context.getResources().getStringArray(R.array.day_of_week);
+        return dayOfWeeks[c.get(Calendar.DAY_OF_WEEK) - 1];
     }
 
     /**
@@ -142,16 +117,11 @@ public class Utility {
      * @return The day in the form of a string formatted "December 6"
      */
     public static String getFormattedMonthDay(Context context, String dateStr) {
-        SimpleDateFormat dbDateFormat = new SimpleDateFormat(Utility.DATE_FORMAT);
-        try {
-            Date inputDate = dbDateFormat.parse(dateStr);
-            SimpleDateFormat monthDayFormat = new SimpleDateFormat("MMMM dd");
-            String monthDayString = monthDayFormat.format(inputDate);
-            return monthDayString;
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
+        Date date = WeatherContract.getDateFromDb(dateStr);
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        String[] months = context.getResources().getStringArray(R.array.months);
+        return c.get(Calendar.DAY_OF_MONTH) + "-" + months[c.get(Calendar.MONTH)];
     }
 
     public static String getFormattedWind(Context context, float windSpeed, float degrees) {
