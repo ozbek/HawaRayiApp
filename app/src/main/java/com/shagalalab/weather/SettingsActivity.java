@@ -15,15 +15,15 @@
  */
 package com.shagalalab.weather;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 
-import com.shagalalab.weather.R;
 import com.shagalalab.weather.data.WeatherContract;
-import com.shagalalab.weather.sync.HawaRayiSyncAdapter;
+import com.shagalalab.weather.service.HawaRayiService;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings.
@@ -78,7 +78,10 @@ public class SettingsActivity extends PreferenceActivity
 
         if (!mBindingPreference) {
             if ( preference.getKey().equals(getString(R.string.pref_location_key))) {
-                HawaRayiSyncAdapter.syncImmediately(this);
+                String location = value.toString();
+                Intent intent = new Intent(this, HawaRayiService.class);
+                intent.putExtra(HawaRayiService.LOCATION_QUERY_EXTRA, location);
+                startService(intent);
             } else {
                 // notify code that weather may be effected
                 getContentResolver().notifyChange(WeatherContract.WeatherEntry.CONTENT_URI, null);

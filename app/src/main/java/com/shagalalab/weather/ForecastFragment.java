@@ -15,6 +15,7 @@
  */
 package com.shagalalab.weather;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,9 +32,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.shagalalab.weather.R;
 import com.shagalalab.weather.data.WeatherContract;
-import com.shagalalab.weather.sync.HawaRayiSyncAdapter;
+import com.shagalalab.weather.service.HawaRayiService;
 
 import java.util.Date;
 
@@ -114,6 +114,11 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_refresh) {
+            updateWeather();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -166,8 +171,9 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
     }
 
     private void updateWeather() {
-        String location = Utility.getPreferredLocation(getActivity());
-        new FetchWeatherTask(getActivity()).execute(location);
+        Intent intent = new Intent(getActivity(), HawaRayiService.class);
+        intent.putExtra(HawaRayiService.LOCATION_QUERY_EXTRA, Utility.getPreferredLocation(getActivity()));
+        getActivity().startService(intent);
     }
 
     @Override
@@ -220,9 +226,6 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        if (data.getCount() == 0) {
-            HawaRayiSyncAdapter.syncImmediately(getActivity());
-        }
         mForecastAdapter.swapCursor(data);
         if (mPosition != ListView.INVALID_POSITION) {
             // If we don't need to restart the loader, and there's a desired position to restore

@@ -57,26 +57,36 @@
     </string>
 
     <!-- Strings for formatting weather-related data -->
-    <!-- Temperature format [CHAR LIMIT=5 -->
+    <!-- Temperature format [CHAR LIMIT=5] -->
     <string name="format_temperature"><xliff:g id="temp">%1.0f</xliff:g>\u00B0</string>
 
     <!-- Windspeed formats -->
     <!-- Wind in kph [CHAR LIMIT=25] -->
     <string name="format_wind_kmh">
-        Самал: <xliff:g id="speed">%1$1.0f</xliff:g> км/саат <xliff:g id="direction">%2$s</xliff:g>
+        Самал: <xliff:g id="speed">%1$1.0f</xliff:g> м/с, <xliff:g id="direction">%2$s</xliff:g>
     </string>
+    <string name="wind_direction_north">арқа</string>
+    <string name="wind_direction_north_east">арқа-шығыс</string>
+    <string name="wind_direction_east">шығыс</string>
+    <string name="wind_direction_south_east">қубла-шығыс</string>
+    <string name="wind_direction_south">қубла</string>
+    <string name="wind_direction_south_west">қубла-батыс</string>
+    <string name="wind_direction_west">батыс</string>
+    <string name="wind_direction_north_west">арқа-батыс</string>
 
     <!-- Pressure format CHAR LIMIT=25] -->
     <string name="format_pressure">Басым: <xliff:g id="pressure">%1.0f</xliff:g> hPa</string>
 
     <!-- Humidity format CHAR LIMIT=25]-->
-    <string name="format_humidity">ығаллық: <xliff:g id="humidity">%1.0f</xliff:g> %%</string>
+    <string name="format_humidity">Ығаллық: <xliff:g id="humidity">%1.0f</xliff:g>%%</string>
 
     <!-- Share format [CHAR LIMIT=NONE]-->
     <string name="format_share">
         Weather for <xliff:g id="date">%1$s</xliff:g> in <xliff:g id="location">%2$s</xliff:g>:
         A high of <xliff:g id="high">%3$s</xliff:g> and low of
-        <xliff:g id="low">%4$s</xliff:g></string>
+        <xliff:g id="low">%4$s</xliff:g>
+    </string>
+
     <!-- SyncAdapter related -->
     <string name="sync_account_type">weather.shagalalab.com</string>
     <string name="content_authority">"com.shagalalab.weather"</string>

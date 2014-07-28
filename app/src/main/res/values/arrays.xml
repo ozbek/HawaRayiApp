@@ -16,12 +16,12 @@
     </array>
 
     <array name="day_of_week">
-        <item>екшемби</item>
-        <item>дүйшемби</item>
-        <item>шийшемби</item>
-        <item>сәршемби</item>
-        <item>пийшемби</item>
-        <item>жума</item>
-        <item>шемби</item>
+        <item>Екшемби</item>
+        <item>Дүйшемби</item>
+        <item>Шийшемби</item>
+        <item>Сәршемби</item>
+        <item>Пийшемби</item>
+        <item>Жума</item>
+        <item>Шемби</item>
     </array>
 </resources>

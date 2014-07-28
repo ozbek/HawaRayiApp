@@ -16,17 +16,10 @@
 package com.shagalalab.weather;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.shagalalab.weather.R;
-import com.shagalalab.weather.sync.HawaRayiSyncAdapter;
 
 public class MainActivity extends ActionBarActivity implements ForecastFragment.Callback {
 
@@ -54,11 +47,6 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
         ForecastFragment forecastFragment =  ((ForecastFragment)getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_forecast));
         forecastFragment.setUseTodayLayout(!mTwoPane);
-
-        // The OpenWeather API update the data every 3 hours.
-        // Since we are automatate the data loading, a periodic sync is scheduled and every 3 hours
-        // the data is retrieved.
-        HawaRayiSyncAdapter.initializeSyncAdapter(this);
     }
 
     @Override

@@ -19,12 +19,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.shagalalab.weather.R;
 import com.shagalalab.weather.data.WeatherContract;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -38,15 +34,6 @@ public class Utility {
     public static String formatTemperature(Context context, double temperature) {
         return context.getString(R.string.format_temperature, temperature);
     }
-
-    /*static String formatDate(String dateString) {
-        Date date = WeatherContract.getDateFromDb(dateString);
-        return DateFormat.getDateInstance().format(date);
-    }*/
-
-    // Format used for storing dates in the database.  ALso used for converting those strings
-    // back into date objects for comparison/processing.
-    public static final String DATE_FORMAT = "yyyyMMdd";
 
     /**
      * Helper method to convert the database representation of the date into something to display
@@ -66,7 +53,6 @@ public class Utility {
 
         Date todayDate = new Date();
         String todayStr = WeatherContract.getDbDateString(todayDate);
-        Date inputDate = WeatherContract.getDateFromDb(dateStr);
 
         // If the date we're building the String for is today's date, the format
         // is "Today, June 24"
@@ -102,11 +88,26 @@ public class Utility {
      * @return
      */
     public static String getDayName(Context context, String dateStr) {
-        Date date = WeatherContract.getDateFromDb(dateStr);
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-        String[] dayOfWeeks = context.getResources().getStringArray(R.array.day_of_week);
-        return dayOfWeeks[c.get(Calendar.DAY_OF_WEEK) - 1];
+        Date todayDate = new Date();
+        if (WeatherContract.getDbDateString(todayDate).equals(dateStr)) {
+            return context.getString(R.string.today);
+        } else {
+            // If the date is set for tomorrow, the format is "Tomorrow".
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(todayDate);
+            cal.add(Calendar.DATE, 1);
+            Date tomorrowDate = cal.getTime();
+            if (WeatherContract.getDbDateString(tomorrowDate).equals(dateStr)) {
+                return context.getString(R.string.tomorrow);
+            } else {
+                // Otherwise, the format is just the day of the week (e.g "Wednesday".
+                Date date = WeatherContract.getDateFromDb(dateStr);
+                Calendar c = Calendar.getInstance();
+                c.setTime(date);
+                String[] dayOfWeeks = context.getResources().getStringArray(R.array.day_of_week);
+                return dayOfWeeks[c.get(Calendar.DAY_OF_WEEK) - 1];
+            }
+        }
     }
 
     /**
@@ -133,21 +134,21 @@ public class Utility {
         // conditions.  Seriously, try it!
         String direction = "Unknown";
         if (degrees >= 337.5 || degrees < 22.5) {
-            direction = "N";
+            direction = context.getResources().getString(R.string.wind_direction_north);
         } else if (degrees >= 22.5 && degrees < 67.5) {
-            direction = "NE";
+            direction = context.getResources().getString(R.string.wind_direction_north_east);
         } else if (degrees >= 67.5 && degrees < 112.5) {
-            direction = "E";
+            direction = context.getResources().getString(R.string.wind_direction_east);
         } else if (degrees >= 112.5 && degrees < 157.5) {
-            direction = "SE";
+            direction = context.getResources().getString(R.string.wind_direction_south_east);
         } else if (degrees >= 157.5 && degrees < 202.5) {
-            direction = "S";
+            direction = context.getResources().getString(R.string.wind_direction_south);
         } else if (degrees >= 202.5 && degrees < 247.5) {
-            direction = "SW";
+            direction = context.getResources().getString(R.string.wind_direction_south_west);
         } else if (degrees >= 247.5 && degrees < 292.5) {
-            direction = "W";
+            direction = context.getResources().getString(R.string.wind_direction_west);
         } else if (degrees >= 292.5 || degrees < 22.5) {
-            direction = "NW";
+            direction = context.getResources().getString(R.string.wind_direction_north_west);
         }
         return String.format(context.getString(windFormat), windSpeed, direction);
     }
