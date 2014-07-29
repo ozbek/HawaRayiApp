@@ -35,7 +35,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.shagalalab.weather.R;
 import com.shagalalab.weather.data.WeatherContract;
 
 /**
@@ -69,7 +68,8 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             WeatherContract.WeatherEntry.COLUMN_WEATHER_ID,
             // This works because the WeatherProvider returns location data joined with
             // weather data, even though they're stored in two different tables.
-            WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING
+            WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING,
+            WeatherContract.LocationEntry.COLUMN_CITY_NAME
     };
 
     private ImageView mIconView;
@@ -81,6 +81,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     private TextView mHumidityView;
     private TextView mWindView;
     private TextView mPressureView;
+    private TextView mCityView;
 
     public DetailFragment() {
         setHasOptionsMenu(true);
@@ -116,6 +117,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         mHumidityView = (TextView) rootView.findViewById(R.id.detail_humidity_textview);
         mWindView = (TextView) rootView.findViewById(R.id.detail_wind_textview);
         mPressureView = (TextView) rootView.findViewById(R.id.detail_pressure_textview);
+        mCityView = (TextView) rootView.findViewById(R.id.detail_city_textview);
         return rootView;
     }
 
@@ -201,6 +203,9 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             String dateText = Utility.getFormattedMonthDay(getActivity(), date);
             mFriendlyDateView.setText(friendlyDateText);
             mDateView.setText(dateText);
+
+            String city = data.getString(data.getColumnIndex(WeatherContract.LocationEntry.COLUMN_CITY_NAME));
+            mCityView.setText(city);
 
             // Read description from cursor and update view
             String description = data.getString(data.getColumnIndex(

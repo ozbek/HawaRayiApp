@@ -68,6 +68,7 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
             WeatherContract.WeatherEntry.COLUMN_MAX_TEMP,
             WeatherContract.WeatherEntry.COLUMN_MIN_TEMP,
             WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING,
+            WeatherContract.LocationEntry.COLUMN_CITY_NAME,
             WeatherContract.WeatherEntry.COLUMN_WEATHER_ID
     };
 
@@ -80,7 +81,8 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
     public static final int COL_WEATHER_MAX_TEMP = 3;
     public static final int COL_WEATHER_MIN_TEMP = 4;
     public static final int COL_LOCATION_SETTING = 5;
-    public static final int COL_WEATHER_CONDITION_ID = 6;
+    public static final int COL_LOCATION_CITY = 6;
+    public static final int COL_WEATHER_CONDITION_ID = 7;
 
     /**
      * A callback interface that all activities containing this fragment must

@@ -123,7 +123,7 @@ public class HawaRayiService extends IntentService {
         }
 
         try {
-            getWeatherDataFromJson(forecastJsonStr, numDays, locationQuery);
+            getWeatherDataFromJson(forecastJsonStr, locationQuery);
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
             e.printStackTrace();
@@ -139,8 +139,7 @@ public class HawaRayiService extends IntentService {
      * Fortunately parsing is easy:  constructor takes the JSON string and converts it
      * into an Object hierarchy for us.
      */
-    private void getWeatherDataFromJson(String forecastJsonStr, int numDays,
-                                        String locationSetting)
+    private void getWeatherDataFromJson(String forecastJsonStr, String locationSetting)
             throws JSONException {
 
         // These are the names of the JSON objects that need to be extracted.
@@ -174,7 +173,7 @@ public class HawaRayiService extends IntentService {
         JSONArray weatherArray = forecastJson.getJSONArray(OWM_LIST);
 
         JSONObject cityJson = forecastJson.getJSONObject(OWM_CITY);
-        String cityName = cityJson.getString(OWM_CITY_NAME);
+        String cityName = Utility.getCityTitle(getResources(), locationSetting);
         JSONObject coordJSON = cityJson.getJSONObject(OWM_COORD);
         double cityLatitude = coordJSON.getLong(OWM_COORD_LAT);
         double cityLongitude = coordJSON.getLong(OWM_COORD_LONG);
@@ -182,8 +181,7 @@ public class HawaRayiService extends IntentService {
         Log.v(LOG_TAG, cityName + ", with coord: " + cityLatitude + " " + cityLongitude);
 
         // Insert the location into the database.
-        long locationID = insertLocationInDatabase(
-                locationSetting, cityName, cityLatitude, cityLongitude);
+        long locationID = insertLocationInDatabase(locationSetting, cityName, cityLatitude, cityLongitude);
 
         // Get and insert the new weather information into the database
         Vector<ContentValues> cVVector = new Vector<ContentValues>(weatherArray.length());

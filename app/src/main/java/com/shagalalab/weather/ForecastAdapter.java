@@ -31,6 +31,7 @@ public class ForecastAdapter extends CursorAdapter {
         public final TextView descriptionView;
         public final TextView highTempView;
         public final TextView lowTempView;
+        public final TextView cityView;
 
         public ViewHolder(View view) {
             iconView = (ImageView) view.findViewById(R.id.list_item_icon);
@@ -38,6 +39,7 @@ public class ForecastAdapter extends CursorAdapter {
             descriptionView = (TextView) view.findViewById(R.id.list_item_forecast_textview);
             highTempView = (TextView) view.findViewById(R.id.list_item_high_textview);
             lowTempView = (TextView) view.findViewById(R.id.list_item_low_textview);
+            cityView = (TextView) view.findViewById(R.id.list_item_city_textview);
         }
     }
 
@@ -107,6 +109,9 @@ public class ForecastAdapter extends CursorAdapter {
         // Read low temperature from cursor
         double low = cursor.getDouble(ForecastFragment.COL_WEATHER_MIN_TEMP);
         viewHolder.lowTempView.setText(Utility.formatTemperature(context, low));
+
+        String city = cursor.getString(ForecastFragment.COL_LOCATION_CITY);
+        viewHolder.cityView.setText(city);
     }
 
     public void setUseTodayLayout(boolean useTodayLayout) {

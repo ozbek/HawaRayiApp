@@ -17,10 +17,12 @@ package com.shagalalab.weather;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.preference.PreferenceManager;
 
 import com.shagalalab.weather.data.WeatherContract;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -245,5 +247,12 @@ public class Utility {
             }
         }
         return true;
+    }
+
+    public static String getCityTitle(Resources res, String location) {
+        String[] cityValues = res.getStringArray(R.array.pref_location_values);
+        String[] cityOptions = res.getStringArray(R.array.pref_location_options);
+        int index = Arrays.asList(cityValues).indexOf(location);
+        return cityOptions[index];
     }
 }

@@ -11,14 +11,32 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Header: Day, Date -->
-        <TextView
-            android:fontFamily="sans-serif-condensed"
-            android:id="@+id/detail_day_textview"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
+        <!-- Header: Day, City, Date -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:fontFamily="sans-serif-condensed"
+                android:id="@+id/detail_day_textview"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="left"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <TextView
+                android:fontFamily="sans-serif-condensed"
+                android:id="@+id/detail_city_textview"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="right"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            </LinearLayout>
 
         <TextView
             android:fontFamily="sans-serif-condensed"
@@ -91,6 +109,7 @@
                     android:id="@+id/detail_humidity_textview"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
+                    android:fontFamily="sans-serif-condensed"
                     android:textAppearance="?android:textAppearanceLarge" />
 
                 <TextView
@@ -98,6 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:layout_width="match_parent"
+                    android:fontFamily="sans-serif-condensed"
                     android:textAppearance="?android:textAppearanceLarge" />
 
                 <TextView
@@ -105,6 +125,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:layout_width="match_parent"
+                    android:fontFamily="sans-serif-condensed"
                     android:textAppearance="?android:textAppearanceLarge" />
         </LinearLayout>
     </LinearLayout>

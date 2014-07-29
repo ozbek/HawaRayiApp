@@ -74,13 +74,12 @@ public class SettingsActivity extends PreferenceActivity
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object value) {
-        String stringValue = value.toString();
+        String newLocation = value.toString();
 
         if (!mBindingPreference) {
             if ( preference.getKey().equals(getString(R.string.pref_location_key))) {
-                String location = value.toString();
                 Intent intent = new Intent(this, HawaRayiService.class);
-                intent.putExtra(HawaRayiService.LOCATION_QUERY_EXTRA, location);
+                intent.putExtra(HawaRayiService.LOCATION_QUERY_EXTRA, newLocation);
                 startService(intent);
             } else {
                 // notify code that weather may be effected
@@ -92,13 +91,13 @@ public class SettingsActivity extends PreferenceActivity
             // For list preferences, look up the correct display value in
             // the preference's 'entries' list (since they have separate labels/values).
             ListPreference listPreference = (ListPreference) preference;
-            int prefIndex = listPreference.findIndexOfValue(stringValue);
+            int prefIndex = listPreference.findIndexOfValue(newLocation);
             if (prefIndex >= 0) {
                 preference.setSummary(listPreference.getEntries()[prefIndex]);
             }
         } else {
             // For other preferences, set the summary to the value's simple string representation.
-            preference.setSummary(stringValue);
+            preference.setSummary(newLocation);
         }
         return true;
     }
