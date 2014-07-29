@@ -99,11 +99,6 @@ public class WeatherContract {
         // "Mountain View" is more recognizable than 94043.
         public static final String COLUMN_CITY_NAME = "city_name";
 
-        // In order to uniquely pinpoint the location on the map when we launch the
-        // map intent, we store the latitude and longitude as returned by openweathermap.
-        public static final String COLUMN_COORD_LAT = "coord_lat";
-        public static final String COLUMN_COORD_LONG = "coord_long";
-
         public static Uri buildLocationUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
@@ -128,10 +123,6 @@ public class WeatherContract {
         public static final String COLUMN_DATETEXT = "date";
         // Weather id as returned by API, to identify the icon to be used
         public static final String COLUMN_WEATHER_ID = "weather_id";
-
-        // Short description and long description of the weather, as provided by API.
-        // e.g "clear" vs "sky is clear".
-        public static final String COLUMN_SHORT_DESC = "short_desc";
 
         // Min and max temperatures for the day (stored as floats)
         public static final String COLUMN_MIN_TEMP = "min";

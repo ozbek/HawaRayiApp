@@ -77,17 +77,16 @@ public class ForecastAdapter extends CursorAdapter {
         ViewHolder viewHolder = (ViewHolder) view.getTag();
 
         int viewType = getItemViewType(cursor.getPosition());
+        int weatherConditionId = cursor.getInt(ForecastFragment.COL_WEATHER_CONDITION_ID);
         switch (viewType) {
             case VIEW_TYPE_TODAY: {
                 // Get weather icon
-                viewHolder.iconView.setImageResource(Utility.getArtResourceForWeatherCondition(
-                        cursor.getInt(ForecastFragment.COL_WEATHER_CONDITION_ID)));
+                viewHolder.iconView.setImageResource(Utility.getArtResourceForWeatherCondition(weatherConditionId));
                 break;
             }
             case VIEW_TYPE_FUTURE_DAY: {
                 // Get weather icon
-                viewHolder.iconView.setImageResource(Utility.getIconResourceForWeatherCondition(
-                        cursor.getInt(ForecastFragment.COL_WEATHER_CONDITION_ID)));
+                viewHolder.iconView.setImageResource(Utility.getIconResourceForWeatherCondition(weatherConditionId));
                 break;
             }
         }
@@ -98,8 +97,7 @@ public class ForecastAdapter extends CursorAdapter {
         viewHolder.dateView.setText(Utility.getFriendlyDayString(context, dateString));
 
         // Read weather forecast from cursor
-        String description = Utility.getWeatherCondition(context.getResources(),
-                cursor.getInt(ForecastFragment.COL_WEATHER_CONDITION_ID));
+        String description = Utility.getWeatherCondition(context.getResources(), weatherConditionId);
         // Find TextView and set weather forecast on it
         viewHolder.descriptionView.setText(description);
 

@@ -41,8 +41,6 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
                 WeatherContract.LocationEntry._ID + " INTEGER PRIMARY KEY," +
                 WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " TEXT UNIQUE NOT NULL, " +
                 WeatherContract.LocationEntry.COLUMN_CITY_NAME + " TEXT NOT NULL, " +
-                WeatherContract.LocationEntry.COLUMN_COORD_LAT + " REAL NOT NULL, " +
-                WeatherContract.LocationEntry.COLUMN_COORD_LONG + " REAL NOT NULL, " +
                 "UNIQUE (" + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING +") ON CONFLICT IGNORE"+
                 " );";
 
@@ -57,7 +55,6 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
                 // the ID of the location entry associated with this weather data
                 WeatherContract.WeatherEntry.COLUMN_LOC_KEY + " INTEGER NOT NULL, " +
                 WeatherContract.WeatherEntry.COLUMN_DATETEXT + " TEXT NOT NULL, " +
-                WeatherContract.WeatherEntry.COLUMN_SHORT_DESC + " TEXT NOT NULL, " +
                 WeatherContract.WeatherEntry.COLUMN_WEATHER_ID + " INTEGER NOT NULL," +
 
                 WeatherContract.WeatherEntry.COLUMN_MIN_TEMP + " REAL NOT NULL, " +

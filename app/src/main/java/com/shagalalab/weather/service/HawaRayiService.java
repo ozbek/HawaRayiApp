@@ -238,7 +238,6 @@ public class HawaRayiService extends IntentService {
             weatherValues.put(WeatherContract.WeatherEntry.COLUMN_DEGREES, windDirection);
             weatherValues.put(WeatherContract.WeatherEntry.COLUMN_MAX_TEMP, high);
             weatherValues.put(WeatherContract.WeatherEntry.COLUMN_MIN_TEMP, low);
-            weatherValues.put(WeatherContract.WeatherEntry.COLUMN_SHORT_DESC, description);
             weatherValues.put(WeatherContract.WeatherEntry.COLUMN_WEATHER_ID, weatherId);
 
             cVVector.add(weatherValues);
@@ -278,8 +277,6 @@ public class HawaRayiService extends IntentService {
             ContentValues locationValues = new ContentValues();
             locationValues.put(WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING, locationSetting);
             locationValues.put(WeatherContract.LocationEntry.COLUMN_CITY_NAME, cityName);
-            locationValues.put(WeatherContract.LocationEntry.COLUMN_COORD_LAT, lat);
-            locationValues.put(WeatherContract.LocationEntry.COLUMN_COORD_LONG, lon);
 
             Uri locationInsertUri = getContentResolver()
                     .insert(WeatherContract.LocationEntry.CONTENT_URI, locationValues);
