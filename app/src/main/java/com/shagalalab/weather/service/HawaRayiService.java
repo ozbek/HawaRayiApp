@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
 
+import com.shagalalab.weather.Utility;
 import com.shagalalab.weather.data.WeatherContract;
 
 import org.json.JSONArray;
@@ -28,6 +29,7 @@ import java.util.Vector;
  */
 public class HawaRayiService extends IntentService {
     private String LOG_TAG = HawaRayiService.class.getSimpleName();
+    private final String APP_ID = "e6350df66ddd09845446a686f9383be8";
     public static final String LOCATION_QUERY_EXTRA = "lqe";
 
     public HawaRayiService() {
@@ -37,6 +39,8 @@ public class HawaRayiService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         String locationQuery = intent.getStringExtra(LOCATION_QUERY_EXTRA);
+
+        boolean isLocationInteger = Utility.isInteger(locationQuery);
 
         // These two need to be declared outside the try/catch
         // so that they can be closed in the finally block.
@@ -57,15 +61,18 @@ public class HawaRayiService extends IntentService {
             final String FORECAST_BASE_URL =
                     "http://api.openweathermap.org/data/2.5/forecast/daily?";
             final String QUERY_PARAM = "q";
+            final String ID_PARAM = "id";
             final String FORMAT_PARAM = "mode";
             final String UNITS_PARAM = "units";
             final String DAYS_PARAM = "cnt";
+            final String APPID_PARAM = "APP_ID";
 
             Uri builtUri = Uri.parse(FORECAST_BASE_URL).buildUpon()
-                    .appendQueryParameter(QUERY_PARAM, locationQuery)
+                    .appendQueryParameter(isLocationInteger? ID_PARAM : QUERY_PARAM, locationQuery)
                     .appendQueryParameter(FORMAT_PARAM, format)
                     .appendQueryParameter(UNITS_PARAM, units)
                     .appendQueryParameter(DAYS_PARAM, Integer.toString(numDays))
+                    .appendQueryParameter(APPID_PARAM, APP_ID)
                     .build();
 
             URL url = new URL(builtUri.toString());

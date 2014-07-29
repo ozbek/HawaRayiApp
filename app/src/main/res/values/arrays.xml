@@ -24,4 +24,42 @@
         <item>Жума</item>
         <item>Шемби</item>
     </array>
+
+    <array name="pref_location_options">
+        <item>Нөкис</item>
+        <item>Ақмаңғыт</item>
+        <item>Беруний</item>
+        <item>Бостан</item>
+        <item>Кегейли</item>
+        <item>Қанлыкөл</item>
+        <item>Қараөзек</item>
+        <item>Қоңырат</item>
+        <item>Манғыт</item>
+        <item>Мойнақ</item>
+        <item>Тахтакөпир</item>
+        <item>Төрткүл</item>
+        <item>Хожели</item>
+        <item>Шымбай</item>
+        <item>Шоманай</item>
+        <item>Ташкент</item>
+    </array>
+
+    <array name="pref_location_values">
+        <item>nukus</item>
+        <item>"601423"</item>
+        <item>beruniy</item>
+        <item>"1538223"</item>
+        <item>kegeyli</item>
+        <item>"601306"</item>
+        <item>karauzyak</item>
+        <item>kungrad</item>
+        <item>mangit</item>
+        <item>moynaq</item>
+        <item>takhtakupir</item>
+        <item>turtkul</item>
+        <item>khujayli</item>
+        <item>chimbay</item>
+        <item>shumanay</item>
+        <item>tashkent</item>
+    </array>
 </resources>
