@@ -75,7 +75,11 @@ public class Utility {
                 // If the input date is less than a week in the future, just return the day name.
                 return getDayName(context, dateStr);
             } else {
-                return getFormattedMonthDay(context, dateStr);
+                int formatId = R.string.format_full_friendly_date;
+                return String.format(context.getString(
+                        formatId,
+                        getFormattedMonthDay(context, dateStr),
+                        getDayName(context, dateStr).toLowerCase()));
             }
         }
     }

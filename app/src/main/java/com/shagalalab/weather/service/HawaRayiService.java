@@ -181,7 +181,7 @@ public class HawaRayiService extends IntentService {
         Log.v(LOG_TAG, cityName + ", with coord: " + cityLatitude + " " + cityLongitude);
 
         // Insert the location into the database.
-        long locationID = insertLocationInDatabase(locationSetting, cityName, cityLatitude, cityLongitude);
+        long locationID = insertLocationInDatabase(locationSetting, cityName);
 
         // Get and insert the new weather information into the database
         Vector<ContentValues> cVVector = new Vector<ContentValues>(weatherArray.length());
@@ -254,12 +254,9 @@ public class HawaRayiService extends IntentService {
      *
      * @param locationSetting The location string used to request updates from the server.
      * @param cityName A human-readable city name, e.g "Mountain View"
-     * @param lat the latitude of the city
-     * @param lon the longitude of the city
      * @return the row ID of the added location.
      */
-    private long insertLocationInDatabase(
-            String locationSetting, String cityName, double lat, double lon) {
+    private long insertLocationInDatabase(String locationSetting, String cityName) {
 
         // First, check if the location with this city name exists in the db
         Cursor cursor = getContentResolver().query(

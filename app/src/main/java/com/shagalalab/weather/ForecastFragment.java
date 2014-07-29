@@ -171,7 +171,7 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
     }
 
     private void updateWeather() {
-        Intent intent = new Intent(getActivity(), HawaRayiService.class);
+            Intent intent = new Intent(getActivity(), HawaRayiService.class);
         intent.putExtra(HawaRayiService.LOCATION_QUERY_EXTRA, Utility.getPreferredLocation(getActivity()));
         getActivity().startService(intent);
     }
