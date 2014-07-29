@@ -33,14 +33,6 @@
             android:fontFamily="sans-serif-light"
             android:textColor="@color/white"
             android:gravity="center_horizontal"/>
-
-        <TextView
-            android:id="@+id/list_item_low_textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="36sp"
-            android:layout_marginLeft="8dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -77,4 +69,13 @@
             android:textAppearance="?android:textAppearanceLarge"
             android:textColor="@color/white"/>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/list_item_low_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        android:layout_marginLeft="8dp"
+        android:visibility="gone"/>
 </LinearLayout>

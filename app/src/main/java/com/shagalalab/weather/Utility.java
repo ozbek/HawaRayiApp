@@ -225,6 +225,41 @@ public class Utility {
         return -1;
     }
 
+    /**
+     * Helper method to provide the icon resource id according to the weather condition id returned
+     * by the OpenWeatherMap call.
+     * @param weatherId from OpenWeatherMap API response
+     * @return resource id for the corresponding icon. -1 if no relation is found.
+     */
+    public static String getWeatherCondition(Resources res, int weatherId) {
+        // Based on weather code data found at:
+        // http://bugs.openweathermap.org/projects/api/wiki/Weather_Condition_Codes
+        if (weatherId >= 200 && weatherId <= 232) {
+            return res.getString(R.string.storm);
+        } else if (weatherId >= 300 && weatherId <= 321) {
+            return res.getString(R.string.light_rain);
+        } else if (weatherId >= 500 && weatherId <= 504) {
+            return res.getString(R.string.rain);
+        } else if (weatherId == 511) {
+            return res.getString(R.string.snow);
+        } else if (weatherId >= 520 && weatherId <= 531) {
+            return res.getString(R.string.rain);
+        } else if (weatherId >= 600 && weatherId <= 622) {
+            return res.getString(R.string.snow);
+        } else if (weatherId >= 701 && weatherId <= 761) {
+            return res.getString(R.string.fog);
+        } else if (weatherId == 761 || weatherId == 781) {
+            return res.getString(R.string.storm);
+        } else if (weatherId == 800) {
+            return res.getString(R.string.clear);
+        } else if (weatherId == 801) {
+            return res.getString(R.string.light_clouds);
+        } else if (weatherId >= 802 && weatherId <= 804) {
+            return res.getString(R.string.cloudy);
+        }
+        return "";
+    }
+
     public static boolean isInteger(String str) {
         if (str == null) {
             return false;

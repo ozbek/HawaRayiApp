@@ -208,8 +208,8 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             mCityView.setText(city);
 
             // Read description from cursor and update view
-            String description = data.getString(data.getColumnIndex(
-                    WeatherContract.WeatherEntry.COLUMN_SHORT_DESC));
+            String description = Utility.getWeatherCondition(getResources(),
+                    data.getInt(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_WEATHER_ID)));
             mDescriptionView.setText(description);
 
             // Read high temperature from cursor and update view

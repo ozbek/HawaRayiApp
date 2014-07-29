@@ -83,7 +83,15 @@
         <xliff:g id="low">%4$s</xliff:g>
     </string>
 
-    <!-- SyncAdapter related -->
-    <string name="sync_account_type">weather.shagalalab.com</string>
     <string name="content_authority">"com.shagalalab.weather"</string>
+
+    <!-- Weather conditions CHAR LIMIT=25]-->
+    <string name="storm">Дүбелей</string>
+    <string name="light_rain">Киши жаӯын</string>
+    <string name="rain">Жаӯын</string>
+    <string name="snow">Қар</string>
+    <string name="fog">Думан</string>
+    <string name="clear">Ашық аспан</string>
+    <string name="light_clouds">Бултлы</string>
+    <string name="cloudy">Бултлы</string>
 </resources>
