@@ -16,7 +16,7 @@
             android:minWidth="56dp"
             android:orientation="vertical" >
 
-            <!-- Header: Day, Date -->
+            <!-- Header: Day, Date, City -->
             <TextView
                 android:fontFamily="sans-serif-condensed"
                 android:id="@+id/detail_day_textview"
@@ -56,7 +56,8 @@
                 android:id="@+id/detail_high_textview"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:textSize="96sp" />
+                android:textSize="96sp"
+                android:layout_gravity="center_horizontal"/>
 
             <TextView
                 android:id="@+id/detail_low_textview"
@@ -64,7 +65,8 @@
                 android:layout_marginLeft="8dp"
                 android:layout_width="wrap_content"
                 android:textColor="@color/grey_700"
-                android:textSize="48sp" />
+                android:textSize="48sp"
+                android:layout_gravity="center_horizontal"/>
 
             <!-- Humidity, wind, pressure -->
             <TextView
