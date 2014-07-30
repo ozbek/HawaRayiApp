@@ -20,6 +20,8 @@
             android:layout_weight="1"
             android:textAppearance="?android:textAppearanceLarge"
             android:fontFamily="sans-serif-condensed"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:textColor="@color/white" />
 
         <TextView
@@ -62,6 +64,8 @@
                 android:layout_gravity="center_horizontal"
                 android:textAppearance="?android:textAppearanceLarge"
                 android:textColor="@color/white"
+                android:ellipsize="end"
+                android:singleLine="true"
                 android:gravity="center_horizontal"/>
         </LinearLayout>
 

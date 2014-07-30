@@ -118,6 +118,8 @@
                     android:layout_marginTop="4dp"
                     android:layout_width="match_parent"
                     android:fontFamily="sans-serif-condensed"
+                    android:ellipsize="end"
+                    android:singleLine="true"
                     android:textAppearance="?android:textAppearanceLarge" />
 
                 <TextView
@@ -126,6 +128,8 @@
                     android:layout_marginTop="4dp"
                     android:layout_width="match_parent"
                     android:fontFamily="sans-serif-condensed"
+                    android:ellipsize="end"
+                    android:singleLine="true"
                     android:textAppearance="?android:textAppearanceLarge" />
         </LinearLayout>
     </LinearLayout>
