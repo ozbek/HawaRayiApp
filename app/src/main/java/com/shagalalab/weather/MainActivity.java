@@ -20,16 +20,19 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 
 public class MainActivity extends ActionBarActivity implements ForecastFragment.Callback {
 
     private final String LOG_TAG = MainActivity.class.getSimpleName();
 
     private boolean mTwoPane;
+    private boolean mProgressBarState = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_main);
         if (findViewById(R.id.weather_detail_container) != null) {
             // The detail container view will be present only in the large-screen layouts
@@ -89,5 +92,14 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
                     .putExtra(DetailActivity.DATE_KEY, date);
             startActivity(intent);
         }
+    }
+
+    public void setProgress(boolean state) {
+        mProgressBarState = state;
+        setSupportProgressBarIndeterminateVisibility(mProgressBarState);
+    }
+
+    public boolean getProgressBarState() {
+        return mProgressBarState;
     }
 }

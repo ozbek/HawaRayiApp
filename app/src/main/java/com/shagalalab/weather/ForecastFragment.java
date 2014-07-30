@@ -171,7 +171,8 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
     }
 
     private void updateWeather() {
-            Intent intent = new Intent(getActivity(), HawaRayiService.class);
+        ((MainActivity) getActivity()).setProgress(true);
+        Intent intent = new Intent(getActivity(), HawaRayiService.class);
         intent.putExtra(HawaRayiService.LOCATION_QUERY_EXTRA, Utility.getPreferredLocation(getActivity()));
         getActivity().startService(intent);
     }
@@ -226,11 +227,21 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        mForecastAdapter.swapCursor(data);
-        if (mPosition != ListView.INVALID_POSITION) {
-            // If we don't need to restart the loader, and there's a desired position to restore
-            // to, do so now.
-            mListView.smoothScrollToPosition(mPosition);
+        // Hide progress bar
+        if (((MainActivity) getActivity()).getProgressBarState()) {
+            ((MainActivity) getActivity()).setProgress(false);
+        }
+
+        // If no records in DB, run updateWeather()
+        if (data.getCount() == 0) {
+            updateWeather();
+        } else {
+            mForecastAdapter.swapCursor(data);
+            if (mPosition != ListView.INVALID_POSITION) {
+                // If we don't need to restart the loader, and there's a desired position to restore
+                // to, do so now.
+                mListView.smoothScrollToPosition(mPosition);
+            }
         }
     }
 
