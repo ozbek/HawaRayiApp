@@ -294,4 +294,8 @@ public class Utility {
         int index = Arrays.asList(cityValues).indexOf(location);
         return cityOptions[index];
     }
+
+    public static float getConvertedPressure(float rawPressure) {
+        return rawPressure * 0.750063f;
+    }
 }

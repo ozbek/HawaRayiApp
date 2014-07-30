@@ -231,7 +231,8 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             mWindView.setText(Utility.getFormattedWind(getActivity(), windSpeedStr, windDirStr));
 
             // Read pressure from cursor and update view
-            float pressure = data.getFloat(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_PRESSURE));
+            float rawPressure = data.getFloat(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_PRESSURE));
+            float pressure = Utility.getConvertedPressure(rawPressure);
             mPressureView.setText(getActivity().getString(R.string.format_pressure, pressure));
 
             mForecastStr = String.format("%s - %s - %s/%s",

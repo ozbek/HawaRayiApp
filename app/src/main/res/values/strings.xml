@@ -71,7 +71,7 @@
     <string name="wind_direction_north_west">арқа-батыс</string>
 
     <!-- Pressure format CHAR LIMIT=25] -->
-    <string name="format_pressure">Басым: <xliff:g id="pressure">%1.0f</xliff:g> hPa</string>
+    <string name="format_pressure">Басым: <xliff:g id="pressure">%1.0f</xliff:g> мм. сынап бағанасы</string>
 
     <!-- Humidity format CHAR LIMIT=25]-->
     <string name="format_humidity">Ығаллық: <xliff:g id="humidity">%1.0f</xliff:g>%%</string>
