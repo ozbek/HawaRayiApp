@@ -94,4 +94,7 @@
     <string name="clear">Ашық аспан</string>
     <string name="light_clouds">Бултлы</string>
     <string name="cloudy">Бултлы</string>
+
+    <string name="no_network_no_data">Интернет байланысы табылмады. Интернетке қосылғаныңызда, бағдарламаны қайта жүклең, ямаса \'Жаңалаӯ\' менюинен пайдаланың.</string>
+    <string name="no_network">Интернет байланысы табылмады. Интернетке қосылғаныңызда, қайтадан ҳәрекет етип көриң.</string>
 </resources>

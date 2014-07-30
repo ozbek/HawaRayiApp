@@ -13,7 +13,6 @@
         <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:minWidth="56dp"
             android:orientation="vertical" >
 
             <!-- Header: Day, Date, City -->
@@ -48,7 +47,8 @@
         <LinearLayout
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView

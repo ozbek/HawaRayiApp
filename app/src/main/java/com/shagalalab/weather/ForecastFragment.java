@@ -15,8 +15,10 @@
  */
 package com.shagalalab.weather;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -31,6 +33,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.shagalalab.weather.data.WeatherContract;
 import com.shagalalab.weather.service.HawaRayiService;
@@ -116,8 +119,12 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_refresh) {
-            updateWeather();
-            return true;
+            if (isNetworkConnected()) {
+                updateWeather();
+                return true;
+            } else {
+                Toast.makeText(getActivity(), getString(R.string.no_network), Toast.LENGTH_LONG).show();
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -135,6 +142,7 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
         // Get a reference to the ListView, and attach this adapter to it.
         mListView = (ListView) rootView.findViewById(R.id.listview_forecast);
         mListView.setAdapter(mForecastAdapter);
+        mListView.setEmptyView(rootView.findViewById(R.id.listview_empty));
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -175,6 +183,11 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
         Intent intent = new Intent(getActivity(), HawaRayiService.class);
         intent.putExtra(HawaRayiService.LOCATION_QUERY_EXTRA, Utility.getPreferredLocation(getActivity()));
         getActivity().startService(intent);
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        return (cm.getActiveNetworkInfo() != null);
     }
 
     @Override
@@ -233,7 +246,7 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
         }
 
         // If no records in DB, run updateWeather()
-        if (data.getCount() == 0) {
+        if (data.getCount() == 0 && isNetworkConnected()) {
             updateWeather();
         } else {
             mForecastAdapter.swapCursor(data);
