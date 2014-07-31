@@ -109,7 +109,8 @@ public class ForecastAdapter extends CursorAdapter {
         double low = cursor.getDouble(ForecastFragment.COL_WEATHER_MIN_TEMP);
         viewHolder.lowTempView.setText(Utility.formatTemperature(context, low));
 
-        String city = cursor.getString(ForecastFragment.COL_LOCATION_CITY);
+        int cityId = cursor.getInt(ForecastFragment.COL_LOCATION_CITY);
+        String city = context.getResources().getStringArray(R.array.pref_location_options)[cityId];
         viewHolder.cityView.setText(city);
     }
 

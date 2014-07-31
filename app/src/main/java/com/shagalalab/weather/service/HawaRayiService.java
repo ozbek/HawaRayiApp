@@ -181,16 +181,10 @@ public class HawaRayiService extends IntentService {
         JSONObject forecastJson = new JSONObject(forecastJsonStr);
         JSONArray weatherArray = forecastJson.getJSONArray(OWM_LIST);
 
-        JSONObject cityJson = forecastJson.getJSONObject(OWM_CITY);
-        String cityName = Utility.getCityTitle(getResources(), locationSetting);
-        JSONObject coordJSON = cityJson.getJSONObject(OWM_COORD);
-        double cityLatitude = coordJSON.getLong(OWM_COORD_LAT);
-        double cityLongitude = coordJSON.getLong(OWM_COORD_LONG);
-
-        Log.v(LOG_TAG, cityName + ", with coord: " + cityLatitude + " " + cityLongitude);
+        int cityIndex = Utility.getCityIndex(getResources(), locationSetting);
 
         // Insert the location into the database.
-        long locationID = insertLocationInDatabase(locationSetting, cityName);
+        long locationID = insertLocationInDatabase(locationSetting, cityIndex);
 
         // Get and insert the new weather information into the database
         Vector<ContentValues> cVVector = new Vector<ContentValues>(weatherArray.length());
@@ -262,10 +256,10 @@ public class HawaRayiService extends IntentService {
      * Helper method to handle insertion of a new location in the weather database.
      *
      * @param locationSetting The location string used to request updates from the server.
-     * @param cityName A human-readable city name, e.g "Mountain View"
+     * @param cityIdx A human-readable city name, e.g "Mountain View"
      * @return the row ID of the added location.
      */
-    private long insertLocationInDatabase(String locationSetting, String cityName) {
+    private long insertLocationInDatabase(String locationSetting, int cityIdx) {
 
         // First, check if the location with this city name exists in the db
         Cursor cursor = getContentResolver().query(
@@ -282,7 +276,7 @@ public class HawaRayiService extends IntentService {
         } else {
             ContentValues locationValues = new ContentValues();
             locationValues.put(WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING, locationSetting);
-            locationValues.put(WeatherContract.LocationEntry.COLUMN_CITY_NAME, cityName);
+            locationValues.put(WeatherContract.LocationEntry.COLUMN_CITY_ID, cityIdx);
 
             Uri locationInsertUri = getContentResolver()
                     .insert(WeatherContract.LocationEntry.CONTENT_URI, locationValues);

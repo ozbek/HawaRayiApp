@@ -72,7 +72,7 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
             WeatherContract.WeatherEntry.COLUMN_MAX_TEMP,
             WeatherContract.WeatherEntry.COLUMN_MIN_TEMP,
             WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING,
-            WeatherContract.LocationEntry.COLUMN_CITY_NAME,
+            WeatherContract.LocationEntry.COLUMN_CITY_ID,
             WeatherContract.WeatherEntry.COLUMN_WEATHER_ID
     };
 

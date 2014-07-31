@@ -116,7 +116,7 @@ public class TestDb extends AndroidTestCase {
         // Create a new map of values, where column names are the keys
         ContentValues testValues = new ContentValues();
         testValues.put(LocationEntry.COLUMN_LOCATION_SETTING, TEST_LOCATION);
-        testValues.put(LocationEntry.COLUMN_CITY_NAME, "North Pole");
+        testValues.put(LocationEntry.COLUMN_CITY_ID, "North Pole");
         testValues.put(LocationEntry.COLUMN_COORD_LAT, 64.7488);
         testValues.put(LocationEntry.COLUMN_COORD_LONG, -147.353);
 

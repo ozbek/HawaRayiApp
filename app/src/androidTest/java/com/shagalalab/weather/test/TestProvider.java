@@ -206,7 +206,7 @@ public class TestProvider extends AndroidTestCase {
 
         ContentValues updatedValues = new ContentValues(values);
         updatedValues.put(LocationEntry._ID, locationRowId);
-        updatedValues.put(LocationEntry.COLUMN_CITY_NAME, "Santa's Village");
+        updatedValues.put(LocationEntry.COLUMN_CITY_ID, "Santa's Village");
 
         int count = mContext.getContentResolver().update(
                 LocationEntry.CONTENT_URI, updatedValues, LocationEntry._ID + "= ?",
@@ -266,7 +266,7 @@ public class TestProvider extends AndroidTestCase {
         // Create a new map of values, where column names are the keys
         ContentValues testValues = new ContentValues();
         testValues.put(LocationEntry.COLUMN_LOCATION_SETTING, KALAMAZOO_LOCATION_SETTING);
-        testValues.put(LocationEntry.COLUMN_CITY_NAME, "Kalamazoo");
+        testValues.put(LocationEntry.COLUMN_CITY_ID, "Kalamazoo");
         testValues.put(LocationEntry.COLUMN_COORD_LAT, 42.2917);
         testValues.put(LocationEntry.COLUMN_COORD_LONG, -85.5872);
 

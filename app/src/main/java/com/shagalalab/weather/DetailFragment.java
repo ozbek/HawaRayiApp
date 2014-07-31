@@ -68,7 +68,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             // This works because the WeatherProvider returns location data joined with
             // weather data, even though they're stored in two different tables.
             WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING,
-            WeatherContract.LocationEntry.COLUMN_CITY_NAME
+            WeatherContract.LocationEntry.COLUMN_CITY_ID
     };
 
     private ImageView mIconView;
@@ -203,7 +203,8 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             mFriendlyDateView.setText(friendlyDateText);
             mDateView.setText(dateText);
 
-            String city = data.getString(data.getColumnIndex(WeatherContract.LocationEntry.COLUMN_CITY_NAME));
+            int cityId = data.getInt(data.getColumnIndex(WeatherContract.LocationEntry.COLUMN_CITY_ID));
+            String city = getResources().getStringArray(R.array.pref_location_options)[cityId];
             mCityView.setText(city);
 
             // Read description from cursor and update view

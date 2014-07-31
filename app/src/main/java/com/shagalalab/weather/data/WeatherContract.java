@@ -97,7 +97,7 @@ public class WeatherContract {
 
         // Human readable location string, provided by the API.  Because for styling,
         // "Mountain View" is more recognizable than 94043.
-        public static final String COLUMN_CITY_NAME = "city_name";
+        public static final String COLUMN_CITY_ID = "city_id";
 
         public static Uri buildLocationUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);

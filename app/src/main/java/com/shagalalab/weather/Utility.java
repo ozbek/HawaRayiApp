@@ -297,11 +297,10 @@ public class Utility {
         return true;
     }
 
-    public static String getCityTitle(Resources res, String location) {
+    public static int getCityIndex(Resources res, String location) {
         String[] cityValues = res.getStringArray(R.array.pref_location_values);
-        String[] cityOptions = res.getStringArray(R.array.pref_location_options);
         int index = Arrays.asList(cityValues).indexOf(location);
-        return cityOptions[index];
+        return index;
     }
 
     public static float getConvertedPressure(float rawPressure) {
