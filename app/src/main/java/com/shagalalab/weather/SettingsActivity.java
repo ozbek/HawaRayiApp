@@ -16,6 +16,8 @@
 package com.shagalalab.weather;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -39,16 +41,27 @@ public class SettingsActivity extends PreferenceActivity
     // since we use the preference change initially to populate the summary
     // field, we'll ignore that change at start of the activity
     boolean mBindingPreference;
+    private String uiInterface;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        uiInterface = prefs.getString(getString(R.string.pref_interface_key),
+                getString(R.string.pref_interface_default));
+
+        if (!uiInterface.equals(getString(R.string.pref_interface_default))) {
+            Utility.changeLocale(this);
+        }
+
         // Add 'general' preferences, defined in the XML file
         addPreferencesFromResource(R.xml.pref_general);
 
         // For all preferences, attach an OnPreferenceChangeListener so the UI summary can be
         // updated when the preference changes.
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_location_key)));
+        bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_interface_key)));
     }
 
     /**
@@ -74,13 +87,19 @@ public class SettingsActivity extends PreferenceActivity
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object value) {
-        String newLocation = value.toString();
+        String newValue = value.toString();
 
         if (!mBindingPreference) {
-            if ( preference.getKey().equals(getString(R.string.pref_location_key))) {
+            if (preference.getKey().equals(getString(R.string.pref_location_key))) {
                 Intent intent = new Intent(this, HawaRayiService.class);
-                intent.putExtra(HawaRayiService.LOCATION_QUERY_EXTRA, newLocation);
+                intent.putExtra(HawaRayiService.LOCATION_QUERY_EXTRA, newValue);
                 startService(intent);
+            } else if (preference.getKey().equals(getString(R.string.pref_interface_key))) {
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putBoolean(getString(R.string.pref_need_restart), true);
+                editor.apply();
+                finish();
             } else {
                 // notify code that weather may be effected
                 getContentResolver().notifyChange(WeatherContract.WeatherEntry.CONTENT_URI, null);
@@ -91,15 +110,24 @@ public class SettingsActivity extends PreferenceActivity
             // For list preferences, look up the correct display value in
             // the preference's 'entries' list (since they have separate labels/values).
             ListPreference listPreference = (ListPreference) preference;
-            int prefIndex = listPreference.findIndexOfValue(newLocation);
+            int prefIndex = listPreference.findIndexOfValue(newValue);
             if (prefIndex >= 0) {
                 preference.setSummary(listPreference.getEntries()[prefIndex]);
             }
         } else {
             // For other preferences, set the summary to the value's simple string representation.
-            preference.setSummary(newLocation);
+            preference.setSummary(newValue);
         }
+
         return true;
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        if (!uiInterface.equals(getString(R.string.pref_interface_default))) {
+            Utility.changeLocale(this);
+        }
+    }
 }

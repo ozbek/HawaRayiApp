@@ -97,4 +97,9 @@
 
     <string name="no_network_no_data">Интернет байланысы табылмады. Интернетке қосылғаныңызда, бағдарламаны қайта жүклең, ямаса \'Жаңалаӯ\' менюинен пайдаланың.</string>
     <string name="no_network">Интернет байланысы табылмады. Интернетке қосылғаныңызда, қайтадан ҳәрекет етип көриң.</string>
+
+    <string name="pref_interface_label">Бағдарлама интерфейси</string>
+    <string name="pref_interface_key" translatable="false">interface</string>
+    <string name="pref_interface_default" translatable="false">cyrillic</string>
+    <string name="pref_need_restart" translatable="false">need_restart</string>
 </resources>

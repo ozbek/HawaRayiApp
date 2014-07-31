@@ -15,8 +15,15 @@
  */
 package com.shagalalab.weather;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,11 +35,21 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
 
     private boolean mTwoPane;
     private boolean mProgressBarState = false;
+    private String uiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        uiInterface = prefs.getString(getString(R.string.pref_interface_key),
+                getString(R.string.pref_interface_default));
+
+        if (!uiInterface.equals(getString(R.string.pref_interface_default))) {
+            Utility.changeLocale(this);
+        }
+
         setContentView(R.layout.activity_main);
         if (findViewById(R.id.weather_detail_container) != null) {
             // The detail container view will be present only in the large-screen layouts
@@ -47,9 +64,39 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
                     .commit();
         }
 
-        ForecastFragment forecastFragment =  ((ForecastFragment) getSupportFragmentManager()
+        ForecastFragment forecastFragment = ((ForecastFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_forecast));
         forecastFragment.setUseTodayLayout(!mTwoPane);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter(Utility.COMMUNICATE_WITH_MAIN_INTENT_FILTER));
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean needRestart = prefs.getBoolean(getString(R.string.pref_need_restart), false);
+        if (needRestart) {
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean(getString(R.string.pref_need_restart), false);
+            editor.apply();
+            Utility.restartApp(this, getIntent());
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        if (!uiInterface.equals(getString(R.string.pref_interface_default))) {
+            Utility.changeLocale(this);
+        }
     }
 
     @Override
@@ -93,6 +140,17 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
             startActivity(intent);
         }
     }
+
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Get extra data included in the Intent
+            String message = intent.getStringExtra(Utility.MESSAGE);
+            if (message.equals(Utility.HIDE_PROGRESS_BAR)) {
+                setProgress(false);
+            }
+        }
+    };
 
     public void setProgress(boolean state) {
         mProgressBarState = state;

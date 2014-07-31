@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="months">
+        <item>yanvar</item>
+        <item>fevral</item>
+        <item>mart</item>
+        <item>aprel</item>
+        <item>may</item>
+        <item>iyun</item>
+        <item>iyul</item>
+        <item>avgust</item>
+        <item>sentyabr</item>
+        <item>oktyabr</item>
+        <item>noyabr</item>
+        <item>dekabr</item>
+    </array>
+
+    <array name="day_of_week">
+        <item>Yekshembi</item>
+        <item>Du\'yshembi</item>
+        <item>Shiyshembi</item>
+        <item>Sa\'rshembi</item>
+        <item>Piyshembi</item>
+        <item>Juma</item>
+        <item>Shembi</item>
+    </array>
+
+    <array name="pref_location_options">
+        <item>No\'kis</item>
+        <item>Aqmang\'i\'t</item>
+        <item>Beruniy</item>
+        <item>Bostan</item>
+        <item>Kegeyli</item>
+        <item>Qanli\'ko\'l</item>
+        <item>Qarao\'zek</item>
+        <item>Qon\'i\'rat</item>
+        <item>Mang\'i\'t</item>
+        <item>Moynaq</item>
+        <item>Taxtako\'pir</item>
+        <item>To\'rtku\'l</item>
+        <item>Xojeli</item>
+        <item>Shi\'mbay</item>
+        <item>Shomanay</item>
+        <item>Tashkent</item>
+    </array>
+
+    <array name="pref_location_values">
+        <item>nukus</item>
+        <item>"601423"</item>
+        <item>beruniy</item>
+        <item>"1538223"</item>
+        <item>kegeyli</item>
+        <item>"601306"</item>
+        <item>karauzyak</item>
+        <item>kungrad</item>
+        <item>mangit</item>
+        <item>moynaq</item>
+        <item>takhtakupir</item>
+        <item>turtkul</item>
+        <item>khujayli</item>
+        <item>chimbay</item>
+        <item>shumanay</item>
+        <item>tashkent</item>
+    </array>
+
+    <array name="pref_interface_options">
+        <item>Kirill a\'lipbesi</item>
+        <item>Lati\'n a\'lipbesi</item>
+    </array>
+
+    <array name="pref_interface_values">
+        <item>cyrillic</item>
+        <item>latin</item>
+    </array>
+</resources>

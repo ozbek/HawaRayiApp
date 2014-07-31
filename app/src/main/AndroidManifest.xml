@@ -13,7 +13,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.shagalalab.weather.MainActivity"
-            android:theme="@style/ForecastTheme" >
+            android:theme="@style/ForecastTheme"
+            android:configChanges="locale">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

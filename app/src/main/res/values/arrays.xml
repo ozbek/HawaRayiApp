@@ -62,4 +62,14 @@
         <item>shumanay</item>
         <item>tashkent</item>
     </array>
+
+    <array name="pref_interface_options">
+        <item>Кирилл әлипбеси</item>
+        <item>Латын әлипбеси</item>
+    </array>
+
+    <array name="pref_interface_values">
+        <item>cyrillic</item>
+        <item>latin</item>
+    </array>
 </resources>

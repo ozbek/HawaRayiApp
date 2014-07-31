@@ -16,21 +16,32 @@
 package com.shagalalab.weather;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.shagalalab.weather.R;
 
 
 public class DetailActivity extends ActionBarActivity {
 
     public static final String DATE_KEY = "forecast_date";
+    private String uiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        uiInterface = prefs.getString(getString(R.string.pref_interface_key),
+                getString(R.string.pref_interface_default));
+
+        if (!uiInterface.equals(getString(R.string.pref_interface_default))) {
+            Utility.changeLocale(this);
+        }
+
         setContentView(R.layout.activity_detail);
 
         if (savedInstanceState == null) {
@@ -68,5 +79,25 @@ public class DetailActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean needRestart = prefs.getBoolean(getString(R.string.pref_need_restart), false);
+        if (needRestart) {
+            finish();
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        if (!uiInterface.equals(getString(R.string.pref_interface_default))) {
+            Utility.changeLocale(this);
+        }
     }
 }

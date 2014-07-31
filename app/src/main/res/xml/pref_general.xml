@@ -10,6 +10,13 @@
         android:entryValues="@array/pref_location_values"
         android:entries="@array/pref_location_options" />
 
+    <ListPreference
+        android:title="@string/pref_interface_label"
+        android:key="@string/pref_interface_key"
+        android:defaultValue="@string/pref_interface_default"
+        android:entryValues="@array/pref_interface_values"
+        android:entries="@array/pref_interface_options" />
+
     <CheckBoxPreference
         android:title="@string/pref_enable_notifications_label"
         android:key="@string/pref_enable_notifications_key"

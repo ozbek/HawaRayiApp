@@ -15,8 +15,12 @@
  */
 package com.shagalalab.weather;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.preference.PreferenceManager;
 
@@ -25,8 +29,13 @@ import com.shagalalab.weather.data.WeatherContract;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class Utility {
+    public static String COMMUNICATE_WITH_MAIN_INTENT_FILTER = "COMMUNICATE_WITH_MAIN_INTENT_FILTER";
+    public static String MESSAGE = "message";
+    public static String HIDE_PROGRESS_BAR = "hide_progressbar";
+
     public static String getPreferredLocation(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getString(context.getString(R.string.pref_location_key),
@@ -297,5 +306,23 @@ public class Utility {
 
     public static float getConvertedPressure(float rawPressure) {
         return rawPressure * 0.750063f;
+    }
+
+    public static void restartApp(Context context, Intent intent) {
+        Intent mStartActivity = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+        int mPendingIntentId = 123456;
+        PendingIntent mPendingIntent = PendingIntent.getActivity(context, mPendingIntentId,
+                intent, PendingIntent.FLAG_CANCEL_CURRENT|PendingIntent.FLAG_ONE_SHOT);
+        AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+        System.exit(0);
+    }
+
+    public static void changeLocale(Context context) {
+        Locale locale = new Locale("ru");
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
     }
 }

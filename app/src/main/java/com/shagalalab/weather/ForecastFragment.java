@@ -33,6 +33,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shagalalab.weather.data.WeatherContract;
@@ -49,6 +50,7 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
 
     private String mLocation;
     private ListView mListView;
+    private TextView mEmptyTextView;
     private int mPosition = ListView.INVALID_POSITION;
     private boolean mUseTodayLayout;
 
@@ -156,6 +158,8 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
             }
         });
 
+        mEmptyTextView = (TextView) rootView.findViewById(R.id.listview_empty);
+
         // If there's instance state, mine it for useful information.
         // The end-goal here is that the user never knows that turning their device sideways
         // does crazy lifecycle related things.  It should feel like some stuff stretched out,
@@ -246,8 +250,12 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
         }
 
         // If no records in DB, run updateWeather()
-        if (data.getCount() == 0 && isNetworkConnected()) {
-            updateWeather();
+        if (data.getCount() == 0) {
+            if (isNetworkConnected()) {
+                updateWeather();
+            } else {
+                mEmptyTextView.setText(getString(R.string.no_network_no_data));
+            }
         } else {
             mForecastAdapter.swapCursor(data);
             if (mPosition != ListView.INVALID_POSITION) {

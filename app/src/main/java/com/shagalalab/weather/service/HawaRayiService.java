@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.shagalalab.weather.Utility;
@@ -108,6 +109,7 @@ public class HawaRayiService extends IntentService {
             Log.e(LOG_TAG, "Error ", e);
             // If the code didn't successfully get the weather data, there's no point in attemping
             // to parse it.
+            hideProgressbar();
             return;
         } finally {
             if (urlConnection != null) {
@@ -130,6 +132,13 @@ public class HawaRayiService extends IntentService {
         }
         // This will only happen if there was an error getting or parsing the forecast.
         return;
+    }
+
+    private void hideProgressbar() {
+        Intent intent = new Intent(Utility.COMMUNICATE_WITH_MAIN_INTENT_FILTER);
+        // You can also include some extra data.
+        intent.putExtra(Utility.MESSAGE, Utility.HIDE_PROGRESS_BAR);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
     /**
