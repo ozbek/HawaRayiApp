@@ -35,6 +35,7 @@ public class Utility {
     public static String COMMUNICATE_WITH_MAIN_INTENT_FILTER = "COMMUNICATE_WITH_MAIN_INTENT_FILTER";
     public static String MESSAGE = "message";
     public static String HIDE_PROGRESS_BAR = "hide_progressbar";
+    public static boolean NEED_RESTART = false;
 
     public static String getPreferredLocation(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);

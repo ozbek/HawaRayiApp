@@ -86,13 +86,9 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
         super.onResume();
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter(Utility.COMMUNICATE_WITH_MAIN_INTENT_FILTER));
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean needRestart = prefs.getBoolean(getString(R.string.pref_need_restart), false);
-        Log.w(LOG_TAG, "onResume, needRestart -> " + needRestart);
-        if (needRestart) {
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean(getString(R.string.pref_need_restart), false);
-            editor.apply();
+        Log.w(LOG_TAG, "onResume, needRestart -> " + Utility.NEED_RESTART);
+        if (Utility.NEED_RESTART) {
+            Utility.NEED_RESTART = false;
             finish();
             Utility.restartApp(this, getIntent());
         }

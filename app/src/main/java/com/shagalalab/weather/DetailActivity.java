@@ -91,9 +91,7 @@ public class DetailActivity extends ActionBarActivity {
         Log.w(LOG_TAG, "onResume");
         super.onResume();
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean needRestart = prefs.getBoolean(getString(R.string.pref_need_restart), false);
-        if (needRestart) {
+        if (Utility.NEED_RESTART) {
             finish();
         }
     }

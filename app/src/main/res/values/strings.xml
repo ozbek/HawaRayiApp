@@ -101,5 +101,4 @@
     <string name="pref_interface_label">Бағдарлама интерфейси</string>
     <string name="pref_interface_key" translatable="false">interface</string>
     <string name="pref_interface_default" translatable="false">cyrillic</string>
-    <string name="pref_need_restart" translatable="false">need_restart</string>
 </resources>

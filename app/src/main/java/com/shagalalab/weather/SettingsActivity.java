@@ -102,10 +102,7 @@ public class SettingsActivity extends PreferenceActivity
                 intent.putExtra(HawaRayiService.LOCATION_QUERY_EXTRA, newValue);
                 startService(intent);
             } else if (preference.getKey().equals(getString(R.string.pref_interface_key))) {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putBoolean(getString(R.string.pref_need_restart), true);
-                editor.apply();
+                Utility.NEED_RESTART = true;
                 finish();
             } else {
                 // notify code that weather may be effected
