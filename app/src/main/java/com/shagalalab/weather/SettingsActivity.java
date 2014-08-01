@@ -88,8 +88,9 @@ public class SettingsActivity extends PreferenceActivity
     @Override
     public boolean onPreferenceChange(Preference preference, Object value) {
         String newValue = value.toString();
+        String oldValue = preference.getSharedPreferences().getString(getString(R.string.pref_interface_key), "");
 
-        if (!mBindingPreference) {
+        if (!mBindingPreference && !oldValue.equals(newValue)) {
             if (preference.getKey().equals(getString(R.string.pref_location_key))) {
                 Intent intent = new Intent(this, HawaRayiService.class);
                 intent.putExtra(HawaRayiService.LOCATION_QUERY_EXTRA, newValue);
