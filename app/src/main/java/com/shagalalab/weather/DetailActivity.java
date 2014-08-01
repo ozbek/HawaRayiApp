@@ -21,17 +21,20 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
 public class DetailActivity extends ActionBarActivity {
 
+    private final String LOG_TAG = DetailActivity.class.getSimpleName();
     public static final String DATE_KEY = "forecast_date";
     private String uiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.w(LOG_TAG, "onCreate");
         super.onCreate(savedInstanceState);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -43,6 +46,8 @@ public class DetailActivity extends ActionBarActivity {
         }
 
         setContentView(R.layout.activity_detail);
+
+        getSupportActionBar().setTitle(R.string.title_activity_detail);
 
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
@@ -83,6 +88,7 @@ public class DetailActivity extends ActionBarActivity {
 
     @Override
     protected void onResume() {
+        Log.w(LOG_TAG, "onResume");
         super.onResume();
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -94,6 +100,7 @@ public class DetailActivity extends ActionBarActivity {
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
+        Log.w(LOG_TAG, "onConfigurationChanged");
         super.onConfigurationChanged(newConfig);
 
         if (!uiInterface.equals(getString(R.string.pref_interface_default))) {

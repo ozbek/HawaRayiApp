@@ -15,6 +15,7 @@
  */
 package com.shagalalab.weather;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -57,6 +58,11 @@ public class SettingsActivity extends PreferenceActivity
 
         // Add 'general' preferences, defined in the XML file
         addPreferencesFromResource(R.xml.pref_general);
+
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(R.string.title_activity_settings);
+        }
 
         // For all preferences, attach an OnPreferenceChangeListener so the UI summary can be
         // updated when the preference changes.

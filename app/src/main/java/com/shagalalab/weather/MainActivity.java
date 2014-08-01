@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -40,6 +41,9 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.w(LOG_TAG, "onCreate");
+
         supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -71,27 +75,32 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
 
     @Override
     protected void onPause() {
+        Log.w(LOG_TAG, "onPause");
         super.onPause();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
     }
 
     @Override
     protected void onResume() {
+        Log.w(LOG_TAG, "onResume");
         super.onResume();
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter(Utility.COMMUNICATE_WITH_MAIN_INTENT_FILTER));
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         boolean needRestart = prefs.getBoolean(getString(R.string.pref_need_restart), false);
+        Log.w(LOG_TAG, "onResume, needRestart -> " + needRestart);
         if (needRestart) {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean(getString(R.string.pref_need_restart), false);
             editor.apply();
+            finish();
             Utility.restartApp(this, getIntent());
         }
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
+        Log.w(LOG_TAG, "onConfigurationChanged");
         super.onConfigurationChanged(newConfig);
 
         if (!uiInterface.equals(getString(R.string.pref_interface_default))) {
