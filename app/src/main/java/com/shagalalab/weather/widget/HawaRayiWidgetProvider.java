@@ -5,17 +5,35 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.widget.RemoteViews;
 
 import com.shagalalab.weather.MainActivity;
 import com.shagalalab.weather.R;
+import com.shagalalab.weather.Utility;
+import com.shagalalab.weather.data.WeatherContract;
 
+import java.util.Date;
 import java.util.Random;
 
 /**
  * Created by atabek on 8/1/14.
  */
 public class HawaRayiWidgetProvider extends AppWidgetProvider {
+
+    private static final String[] FORECAST_COLUMNS = {
+            WeatherContract.WeatherEntry.TABLE_NAME + "." + WeatherContract.WeatherEntry._ID,
+            WeatherContract.WeatherEntry.COLUMN_DATETEXT,
+            WeatherContract.WeatherEntry.COLUMN_MAX_TEMP,
+            WeatherContract.WeatherEntry.COLUMN_MIN_TEMP,
+            WeatherContract.WeatherEntry.COLUMN_WEATHER_ID,
+            // This works because the WeatherProvider returns location data joined with
+            // weather data, even though they're stored in two different tables.
+            WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING,
+            WeatherContract.LocationEntry.COLUMN_CITY_ID
+    };
+
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         final int N = appWidgetIds.length;
@@ -26,8 +44,42 @@ public class HawaRayiWidgetProvider extends AppWidgetProvider {
 
             // Get the layout for the App Widget and attach an on-click listener
             // to the button
+            String mLocation = Utility.getPreferredLocation(context);
+            Date todayDate = new Date();
+            String todayStr = Utility.getDbDateString(todayDate);
+            Uri weatherForLocationUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(
+                    mLocation, todayStr);
+            String sortOrder = WeatherContract.WeatherEntry.COLUMN_DATETEXT + " ASC";
+            Cursor cursor = context.getContentResolver().query(
+                    weatherForLocationUri,
+                    FORECAST_COLUMNS,
+                    null,
+                    null,
+                    sortOrder
+            );
+
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
-            views.setTextViewText(R.id.widget_text, Integer.toString(new Random().nextInt(100)));
+
+            if (cursor != null && cursor.moveToFirst()){
+                int weatherId = cursor.getInt(cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_WEATHER_ID));
+
+                String date = cursor.getString(cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_DATETEXT));
+                String friendlyDateText = Utility.getDayName(context, date);
+                String dateText = Utility.getFormattedMonthDay(context, date);
+
+                int cityId = cursor.getInt(cursor.getColumnIndex(WeatherContract.LocationEntry.COLUMN_CITY_ID));
+                String city = context.getResources().getStringArray(R.array.pref_location_options)[cityId];
+
+                double high = cursor.getDouble(cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_MAX_TEMP));
+                String highString = Utility.formatTemperature(context, high);
+
+                double low = cursor.getDouble(cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_MIN_TEMP));
+                String lowString = Utility.formatTemperature(context, low);
+
+                views.setTextViewText(R.id.widget_city, city);
+                views.setTextViewText(R.id.widget_today_temp, highString);
+                views.setImageViewResource(R.id.widget_today_icon, Utility.getArtResourceForWeatherCondition(weatherId));
+            }
 
             // Create an Intent to launch ExampleActivity
             Intent intent = new Intent(context, MainActivity.class);
@@ -35,7 +87,7 @@ public class HawaRayiWidgetProvider extends AppWidgetProvider {
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
 
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
-            views.setOnClickPendingIntent(R.id.widget_text, pendingIntent);
+            views.setOnClickPendingIntent(R.id.widget_city, pendingIntent);
             // Tell the AppWidgetManager to perform an update on the current app widget
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }

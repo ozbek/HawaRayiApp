@@ -234,7 +234,7 @@ public class HawaRayiService extends IntentService {
 
             weatherValues.put(WeatherContract.WeatherEntry.COLUMN_LOC_KEY, locationID);
             weatherValues.put(WeatherContract.WeatherEntry.COLUMN_DATETEXT,
-                    WeatherContract.getDbDateString(new Date(dateTime * 1000L)));
+                    Utility.getDbDateString(new Date(dateTime * 1000L)));
             weatherValues.put(WeatherContract.WeatherEntry.COLUMN_HUMIDITY, humidity);
             weatherValues.put(WeatherContract.WeatherEntry.COLUMN_PRESSURE, pressure);
             weatherValues.put(WeatherContract.WeatherEntry.COLUMN_WIND_SPEED, windSpeed);

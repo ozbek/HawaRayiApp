@@ -9,4 +9,6 @@
     <color name="sunshine_light_blue">#ff64c2f4</color>
     <color name="sunshine_blue">#ff1ca8f4</color>
 
+    <color name="widget_dark">#3b3b3b</color>
+
 </resources>

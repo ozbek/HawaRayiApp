@@ -26,6 +26,8 @@ import android.preference.PreferenceManager;
 
 import com.shagalalab.weather.data.WeatherContract;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -64,7 +66,7 @@ public class Utility {
         // For all days after that: "Mon Jun 8"
 
         Date todayDate = new Date();
-        String todayStr = WeatherContract.getDbDateString(todayDate);
+        String todayStr = getDbDateString(todayDate);
 
         // If the date we're building the String for is today's date, the format
         // is "Today, June 24"
@@ -79,7 +81,7 @@ public class Utility {
             Calendar cal = Calendar.getInstance();
             cal.setTime(todayDate);
             cal.add(Calendar.DATE, 7);
-            String weekFutureString = WeatherContract.getDbDateString(cal.getTime());
+            String weekFutureString = getDbDateString(cal.getTime());
 
             if (dateStr.compareTo(weekFutureString) < 0) {
                 // If the input date is less than a week in the future, just return the day name.
@@ -105,7 +107,7 @@ public class Utility {
      */
     public static String getDayName(Context context, String dateStr) {
         Date todayDate = new Date();
-        if (WeatherContract.getDbDateString(todayDate).equals(dateStr)) {
+        if (getDbDateString(todayDate).equals(dateStr)) {
             return context.getString(R.string.today);
         } else {
             // If the date is set for tomorrow, the format is "Tomorrow".
@@ -113,11 +115,11 @@ public class Utility {
             cal.setTime(todayDate);
             cal.add(Calendar.DATE, 1);
             Date tomorrowDate = cal.getTime();
-            if (WeatherContract.getDbDateString(tomorrowDate).equals(dateStr)) {
+            if (getDbDateString(tomorrowDate).equals(dateStr)) {
                 return context.getString(R.string.tomorrow);
             } else {
                 // Otherwise, the format is just the day of the week (e.g "Wednesday".
-                Date date = WeatherContract.getDateFromDb(dateStr);
+                Date date = getDateFromDb(dateStr);
                 Calendar c = Calendar.getInstance();
                 c.setTime(date);
                 String[] dayOfWeeks = context.getResources().getStringArray(R.array.day_of_week);
@@ -134,7 +136,7 @@ public class Utility {
      * @return The day in the form of a string formatted "December 6"
      */
     public static String getFormattedMonthDay(Context context, String dateStr) {
-        Date date = WeatherContract.getDateFromDb(dateStr);
+        Date date = getDateFromDb(dateStr);
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         String[] months = context.getResources().getStringArray(R.array.months);
@@ -309,7 +311,6 @@ public class Utility {
     }
 
     public static void restartApp(Context context, Intent intent) {
-        Intent mStartActivity = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
         int mPendingIntentId = 123456;
         PendingIntent mPendingIntent = PendingIntent.getActivity(context, mPendingIntentId,
                 intent, PendingIntent.FLAG_CANCEL_CURRENT|PendingIntent.FLAG_ONE_SHOT);
@@ -324,5 +325,32 @@ public class Utility {
         Configuration config = new Configuration();
         config.locale = locale;
         context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
+    }
+
+    /**
+     * Converts Date class to a string representation, used for easy comparison and database lookup.
+     * @param date The input date
+     * @return a DB-friendly representation of the date, using the format defined in DATE_FORMAT.
+     */
+    public static String getDbDateString(Date date){
+        // Because the API returns a unix timestamp (measured in seconds),
+        // it must be converted to milliseconds in order to be converted to valid date.
+        SimpleDateFormat sdf = new SimpleDateFormat(WeatherContract.DATE_FORMAT);
+        return sdf.format(date);
+    }
+
+    /**
+     * Converts a dateText to a long Unix time representation
+     * @param dateText the input date string
+     * @return the Date object
+     */
+    public static Date getDateFromDb(String dateText) {
+        SimpleDateFormat dbDateFormat = new SimpleDateFormat(WeatherContract.DATE_FORMAT);
+        try {
+            return dbDateFormat.parse(dateText);
+        } catch ( ParseException e ) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

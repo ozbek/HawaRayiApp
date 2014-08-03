@@ -44,7 +44,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
     private static final String LOG_TAG = DetailFragment.class.getSimpleName();
 
-    private static final String FORECAST_SHARE_HASHTAG = " #SunshineApp";
+    private static final String FORECAST_SHARE_HASHTAG = " #HawaRayi #ShagalaLab";
 
     private static final String LOCATION_KEY = "location";
     private static final String FORECAST_KEY = "forecast";

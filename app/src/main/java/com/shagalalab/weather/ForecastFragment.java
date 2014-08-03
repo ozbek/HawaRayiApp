@@ -221,7 +221,7 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
         // To only show current and future dates, get the String representation for today,
         // and filter the query to return weather only for dates after or including today.
         // Only return data after today.
-        String startDate = WeatherContract.getDbDateString(new Date());
+        String startDate = Utility.getDbDateString(new Date());
 
         // Sort order:  Ascending, by date.
         String sortOrder = WeatherContract.WeatherEntry.COLUMN_DATETEXT + " ASC";
