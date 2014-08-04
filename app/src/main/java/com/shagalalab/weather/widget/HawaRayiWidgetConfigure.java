@@ -7,10 +7,11 @@ import android.app.DialogFragment;
 import android.appwidget.AppWidgetManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,11 +25,19 @@ import com.shagalalab.weather.Utility;
 public class HawaRayiWidgetConfigure extends Activity {
     int mAppWidgetId;
     private Button createWidgetButton;
-    private TextView editCity;
+    private TextView textViewCity;
+    private String uiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        uiInterface = prefs.getString(getString(R.string.pref_interface_key),
+                getString(R.string.pref_interface_default));
+        if (!uiInterface.equals(getString(R.string.pref_interface_default))) {
+            Utility.changeLocale(this);
+        }
 
         setContentView(R.layout.widget_configure);
 
@@ -42,11 +51,11 @@ public class HawaRayiWidgetConfigure extends Activity {
         }
 
         // Perform your App Widget configuration.
-        editCity = (TextView) findViewById(R.id.widget_conf_city);
-        editCity.setOnClickListener(new View.OnClickListener() {
+        textViewCity = (TextView) findViewById(R.id.widget_conf_city);
+        textViewCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertListDialog dialogFragment = new AlertListDialog();
+                AlertListDialog dialogFragment = new AlertListDialog("Select city", R.array.pref_location_options, textViewCity);
                 dialogFragment.show(getFragmentManager(), "dialog");
             }
         });
@@ -75,14 +84,24 @@ public class HawaRayiWidgetConfigure extends Activity {
     }
 
     public class AlertListDialog extends DialogFragment {
+        int array;
+        TextView tvReference;
+        String mTitle;
+
+        public AlertListDialog(String title, int dialogItems, TextView textView) {
+            array = dialogItems;
+            tvReference = textView;
+            mTitle = title;
+        }
+
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             return new AlertDialog.Builder(getActivity())
-                    .setTitle("Select city")
-                    .setItems(R.array.pref_location_options, new DialogInterface.OnClickListener() {
+                    .setTitle(mTitle)
+                    .setItems(array, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int which) {
-                            Toast.makeText(getActivity(), "Selected: " + which, Toast.LENGTH_LONG).show();
+                            tvReference.setText(getResources().getTextArray(array)[which]);
                         }
                     })
                     .create();
