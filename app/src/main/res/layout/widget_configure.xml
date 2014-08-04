@@ -11,6 +11,13 @@
         android:text="Location"
         style="?android:attr/listSeparatorTextViewStyle"/>
 
+    <TextView
+        android:id="@+id/widget_conf_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:editable="false"
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:text="Nukus"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -18,10 +25,17 @@
         android:text="Interface"
         style="?android:attr/listSeparatorTextViewStyle"/>
 
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Update"
         style="?android:attr/listSeparatorTextViewStyle"/>
+
+    <Button
+        android:id="@+id/widget_create"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Widget'ti jaratiw" />
 
 </LinearLayout>
