@@ -26,10 +26,9 @@ import java.util.Date;
  * Created by atabek on 08/03/14.
  */
 public class HawaRayiWidgetConfigure extends PreferenceActivity implements Preference.OnPreferenceChangeListener {
-    int mAppWidgetId;
+    private int mAppWidgetId;
     private String selectedCity;
-    private String selectedCityTitle;
-    private String selectedInterface;
+    private int cityIndex;
     private RemoteViews views;
     private AppWidgetManager appWidgetManager = null;
 
@@ -86,6 +85,7 @@ public class HawaRayiWidgetConfigure extends PreferenceActivity implements Prefe
     }
 
     private void parseCursor() {
+        Utility.insertWidgetLocationInDatabase(this, selectedCity, cityIndex, mAppWidgetId);
         Date todayDate = new Date();
         String todayStr = Utility.getDbDateString(todayDate);
         Uri weatherForLocationUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(
@@ -155,6 +155,7 @@ public class HawaRayiWidgetConfigure extends PreferenceActivity implements Prefe
             }
             if (preference.getKey().equals(getString(R.string.pref_widget_location_key))) {
                 selectedCity = newValue;
+                cityIndex = prefIndex;
             }
         } else {
             // For other preferences, set the summary to the value's simple string representation.

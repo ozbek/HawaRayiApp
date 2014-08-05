@@ -17,11 +17,15 @@ package com.shagalalab.weather;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 
 import com.shagalalab.weather.data.WeatherContract;
@@ -369,6 +373,47 @@ public class Utility {
             return dbDateFormat.parse(dateText);
         } catch ( ParseException e ) {
             e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static void insertWidgetLocationInDatabase(Context context, String locationSetting, int cityIdx, int appWidgetId) {
+
+        // First, check if the location with this city name exists in the db
+        Cursor cursor = context.getContentResolver().query(
+                WeatherContract.LocationEntry.CONTENT_WIDGET_URI,
+                new String[]{WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING},
+                WeatherContract.LocationEntry.COLUMN_APP_WIDGET_ID + " = ?",
+                new String[]{Integer.toString(appWidgetId)},
+                null,
+                null);
+
+        if (!cursor.moveToFirst()) {
+            ContentValues locationValues = new ContentValues();
+            locationValues.put(WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING, locationSetting);
+            locationValues.put(WeatherContract.LocationEntry.COLUMN_APP_WIDGET_ID, appWidgetId);
+            locationValues.put(WeatherContract.LocationEntry.COLUMN_CITY_ID, cityIdx);
+
+            Uri locationInsertUri = context.getContentResolver()
+                    .insert(WeatherContract.LocationEntry.CONTENT_WIDGET_URI, locationValues);
+        }
+    }
+
+    public static String getWidgetLocation(Context context, int appWidgetId) {
+
+        // First, check if the location with this city name exists in the db
+        Cursor cursor = context.getContentResolver().query(
+                WeatherContract.LocationEntry.CONTENT_WIDGET_URI,
+                new String[]{WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING},
+                WeatherContract.LocationEntry.COLUMN_APP_WIDGET_ID + " = ?",
+                new String[]{Integer.toString(appWidgetId)},
+                null,
+                null);
+
+        if (cursor.moveToFirst()) {
+            int locationSettingIdx = cursor.getColumnIndex(WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING);
+            return cursor.getString(locationSettingIdx);
+        } else {
             return null;
         }
     }

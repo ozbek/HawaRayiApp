@@ -45,6 +45,7 @@ public class WeatherContract {
     // At least, let's hope not.  Don't be that dev, reader.  Don't be that dev.
     public static final String PATH_WEATHER = "weather";
     public static final String PATH_LOCATION = "location";
+    public static final String PATH_WIDGET = "widget";
 
     // Format used for storing dates in the database.  ALso used for converting those strings
     // back into date objects for comparison/processing.
@@ -56,6 +57,9 @@ public class WeatherContract {
         public static final Uri CONTENT_URI =
                 BASE_CONTENT_URI.buildUpon().appendPath(PATH_LOCATION).build();
 
+        public static final Uri CONTENT_WIDGET_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_WIDGET).build();
+
         public static final String CONTENT_TYPE =
                 "vnd.android.cursor.dir/" + CONTENT_AUTHORITY + "/" + PATH_LOCATION;
         public static final String CONTENT_ITEM_TYPE =
@@ -63,6 +67,7 @@ public class WeatherContract {
 
         // Table name
         public static final String TABLE_NAME = "location";
+        public static final String WIDGET_TABLE_NAME = "widget";
 
         // The location setting string is what will be sent to openweathermap
         // as the location query.
@@ -71,6 +76,8 @@ public class WeatherContract {
         // Human readable location string, provided by the API.  Because for styling,
         // "Mountain View" is more recognizable than 94043.
         public static final String COLUMN_CITY_ID = "city_id";
+
+        public static final String COLUMN_APP_WIDGET_ID = "app_widget_id";
 
         public static Uri buildLocationUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);

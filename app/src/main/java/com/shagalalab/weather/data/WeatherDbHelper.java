@@ -44,6 +44,14 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
                 "UNIQUE (" + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING +") ON CONFLICT IGNORE"+
                 " );";
 
+        final String SQL_CREATE_WIDGET_TABLE = "CREATE TABLE " + WeatherContract.LocationEntry.WIDGET_TABLE_NAME + " (" +
+                WeatherContract.LocationEntry._ID + " INTEGER PRIMARY KEY," +
+                WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " TEXT UNIQUE NOT NULL, " +
+                WeatherContract.LocationEntry.COLUMN_CITY_ID + " TEXT NOT NULL, " +
+                WeatherContract.LocationEntry.COLUMN_APP_WIDGET_ID + " INTEGER NOT NULL, " +
+                "UNIQUE (" + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING +") ON CONFLICT IGNORE"+
+                " );";
+
         final String SQL_CREATE_WEATHER_TABLE = "CREATE TABLE " + WeatherContract.WeatherEntry.TABLE_NAME + " (" +
                 // Why AutoIncrement here, and not above?
                 // Unique keys will be auto-generated in either case.  But for weather
@@ -76,6 +84,7 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL(SQL_CREATE_LOCATION_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_WEATHER_TABLE);
+        sqLiteDatabase.execSQL(SQL_CREATE_WIDGET_TABLE);
     }
 
     @Override
@@ -88,6 +97,7 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
         // should be your top priority before modifying this method.
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + WeatherContract.LocationEntry.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + WeatherContract.WeatherEntry.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + WeatherContract.LocationEntry.WIDGET_TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
 }
