@@ -38,10 +38,29 @@ public class Utility {
     public static String MESSAGE = "message";
     public static String HIDE_PROGRESS_BAR = "hide_progressbar";
     public static boolean NEED_RESTART = false;
+    public static String UPDATE_WIDGET = "updateWidget";
+
+    public static final String[] WIDGET_FORECAST_COLUMNS = {
+            WeatherContract.WeatherEntry.TABLE_NAME + "." + WeatherContract.WeatherEntry._ID,
+            WeatherContract.WeatherEntry.COLUMN_DATETEXT,
+            WeatherContract.WeatherEntry.COLUMN_MAX_TEMP,
+            WeatherContract.WeatherEntry.COLUMN_MIN_TEMP,
+            WeatherContract.WeatherEntry.COLUMN_WEATHER_ID,
+            // This works because the WeatherProvider returns location data joined with
+            // weather data, even though they're stored in two different tables.
+            WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING,
+            WeatherContract.LocationEntry.COLUMN_CITY_ID
+    };
 
     public static String getPreferredLocation(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getString(context.getString(R.string.pref_location_key),
+                context.getString(R.string.pref_location_default));
+    }
+
+    public static String getPreferredWidgetLocation(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getString(context.getString(R.string.pref_widget_location_key),
                 context.getString(R.string.pref_location_default));
     }
 

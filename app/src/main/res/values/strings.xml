@@ -101,5 +101,15 @@
     <string name="pref_interface_label">Бағдарлама интерфейси</string>
     <string name="pref_interface_key" translatable="false">interface</string>
     <string name="pref_interface_default" translatable="false">cyrillic</string>
+
     <string name="title_widget_settings">Widget сазлаўлары</string>
+    <string name="pref_widget_location_key" translatable="false">location_widget</string>
+    <string name="pref_widget_interface_label">Widget интерфейси</string>
+    <string name="pref_widget_interface_key" translatable="false">widget_interface</string>
+    <string name="pref_update">Бағдарламаның жаңаланыӯ жийилиги</string>
+    <string name="pref_update_key" translatable="false">widget_update</string>
+    <string name="pref_update_default" translatable="false">manual</string>
+
+    <string name="create_widget">Widget жаратыӯ</string>
+
 </resources>

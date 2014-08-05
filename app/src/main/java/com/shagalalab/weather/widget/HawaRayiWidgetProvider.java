@@ -3,6 +3,7 @@ package com.shagalalab.weather.widget;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,24 +16,23 @@ import com.shagalalab.weather.Utility;
 import com.shagalalab.weather.data.WeatherContract;
 
 import java.util.Date;
-import java.util.Random;
 
 /**
  * Created by atabek on 8/1/14.
  */
 public class HawaRayiWidgetProvider extends AppWidgetProvider {
 
-    private static final String[] FORECAST_COLUMNS = {
-            WeatherContract.WeatherEntry.TABLE_NAME + "." + WeatherContract.WeatherEntry._ID,
-            WeatherContract.WeatherEntry.COLUMN_DATETEXT,
-            WeatherContract.WeatherEntry.COLUMN_MAX_TEMP,
-            WeatherContract.WeatherEntry.COLUMN_MIN_TEMP,
-            WeatherContract.WeatherEntry.COLUMN_WEATHER_ID,
-            // This works because the WeatherProvider returns location data joined with
-            // weather data, even though they're stored in two different tables.
-            WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING,
-            WeatherContract.LocationEntry.COLUMN_CITY_ID
-    };
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+        boolean updateWidget = intent.getBooleanExtra(Utility.UPDATE_WIDGET, false);
+        if (updateWidget) {
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            ComponentName thisWidget = new ComponentName(context, HawaRayiWidgetProvider.class);
+            int[] allWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+            onUpdate(context, appWidgetManager, allWidgetIds);
+        }
+    }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -44,7 +44,7 @@ public class HawaRayiWidgetProvider extends AppWidgetProvider {
 
             // Get the layout for the App Widget and attach an on-click listener
             // to the button
-            String mLocation = Utility.getPreferredLocation(context);
+            String mLocation = Utility.getPreferredWidgetLocation(context);
             Date todayDate = new Date();
             String todayStr = Utility.getDbDateString(todayDate);
             Uri weatherForLocationUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(
@@ -52,7 +52,7 @@ public class HawaRayiWidgetProvider extends AppWidgetProvider {
             String sortOrder = WeatherContract.WeatherEntry.COLUMN_DATETEXT + " ASC";
             Cursor cursor = context.getContentResolver().query(
                     weatherForLocationUri,
-                    FORECAST_COLUMNS,
+                    Utility.WIDGET_FORECAST_COLUMNS,
                     null,
                     null,
                     sortOrder

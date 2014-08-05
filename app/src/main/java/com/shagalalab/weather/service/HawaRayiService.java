@@ -1,6 +1,7 @@
 package com.shagalalab.weather.service;
 
 import android.app.IntentService;
+import android.appwidget.AppWidgetManager;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -249,6 +250,11 @@ public class HawaRayiService extends IntentService {
             ContentValues[] cvArray = new ContentValues[cVVector.size()];
             cVVector.toArray(cvArray);
             getContentResolver().bulkInsert(WeatherContract.WeatherEntry.CONTENT_URI, cvArray);
+
+            // update widget
+            Intent update = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+            update.putExtra(Utility.UPDATE_WIDGET, true);
+            sendBroadcast(update);
         }
     }
 

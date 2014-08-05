@@ -52,7 +52,7 @@
         <service android:name=".service.HawaRayiService" />
         <receiver
             android:icon="@mipmap/ic_launcher"
-            android:label="Hawa Rayi Widget"
+            android:label="2x1 Hawa Rayi Widget"
             android:name=".widget.HawaRayiWidgetProvider" >
             <intent-filter >
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

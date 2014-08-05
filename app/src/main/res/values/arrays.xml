@@ -72,4 +72,22 @@
         <item>cyrillic</item>
         <item>latin</item>
     </array>
+
+    <array name="pref_update_options">
+        <item>Автоматик</item>
+        <item>Қолдан</item>
+        <item>12 саат</item>
+        <item>1 күн</item>
+        <item>3 күн</item>
+        <item>7 күн</item>
+    </array>
+
+    <array name="pref_update_values">
+        <item>auto</item>
+        <item>manual</item>
+        <item>12hours</item>
+        <item>1day</item>
+        <item>3days</item>
+        <item>7days</item>
+    </array>
 </resources>
