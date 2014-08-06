@@ -85,11 +85,22 @@ public class HawaRayiWidgetProvider extends AppWidgetProvider {
             Intent intent = new Intent(context, MainActivity.class);
             intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+            intent.putExtra("city", appWidgetId);
 
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
-            views.setOnClickPendingIntent(R.id.widget_city, pendingIntent);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, appWidgetId, intent, 0);
+            views.setOnClickPendingIntent(R.id.widget_today_icon, pendingIntent);
             // Tell the AppWidgetManager to perform an update on the current app widget
             appWidgetManager.updateAppWidget(appWidgetId, views);
+        }
+    }
+
+    @Override
+    public void onDeleted(Context context, int[] appWidgetIds) {
+        super.onDeleted(context, appWidgetIds);
+
+        for (int q = 0; q < appWidgetIds.length; q++) {
+            int result = context.getContentResolver().delete(WeatherContract.LocationEntry.buildWidgetUri(appWidgetIds[q]),
+                    WeatherContract.LocationEntry.COLUMN_APP_WIDGET_ID + " = " + appWidgetIds[q], null);
         }
     }
 }

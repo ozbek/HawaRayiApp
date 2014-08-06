@@ -85,7 +85,7 @@ public class HawaRayiWidgetConfigure extends PreferenceActivity implements Prefe
     }
 
     private void parseCursor() {
-        Utility.insertWidgetLocationInDatabase(this, selectedCity, cityIndex, mAppWidgetId);
+        Utility.insertWidgetLocationInDatabase(this, selectedCity, mAppWidgetId);
         Date todayDate = new Date();
         String todayStr = Utility.getDbDateString(todayDate);
         Uri weatherForLocationUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(

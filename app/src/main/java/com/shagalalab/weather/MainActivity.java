@@ -125,13 +125,14 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
     }
 
     @Override
-    public void onItemSelected(String date) {
+    public void onItemSelected(String date, String location) {
         if (mTwoPane) {
             // In two-pane mode, show the detail view in this activity by
             // adding or replacing the detail fragment using a
             // fragment transaction.
             Bundle args = new Bundle();
             args.putString(DetailActivity.DATE_KEY, date);
+            args.putString(DetailActivity.LOCATION_KEY, location);
 
             DetailFragment fragment = new DetailFragment();
             fragment.setArguments(args);
@@ -141,7 +142,8 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
                     .commit();
         } else {
             Intent intent = new Intent(this, DetailActivity.class)
-                    .putExtra(DetailActivity.DATE_KEY, date);
+                    .putExtra(DetailActivity.DATE_KEY, date)
+                    .putExtra(DetailActivity.LOCATION_KEY, location);
             startActivity(intent);
         }
     }

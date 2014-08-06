@@ -19,10 +19,6 @@ import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  * Defines table and column names for the weather database.
  */
@@ -64,6 +60,8 @@ public class WeatherContract {
                 "vnd.android.cursor.dir/" + CONTENT_AUTHORITY + "/" + PATH_LOCATION;
         public static final String CONTENT_ITEM_TYPE =
                 "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "/" + PATH_LOCATION;
+        public static final String CONTENT_TYPE_WIDGET =
+                "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "/" + PATH_WIDGET;
 
         // Table name
         public static final String TABLE_NAME = "location";
@@ -81,6 +79,10 @@ public class WeatherContract {
 
         public static Uri buildLocationUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+
+        public static Uri buildWidgetUri(long id) {
+            return ContentUris.withAppendedId(CONTENT_WIDGET_URI, id);
         }
     }
 

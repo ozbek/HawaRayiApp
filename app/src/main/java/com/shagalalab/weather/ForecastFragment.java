@@ -15,6 +15,7 @@
  */
 package com.shagalalab.weather;
 
+import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -96,7 +97,7 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
         /**
          * DetailFragmentCallback for when an item has been selected.
          */
-        public void onItemSelected(String date);
+        public void onItemSelected(String date, String location);
     }
 
     public ForecastFragment() {
@@ -152,7 +153,7 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
                 Cursor cursor = mForecastAdapter.getCursor();
                 if (cursor != null && cursor.moveToPosition(position)) {
                     ((Callback)getActivity())
-                            .onItemSelected(cursor.getString(COL_WEATHER_DATE));
+                            .onItemSelected(cursor.getString(COL_WEATHER_DATE), cursor.getString(COL_LOCATION_SETTING));
                 }
                 mPosition = position;
             }
@@ -226,7 +227,15 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
         // Sort order:  Ascending, by date.
         String sortOrder = WeatherContract.WeatherEntry.COLUMN_DATETEXT + " ASC";
 
-        mLocation = Utility.getPreferredLocation(getActivity());
+        String action = getActivity().getIntent().getAction();
+        int appWidgetId = getActivity().getIntent().getIntExtra("city", -1);
+
+        if (action.equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE) && appWidgetId > -1) {
+            mLocation = Utility.getWidgetLocation(getActivity(), appWidgetId);
+        } else {
+            mLocation = Utility.getPreferredLocation(getActivity());
+        }
+
         Uri weatherForLocationUri = WeatherContract.WeatherEntry.buildWeatherLocationWithStartDate(
                 mLocation, startDate);
 

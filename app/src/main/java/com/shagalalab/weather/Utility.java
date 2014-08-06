@@ -17,7 +17,6 @@ package com.shagalalab.weather;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -377,7 +376,7 @@ public class Utility {
         }
     }
 
-    public static void insertWidgetLocationInDatabase(Context context, String locationSetting, int cityIdx, int appWidgetId) {
+    public static void insertWidgetLocationInDatabase(Context context, String locationSetting, int appWidgetId) {
 
         // First, check if the location with this city name exists in the db
         Cursor cursor = context.getContentResolver().query(
@@ -392,7 +391,6 @@ public class Utility {
             ContentValues locationValues = new ContentValues();
             locationValues.put(WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING, locationSetting);
             locationValues.put(WeatherContract.LocationEntry.COLUMN_APP_WIDGET_ID, appWidgetId);
-            locationValues.put(WeatherContract.LocationEntry.COLUMN_CITY_ID, cityIdx);
 
             Uri locationInsertUri = context.getContentResolver()
                     .insert(WeatherContract.LocationEntry.CONTENT_WIDGET_URI, locationValues);

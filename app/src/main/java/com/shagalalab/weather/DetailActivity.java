@@ -30,6 +30,7 @@ public class DetailActivity extends ActionBarActivity {
 
     private final String LOG_TAG = DetailActivity.class.getSimpleName();
     public static final String DATE_KEY = "forecast_date";
+    public static final String LOCATION_KEY = "forecast_location";
     private String uiInterface;
 
     @Override
@@ -53,9 +54,11 @@ public class DetailActivity extends ActionBarActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             String date = getIntent().getStringExtra(DATE_KEY);
+            String location = getIntent().getStringExtra(LOCATION_KEY);
 
             Bundle arguments = new Bundle();
             arguments.putString(DetailActivity.DATE_KEY, date);
+            arguments.putString(DetailActivity.LOCATION_KEY, location);
 
             DetailFragment fragment = new DetailFragment();
             fragment.setArguments(arguments);

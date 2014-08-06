@@ -100,6 +100,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         Bundle arguments = getArguments();
         if (arguments != null) {
             mDateStr = arguments.getString(DetailActivity.DATE_KEY);
+            mLocation = arguments.getString(DetailActivity.LOCATION_KEY);
         }
 
         if (savedInstanceState != null) {
@@ -172,7 +173,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         // Sort order:  Ascending, by date.
         String sortOrder = WeatherContract.WeatherEntry.COLUMN_DATETEXT + " ASC";
 
-        mLocation = Utility.getPreferredLocation(getActivity());
+        //mLocation = Utility.getPreferredLocation(getActivity());
         Uri weatherForLocationUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(
                 mLocation, mDateStr);
 

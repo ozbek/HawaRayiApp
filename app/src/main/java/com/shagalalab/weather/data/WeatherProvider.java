@@ -122,6 +122,7 @@ public class WeatherProvider extends ContentProvider {
         matcher.addURI(authority, WeatherContract.PATH_LOCATION + "/#", LOCATION_ID);
 
         matcher.addURI(authority, WeatherContract.PATH_WIDGET, WIDGET);
+        matcher.addURI(authority, WeatherContract.PATH_WIDGET + "/#", WIDGET);
 
         return matcher;
     }
@@ -189,7 +190,7 @@ public class WeatherProvider extends ContentProvider {
                 );
                 break;
             }
-            // "location"
+            // "widget"
             case WIDGET: {
                 retCursor = mOpenHelper.getReadableDatabase().query(
                         WeatherContract.LocationEntry.WIDGET_TABLE_NAME,
@@ -228,7 +229,7 @@ public class WeatherProvider extends ContentProvider {
             case LOCATION_ID:
                 return WeatherContract.LocationEntry.CONTENT_ITEM_TYPE;
             case WIDGET:
-                return WeatherContract.LocationEntry.CONTENT_ITEM_TYPE;
+                return WeatherContract.LocationEntry.CONTENT_TYPE_WIDGET;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -260,7 +261,7 @@ public class WeatherProvider extends ContentProvider {
             case WIDGET: {
                 long _id = db.insert(WeatherContract.LocationEntry.WIDGET_TABLE_NAME, null, values);
                 if ( _id > 0 )
-                    returnUri = WeatherContract.LocationEntry.buildLocationUri(_id);
+                    returnUri = WeatherContract.LocationEntry.buildWidgetUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
