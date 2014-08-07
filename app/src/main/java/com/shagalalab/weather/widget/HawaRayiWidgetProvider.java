@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.shagalalab.weather.MainActivity;
@@ -21,9 +22,11 @@ import java.util.Date;
  * Created by atabek on 8/1/14.
  */
 public class HawaRayiWidgetProvider extends AppWidgetProvider {
+    private String LOG_TAG = HawaRayiWidgetProvider.class.getSimpleName();
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.w(LOG_TAG, "onReceive - start");
         super.onReceive(context, intent);
         boolean updateWidget = intent.getBooleanExtra(Utility.UPDATE_WIDGET, false);
         if (updateWidget) {
@@ -32,10 +35,13 @@ public class HawaRayiWidgetProvider extends AppWidgetProvider {
             int[] allWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
             onUpdate(context, appWidgetManager, allWidgetIds);
         }
+        Log.w(LOG_TAG, "onReceive - end");
     }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        Log.w(LOG_TAG, "onUpdate - start");
+
         final int N = appWidgetIds.length;
 
         // Perform this loop procedure for each App Widget that belongs to this provider
@@ -64,7 +70,6 @@ public class HawaRayiWidgetProvider extends AppWidgetProvider {
                 int weatherId = cursor.getInt(cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_WEATHER_ID));
 
                 String date = cursor.getString(cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_DATETEXT));
-                String friendlyDateText = Utility.getDayName(context, date);
                 String dateText = Utility.getFormattedMonthDay(context, date);
 
                 int cityId = cursor.getInt(cursor.getColumnIndex(WeatherContract.LocationEntry.COLUMN_CITY_ID));
@@ -77,6 +82,7 @@ public class HawaRayiWidgetProvider extends AppWidgetProvider {
                 String lowString = Utility.formatTemperature(context, low);
 
                 views.setTextViewText(R.id.widget_city, city);
+                views.setTextViewText(R.id.widget_today_date, dateText);
                 views.setTextViewText(R.id.widget_today_temp, highString);
                 views.setImageViewResource(R.id.widget_today_icon, Utility.getArtResourceForWeatherCondition(weatherId));
             }
@@ -88,10 +94,12 @@ public class HawaRayiWidgetProvider extends AppWidgetProvider {
             intent.putExtra("city", appWidgetId);
 
             PendingIntent pendingIntent = PendingIntent.getActivity(context, appWidgetId, intent, 0);
-            views.setOnClickPendingIntent(R.id.widget_today_icon, pendingIntent);
+            views.setOnClickPendingIntent(R.id.layout, pendingIntent);
             // Tell the AppWidgetManager to perform an update on the current app widget
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
+
+        Log.w(LOG_TAG, "onUpdate - end");
     }
 
     @Override

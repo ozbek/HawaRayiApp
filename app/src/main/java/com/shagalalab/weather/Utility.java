@@ -165,6 +165,14 @@ public class Utility {
         return c.get(Calendar.DAY_OF_MONTH) + "-" + months[c.get(Calendar.MONTH)];
     }
 
+    public static String getShortFormattedMonthDay(Context context, String dateStr) {
+        Date date = getDateFromDb(dateStr);
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        String[] months = context.getResources().getStringArray(R.array.months);
+        return months[c.get(Calendar.MONTH)].toUpperCase().substring(0, 3) + c.get(Calendar.DAY_OF_MONTH);
+    }
+
     public static String getFormattedWind(Context context, float windSpeed, float degrees) {
         int windFormat;
         windFormat = R.string.format_wind_kmh;

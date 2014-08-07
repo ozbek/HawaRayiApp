@@ -9,16 +9,37 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/widget_dark">
+        android:background="@drawable/bg_repeating">
 
-        <TextView
-            android:id="@+id/widget_city"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:paddingLeft="10dp"
-            android:textColor="@color/white"
-            android:textSize="14sp" >
-        </TextView>
+            android:paddingRight="10dp">
+
+            <TextView
+                android:id="@+id/widget_city"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@color/white"
+                android:textSize="14sp" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/widget_today_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@color/white"
+                android:textSize="14sp" >
+            </TextView>
+
+            </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,12 +49,11 @@
             <TextView
                 android:id="@+id/widget_today_temp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textColor="@color/white"
-                android:textSize="30sp"
-                android:gravity="center"
-                android:layout_gravity="center"
+                android:textSize="40dp"
+                android:gravity="right|center_vertical"
                 />
 
             <ImageView

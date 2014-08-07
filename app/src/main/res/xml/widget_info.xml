@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:initialLayout="@layout/widget_layout"
+    android:initialLayout="@layout/widget_loading"
     android:minHeight="40dp"
     android:minWidth="110dp"
     android:configure="com.shagalalab.weather.widget.HawaRayiWidgetConfigure"
