@@ -46,9 +46,9 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
 
         final String SQL_CREATE_WIDGET_TABLE = "CREATE TABLE " + WeatherContract.LocationEntry.WIDGET_TABLE_NAME + " (" +
                 WeatherContract.LocationEntry._ID + " INTEGER PRIMARY KEY," +
-                WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " TEXT UNIQUE NOT NULL, " +
-                WeatherContract.LocationEntry.COLUMN_APP_WIDGET_ID + " INTEGER NOT NULL, " +
-                "UNIQUE (" + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING +") ON CONFLICT IGNORE"+
+                WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " TEXT NOT NULL, " +
+                WeatherContract.LocationEntry.COLUMN_APP_WIDGET_ID + " INTEGER UNIQUE NOT NULL, " +
+                "UNIQUE (" + WeatherContract.LocationEntry.COLUMN_APP_WIDGET_ID +") ON CONFLICT IGNORE"+
                 " );";
 
         final String SQL_CREATE_WEATHER_TABLE = "CREATE TABLE " + WeatherContract.WeatherEntry.TABLE_NAME + " (" +

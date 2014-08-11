@@ -42,6 +42,7 @@ public class Utility {
     public static String HIDE_PROGRESS_BAR = "hide_progressbar";
     public static boolean NEED_RESTART = false;
     public static String UPDATE_WIDGET = "updateWidget";
+    public static String APP_WIDGET_ID = "appWidgetId";
 
     public static final String[] WIDGET_FORECAST_COLUMNS = {
             WeatherContract.WeatherEntry.TABLE_NAME + "." + WeatherContract.WeatherEntry._ID,
@@ -171,6 +172,14 @@ public class Utility {
         c.setTime(date);
         String[] months = context.getResources().getStringArray(R.array.months);
         return months[c.get(Calendar.MONTH)].toUpperCase().substring(0, 3) + c.get(Calendar.DAY_OF_MONTH);
+    }
+
+    public static String getWeekOfDay(Context context, String dateStr) {
+        Date date = getDateFromDb(dateStr);
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        String[] dayOfWeeks = context.getResources().getStringArray(R.array.day_of_week);
+        return dayOfWeeks[c.get(Calendar.DAY_OF_WEEK) - 1];
     }
 
     public static String getFormattedWind(Context context, float windSpeed, float degrees) {

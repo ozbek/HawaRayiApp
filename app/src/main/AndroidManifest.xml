@@ -50,17 +50,31 @@
             android:exported="false"
             android:syncable="true" />
         <service android:name=".service.HawaRayiService" />
+
         <receiver
             android:icon="@mipmap/ic_launcher"
-            android:label="2x1 Hawa Rayi Widget"
-            android:name=".widget.HawaRayiWidgetProvider" >
+            android:label="@string/widget_label_small"
+            android:name=".widget.HawaRayiWidgetProviderSmall" >
             <intent-filter >
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_info" />
+                android:resource="@xml/widget_info_small" />
+        </receiver>
+
+        <receiver
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/widget_label_large"
+            android:name=".widget.HawaRayiWidgetProviderLarge" >
+            <intent-filter >
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_large" />
         </receiver>
     </application>
 </manifest>

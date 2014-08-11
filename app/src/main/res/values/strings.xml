@@ -112,4 +112,7 @@
 
     <string name="create_widget">Widget жаратыӯ</string>
 
+    <string name="widget_label_small">2x1 Hawa Rayi Widget</string>
+    <string name="widget_label_large">4x1 Hawa Rayi Widget</string>
+
 </resources>

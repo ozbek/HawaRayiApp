@@ -21,8 +21,8 @@ import java.util.Date;
 /**
  * Created by atabek on 8/1/14.
  */
-public class HawaRayiWidgetProvider extends AppWidgetProvider {
-    private String LOG_TAG = HawaRayiWidgetProvider.class.getSimpleName();
+public class HawaRayiWidgetProviderSmall extends AppWidgetProvider {
+    private String LOG_TAG = HawaRayiWidgetProviderSmall.class.getSimpleName();
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -31,7 +31,7 @@ public class HawaRayiWidgetProvider extends AppWidgetProvider {
         boolean updateWidget = intent.getBooleanExtra(Utility.UPDATE_WIDGET, false);
         if (updateWidget) {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-            ComponentName thisWidget = new ComponentName(context, HawaRayiWidgetProvider.class);
+            ComponentName thisWidget = new ComponentName(context, HawaRayiWidgetProviderSmall.class);
             int[] allWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
             onUpdate(context, appWidgetManager, allWidgetIds);
         }
@@ -64,7 +64,7 @@ public class HawaRayiWidgetProvider extends AppWidgetProvider {
                     sortOrder
             );
 
-            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout_small);
 
             if (cursor != null && cursor.moveToFirst()){
                 int weatherId = cursor.getInt(cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_WEATHER_ID));
@@ -78,20 +78,17 @@ public class HawaRayiWidgetProvider extends AppWidgetProvider {
                 double high = cursor.getDouble(cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_MAX_TEMP));
                 String highString = Utility.formatTemperature(context, high);
 
-                double low = cursor.getDouble(cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_MIN_TEMP));
-                String lowString = Utility.formatTemperature(context, low);
-
                 views.setTextViewText(R.id.widget_city, city);
                 views.setTextViewText(R.id.widget_today_date, dateText);
                 views.setTextViewText(R.id.widget_today_temp, highString);
                 views.setImageViewResource(R.id.widget_today_icon, Utility.getArtResourceForWeatherCondition(weatherId));
             }
 
-            // Create an Intent to launch ExampleActivity
+            // Create an Intent to launch MainActivity
             Intent intent = new Intent(context, MainActivity.class);
             intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
-            intent.putExtra("city", appWidgetId);
+            intent.putExtra(Utility.APP_WIDGET_ID, appWidgetId);
 
             PendingIntent pendingIntent = PendingIntent.getActivity(context, appWidgetId, intent, 0);
             views.setOnClickPendingIntent(R.id.layout, pendingIntent);
@@ -104,11 +101,13 @@ public class HawaRayiWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
+        Log.w(LOG_TAG, "onDeleted - start");
         super.onDeleted(context, appWidgetIds);
 
         for (int q = 0; q < appWidgetIds.length; q++) {
             int result = context.getContentResolver().delete(WeatherContract.LocationEntry.buildWidgetUri(appWidgetIds[q]),
                     WeatherContract.LocationEntry.COLUMN_APP_WIDGET_ID + " = " + appWidgetIds[q], null);
         }
+        Log.w(LOG_TAG, "onDeleted - end");
     }
 }
