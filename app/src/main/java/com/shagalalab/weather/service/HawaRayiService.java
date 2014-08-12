@@ -202,7 +202,6 @@ public class HawaRayiService extends IntentService {
             double high;
             double low;
 
-            String description;
             int weatherId;
 
             // Get the JSON object representing the day
@@ -222,7 +221,6 @@ public class HawaRayiService extends IntentService {
             // That element also contains a weather code.
             JSONObject weatherObject =
                     dayForecast.getJSONArray(OWM_WEATHER).getJSONObject(0);
-            description = weatherObject.getString(OWM_DESCRIPTION);
             weatherId = weatherObject.getInt(OWM_WEATHER_ID);
 
             // Temperatures are in a child object called "temp".  Try not to name variables
@@ -273,7 +271,6 @@ public class HawaRayiService extends IntentService {
                 new String[]{WeatherContract.LocationEntry._ID},
                 WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ?",
                 new String[]{locationSetting},
-                null,
                 null);
 
         if (cursor.moveToFirst()) {

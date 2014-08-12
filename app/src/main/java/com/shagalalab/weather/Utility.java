@@ -166,14 +166,6 @@ public class Utility {
         return c.get(Calendar.DAY_OF_MONTH) + "-" + months[c.get(Calendar.MONTH)];
     }
 
-    public static String getShortFormattedMonthDay(Context context, String dateStr) {
-        Date date = getDateFromDb(dateStr);
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-        String[] months = context.getResources().getStringArray(R.array.months);
-        return months[c.get(Calendar.MONTH)].toUpperCase().substring(0, 3) + c.get(Calendar.DAY_OF_MONTH);
-    }
-
     public static String getWeekOfDay(Context context, String dateStr) {
         Date date = getDateFromDb(dateStr);
         Calendar c = Calendar.getInstance();
@@ -401,7 +393,6 @@ public class Utility {
                 new String[]{WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING},
                 WeatherContract.LocationEntry.COLUMN_APP_WIDGET_ID + " = ?",
                 new String[]{Integer.toString(appWidgetId)},
-                null,
                 null);
 
         if (!cursor.moveToFirst()) {
@@ -422,7 +413,6 @@ public class Utility {
                 new String[]{WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING},
                 WeatherContract.LocationEntry.COLUMN_APP_WIDGET_ID + " = ?",
                 new String[]{Integer.toString(appWidgetId)},
-                null,
                 null);
 
         if (cursor.moveToFirst()) {

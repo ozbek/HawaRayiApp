@@ -19,6 +19,7 @@ import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -59,9 +60,11 @@ public class SettingsActivity extends PreferenceActivity
         // Add 'general' preferences, defined in the XML file
         addPreferencesFromResource(R.xml.pref_general);
 
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(R.string.title_activity_settings);
+        if (Build.VERSION.SDK_INT > 10) {
+            ActionBar actionBar = getActionBar();
+            if (actionBar != null) {
+                actionBar.setTitle(R.string.title_activity_settings);
+            }
         }
 
         // For all preferences, attach an OnPreferenceChangeListener so the UI summary can be
