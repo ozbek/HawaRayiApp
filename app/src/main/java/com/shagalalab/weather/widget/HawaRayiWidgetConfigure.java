@@ -163,8 +163,6 @@ public class HawaRayiWidgetConfigure extends PreferenceActivity implements Prefe
 
                         dateText = Utility.getFormattedMonthDay(this, date);
 
-                        views.setTextViewText(R.id.widget_large_today_temp_low, lowString);
-
                         temperature = highString;
                     } else {
                         dateText = Utility.getWeekOfDay(this, date).substring(0, 3);

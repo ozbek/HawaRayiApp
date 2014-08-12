@@ -96,8 +96,6 @@ public class HawaRayiWidgetProviderLarge extends AppWidgetProvider {
 
                         dateText = Utility.getFormattedMonthDay(context, date);
 
-                        views.setTextViewText(R.id.widget_large_today_temp_low, lowString);
-
                         temperature = highString;
                     } else {
                         dateText = Utility.getWeekOfDay(context, date).substring(0, 3);
