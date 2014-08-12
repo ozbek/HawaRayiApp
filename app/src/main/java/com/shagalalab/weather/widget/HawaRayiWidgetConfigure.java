@@ -119,6 +119,7 @@ public class HawaRayiWidgetConfigure extends PreferenceActivity implements Prefe
                 views.setTextViewText(R.id.widget_today_temp, highString);
                 views.setTextViewText(R.id.widget_today_date, dateText);
                 views.setImageViewResource(R.id.widget_today_icon, Utility.getArtResourceForWeatherCondition(weatherId));
+                appWidgetManager.updateAppWidget(mAppWidgetId, views);
             } else {
                 Intent serviceIntent = new Intent(this, HawaRayiService.class);
                 serviceIntent.putExtra(HawaRayiService.LOCATION_QUERY_EXTRA, selectedCity);
@@ -174,6 +175,7 @@ public class HawaRayiWidgetConfigure extends PreferenceActivity implements Prefe
                     views.setTextViewText(HawaRayiWidgetProviderLarge.widgetTemperature[cursor.getPosition()], temperature);
                     views.setTextViewText(HawaRayiWidgetProviderLarge.widgetDays[cursor.getPosition()], dateText);
                     views.setImageViewResource(HawaRayiWidgetProviderLarge.widgetIcons[cursor.getPosition()], Utility.getArtResourceForWeatherCondition(weatherId));
+                    appWidgetManager.updateAppWidget(mAppWidgetId, views);
                 }
             } else {
                 Intent serviceIntent = new Intent(this, HawaRayiService.class);
@@ -181,8 +183,6 @@ public class HawaRayiWidgetConfigure extends PreferenceActivity implements Prefe
                 startService(serviceIntent);
             }
         }
-
-        appWidgetManager.updateAppWidget(mAppWidgetId, views);
     }
 
     /**

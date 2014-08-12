@@ -109,18 +109,18 @@ public class HawaRayiWidgetProviderLarge extends AppWidgetProvider {
                     views.setTextViewText(widgetDays[cursor.getPosition()], dateText);
                     views.setImageViewResource(widgetIcons[cursor.getPosition()], Utility.getArtResourceForWeatherCondition(weatherId));
                 }
+
+                // Create an Intent to launch MainActivity
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+                intent.putExtra(Utility.APP_WIDGET_ID, appWidgetId);
+
+                PendingIntent pendingIntent = PendingIntent.getActivity(context, appWidgetId, intent, 0);
+                views.setOnClickPendingIntent(R.id.large_layout, pendingIntent);
+                // Tell the AppWidgetManager to perform an update on the current app widget
+                appWidgetManager.updateAppWidget(appWidgetId, views);
             }
-
-            // Create an Intent to launch MainActivity
-            Intent intent = new Intent(context, MainActivity.class);
-            intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
-            intent.putExtra(Utility.APP_WIDGET_ID, appWidgetId);
-
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, appWidgetId, intent, 0);
-            views.setOnClickPendingIntent(R.id.large_layout, pendingIntent);
-            // Tell the AppWidgetManager to perform an update on the current app widget
-            appWidgetManager.updateAppWidget(appWidgetId, views);
         }
 
         Log.w(LOG_TAG, "onUpdate - end");
