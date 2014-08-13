@@ -11,4 +11,5 @@
 
     <color name="widget_dark">#3b3b3b</color>
 
+    <color name="widget_vertical_line_color">#4B4B4B</color>
 </resources>

@@ -21,6 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -30,15 +31,6 @@
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:singleLine="true"
-                    android:fontFamily="sans-serif-condensed"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" >
-                </TextView>
-
-                <TextView
-                    android:id="@+id/widget_large_today_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed"
                     android:textColor="@color/white"
                     android:textSize="14sp" >
@@ -74,6 +66,16 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/widget_vertical_bar1"
+            android:layout_width="@dimen/widget_vertical_line_width"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/widget_vertical_line_margin"
+            android:layout_marginBottom="@dimen/widget_vertical_line_margin"
+            android:background="@color/widget_vertical_line_color"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -105,6 +107,16 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/widget_vertical_bar2"
+            android:layout_width="@dimen/widget_vertical_line_width"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/widget_vertical_line_margin"
+            android:layout_marginBottom="@dimen/widget_vertical_line_margin"
+            android:background="@color/widget_vertical_line_color"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -133,6 +145,16 @@
                 android:textColor="@color/white"
                 android:layout_gravity="center" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/widget_vertical_bar3"
+            android:layout_width="@dimen/widget_vertical_line_width"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/widget_vertical_line_margin"
+            android:layout_marginBottom="@dimen/widget_vertical_line_margin"
+            android:background="@color/widget_vertical_line_color"
+            android:orientation="vertical" >
         </LinearLayout>
 
         <LinearLayout
