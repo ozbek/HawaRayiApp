@@ -403,9 +403,14 @@ public class Utility {
             Uri locationInsertUri = context.getContentResolver()
                     .insert(WeatherContract.LocationEntry.CONTENT_WIDGET_URI, locationValues);
         }
+
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
     }
 
     public static String getWidgetLocation(Context context, int appWidgetId) {
+        String result;
 
         // First, check if the location with this city name exists in the db
         Cursor cursor = context.getContentResolver().query(
@@ -417,9 +422,15 @@ public class Utility {
 
         if (cursor.moveToFirst()) {
             int locationSettingIdx = cursor.getColumnIndex(WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING);
-            return cursor.getString(locationSettingIdx);
+            result = cursor.getString(locationSettingIdx);
         } else {
-            return null;
+            result = null;
         }
+
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+
+        return result;
     }
 }

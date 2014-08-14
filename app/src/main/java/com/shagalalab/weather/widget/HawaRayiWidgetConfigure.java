@@ -76,6 +76,8 @@ public class HawaRayiWidgetConfigure extends PreferenceActivity implements Prefe
         // First, get the App Widget ID from the Intent that launched the Activity:
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
+        Cursor cursor = null;
+
         if (extras != null) {
             mAppWidgetId = extras.getInt(
                     AppWidgetManager.EXTRA_APPWIDGET_ID,
@@ -99,7 +101,7 @@ public class HawaRayiWidgetConfigure extends PreferenceActivity implements Prefe
 
             Uri weatherForLocationUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(
                     selectedCity, todayStr);
-            Cursor cursor = getContentResolver().query(
+            cursor = getContentResolver().query(
                     weatherForLocationUri,
                     Utility.WIDGET_FORECAST_COLUMNS,
                     null,
@@ -134,7 +136,7 @@ public class HawaRayiWidgetConfigure extends PreferenceActivity implements Prefe
 
             Uri weatherForLocationUri = WeatherContract.WeatherEntry.buildWeatherLocationWithStartDate(
                     selectedCity, todayStr);
-            Cursor cursor = getContentResolver().query(
+            cursor = getContentResolver().query(
                     weatherForLocationUri,
                     Utility.WIDGET_FORECAST_COLUMNS,
                     null,
@@ -184,6 +186,10 @@ public class HawaRayiWidgetConfigure extends PreferenceActivity implements Prefe
                 serviceIntent.putExtra(HawaRayiService.LOCATION_QUERY_EXTRA, selectedCity);
                 startService(serviceIntent);
             }
+        }
+
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
         }
     }
 

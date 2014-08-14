@@ -141,6 +141,7 @@ public class WeatherProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
                         String sortOrder) {
         Log.w(LOG_TAG, "query - start");
+        Log.w(LOG_TAG, "query - uri: " + uri.toString());
         // Here's the switch statement that, given a URI, will determine what kind of request it is,
         // and query the database accordingly.
         Cursor retCursor;
@@ -213,7 +214,7 @@ public class WeatherProvider extends ContentProvider {
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
         retCursor.setNotificationUri(getContext().getContentResolver(), uri);
-        Log.w(LOG_TAG, "onCreate - end");
+        Log.w(LOG_TAG, "query - end");
         return retCursor;
     }
 

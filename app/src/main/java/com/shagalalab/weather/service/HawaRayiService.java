@@ -268,6 +268,7 @@ public class HawaRayiService extends IntentService {
      * @return the row ID of the added location.
      */
     private long insertLocationInDatabase(String locationSetting, int cityIdx) {
+        long result;
 
         // First, check if the location with this city name exists in the db
         Cursor cursor = getContentResolver().query(
@@ -279,7 +280,7 @@ public class HawaRayiService extends IntentService {
 
         if (cursor.moveToFirst()) {
             int locationIdIndex = cursor.getColumnIndex(WeatherContract.LocationEntry._ID);
-            return cursor.getLong(locationIdIndex);
+            result = cursor.getLong(locationIdIndex);
         } else {
             ContentValues locationValues = new ContentValues();
             locationValues.put(WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING, locationSetting);
@@ -288,7 +289,13 @@ public class HawaRayiService extends IntentService {
             Uri locationInsertUri = getContentResolver()
                     .insert(WeatherContract.LocationEntry.CONTENT_URI, locationValues);
 
-            return ContentUris.parseId(locationInsertUri);
+            result = ContentUris.parseId(locationInsertUri);
         }
+
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+
+        return result;
     }
 }

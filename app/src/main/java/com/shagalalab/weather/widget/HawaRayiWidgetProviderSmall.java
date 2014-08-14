@@ -94,6 +94,10 @@ public class HawaRayiWidgetProviderSmall extends AppWidgetProvider {
                 // Tell the AppWidgetManager to perform an update on the current app widget
                 appWidgetManager.updateAppWidget(appWidgetId, views);
             }
+
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
         }
 
         Log.w(LOG_TAG, "onUpdate - end");
