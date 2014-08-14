@@ -23,8 +23,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.util.Log;
 
 public class WeatherProvider extends ContentProvider {
+    private String LOG_TAG = WeatherProvider.class.getSimpleName();
 
     // The URI Matcher used by this content provider.
     private static final UriMatcher sUriMatcher = buildUriMatcher();
@@ -129,13 +131,16 @@ public class WeatherProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
+        Log.w(LOG_TAG, "onCreate - start");
         mOpenHelper = new WeatherDbHelper(getContext());
+        Log.w(LOG_TAG, "onCreate - end");
         return true;
     }
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
                         String sortOrder) {
+        Log.w(LOG_TAG, "query - start");
         // Here's the switch statement that, given a URI, will determine what kind of request it is,
         // and query the database accordingly.
         Cursor retCursor;
@@ -208,6 +213,7 @@ public class WeatherProvider extends ContentProvider {
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
         retCursor.setNotificationUri(getContext().getContentResolver(), uri);
+        Log.w(LOG_TAG, "onCreate - end");
         return retCursor;
     }
 
@@ -237,6 +243,7 @@ public class WeatherProvider extends ContentProvider {
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
+        Log.w(LOG_TAG, "insert - start");
         final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
         final int match = sUriMatcher.match(uri);
         Uri returnUri;
@@ -270,6 +277,7 @@ public class WeatherProvider extends ContentProvider {
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
         getContext().getContentResolver().notifyChange(uri, null);
+        Log.w(LOG_TAG, "onCreate - start");
         return returnUri;
     }
 

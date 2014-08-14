@@ -26,6 +26,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,7 +47,7 @@ import java.util.Date;
  * Encapsulates fetching the forecast and displaying it as a {@link android.widget.ListView} layout.
  */
 public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor> {
-
+    private final String LOG_TAG = ForecastFragment.class.getSimpleName();
     private ForecastAdapter mForecastAdapter;
 
     private String mLocation;
@@ -135,6 +136,7 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.w(LOG_TAG, "onCreateView - start");
 
         // The ArrayAdapter will take data from a source and
         // use it to populate the ListView it's attached to.
@@ -173,6 +175,8 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
         }
 
         mForecastAdapter.setUseTodayLayout(mUseTodayLayout);
+
+        Log.w(LOG_TAG, "onCreateView - end");
 
         return rootView;
     }
@@ -222,6 +226,9 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
         // To only show current and future dates, get the String representation for today,
         // and filter the query to return weather only for dates after or including today.
         // Only return data after today.
+
+        Log.w(LOG_TAG, "onCreateLoader - start");
+
         String startDate = Utility.getDbDateString(new Date());
 
         // Sort order:  Ascending, by date.
@@ -239,6 +246,8 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
         Uri weatherForLocationUri = WeatherContract.WeatherEntry.buildWeatherLocationWithStartDate(
                 mLocation, startDate);
 
+        Log.w(LOG_TAG, "onCreateLoader - end");
+
         // Now create and return a CursorLoader that will take care of
         // creating a Cursor for the data being displayed.
         return new CursorLoader(
@@ -253,6 +262,7 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        Log.w(LOG_TAG, "onLoadFinished - start");
         // Hide progress bar
         if (((MainActivity) getActivity()).getProgressBarState()) {
             ((MainActivity) getActivity()).setProgress(false);
@@ -273,6 +283,7 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
                 mListView.smoothScrollToPosition(mPosition);
             }
         }
+        Log.w(LOG_TAG, "onLoadFinished - end");
     }
 
     @Override

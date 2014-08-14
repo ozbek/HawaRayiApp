@@ -11,6 +11,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -27,6 +28,7 @@ import java.util.Date;
  * Created by atabek on 08/03/14.
  */
 public class HawaRayiWidgetConfigure extends PreferenceActivity implements Preference.OnPreferenceChangeListener {
+    private String LOG_TAG = HawaRayiWidgetConfigure.class.getSimpleName();
     private int mAppWidgetId;
     private String selectedCity;
     private int cityIndex;
@@ -35,6 +37,7 @@ public class HawaRayiWidgetConfigure extends PreferenceActivity implements Prefe
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.w(LOG_TAG, "onCreate - start");
         super.onCreate(savedInstanceState);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -66,6 +69,7 @@ public class HawaRayiWidgetConfigure extends PreferenceActivity implements Prefe
             }
         });
         v.addFooterView(buttonCreateWidget);
+        Log.w(LOG_TAG, "onCreate - end");
     }
 
     private void parseCursor() {

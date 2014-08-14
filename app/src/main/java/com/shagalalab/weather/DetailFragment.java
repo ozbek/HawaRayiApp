@@ -41,7 +41,6 @@ import com.shagalalab.weather.data.WeatherContract;
  * A placeholder fragment containing a simple view.
  */
 public class DetailFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
-
     private static final String LOG_TAG = DetailFragment.class.getSimpleName();
 
     private static final String FORECAST_SHARE_HASHTAG = " #HawaRayi #ShagalaLab";
@@ -96,7 +95,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        Log.w(LOG_TAG, "onCreateView - start");
         Bundle arguments = getArguments();
         if (arguments != null) {
             mDateStr = arguments.getString(DetailActivity.DATE_KEY);
@@ -118,15 +117,19 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         mWindView = (TextView) rootView.findViewById(R.id.detail_wind_textview);
         mPressureView = (TextView) rootView.findViewById(R.id.detail_pressure_textview);
         mCityView = (TextView) rootView.findViewById(R.id.detail_city_textview);
+
+        Log.w(LOG_TAG, "onCreateView - end");
         return rootView;
     }
 
     @Override
     public void onResume() {
+        Log.w(LOG_TAG, "onResume - start");
         super.onResume();
         if (mLocation != null && !mLocation.equals(Utility.getPreferredLocation(getActivity()))) {
             getLoaderManager().restartLoader(DETAIL_LOADER, null, this);
         }
+        Log.w(LOG_TAG, "onResume - end");
     }
 
     @Override
@@ -191,6 +194,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        Log.w(LOG_TAG, "onLoadFinished - start");
         if (data != null && data.moveToFirst()) {
             // Read weather condition ID from cursor
             int weatherId = data.getInt(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_WEATHER_ID));
@@ -240,7 +244,9 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             mForecastStr = String.format("%s - %s - %s/%s",
                     dateText, description, highString, lowString);
         }
+        Log.w(LOG_TAG, "onLoadFinished - end");
     }
+
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {

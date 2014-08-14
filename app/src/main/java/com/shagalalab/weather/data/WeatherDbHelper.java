@@ -18,11 +18,13 @@ package com.shagalalab.weather.data;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Manages a local database for weather data.
  */
 public class WeatherDbHelper extends SQLiteOpenHelper {
+    private String LOG_TAG = WeatherDbHelper.class.getSimpleName();
 
     // If you change the database schema, you must increment the database version.
     private static final int DATABASE_VERSION = 1;
@@ -35,6 +37,7 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        Log.w(LOG_TAG, "onCreate - start");
         // Create a table to hold locations.  A location consists of the string supplied in the
         // location setting, the city name, and the latitude and longitude
         final String SQL_CREATE_LOCATION_TABLE = "CREATE TABLE " + WeatherContract.LocationEntry.TABLE_NAME + " (" +
@@ -84,6 +87,8 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(SQL_CREATE_LOCATION_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_WEATHER_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_WIDGET_TABLE);
+
+        Log.w(LOG_TAG, "onCreate - end");
     }
 
     @Override

@@ -40,6 +40,7 @@ public class HawaRayiService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        Log.w(LOG_TAG, "onHandleIntent - start");
         String locationQuery = intent.getStringExtra(LOCATION_QUERY_EXTRA);
 
         boolean isLocationInteger = Utility.isInteger(locationQuery);
@@ -131,6 +132,7 @@ public class HawaRayiService extends IntentService {
             Log.e(LOG_TAG, e.getMessage(), e);
             e.printStackTrace();
         }
+        Log.w(LOG_TAG, "onHandleIntent - end");
         // This will only happen if there was an error getting or parsing the forecast.
         return;
     }
@@ -151,6 +153,7 @@ public class HawaRayiService extends IntentService {
      */
     private void getWeatherDataFromJson(String forecastJsonStr, String locationSetting)
             throws JSONException {
+        Log.w(LOG_TAG, "getWeatherDataFromJson - start");
 
         // These are the names of the JSON objects that need to be extracted.
 
@@ -254,6 +257,7 @@ public class HawaRayiService extends IntentService {
             update.putExtra(Utility.UPDATE_WIDGET, true);
             sendBroadcast(update);
         }
+        Log.w(LOG_TAG, "getWeatherDataFromJson - end");
     }
 
     /**

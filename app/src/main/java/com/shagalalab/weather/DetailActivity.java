@@ -27,7 +27,6 @@ import android.view.MenuItem;
 
 
 public class DetailActivity extends ActionBarActivity {
-
     private final String LOG_TAG = DetailActivity.class.getSimpleName();
     public static final String DATE_KEY = "forecast_date";
     public static final String LOCATION_KEY = "forecast_location";
@@ -35,7 +34,7 @@ public class DetailActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.w(LOG_TAG, "onCreate");
+        Log.w(LOG_TAG, "onCreate - start");
         super.onCreate(savedInstanceState);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -67,6 +66,7 @@ public class DetailActivity extends ActionBarActivity {
                     .add(R.id.weather_detail_container, fragment)
                     .commit();
         }
+        Log.w(LOG_TAG, "onCreate - end");
     }
 
     @Override
