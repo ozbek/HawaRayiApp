@@ -328,8 +328,7 @@ public class Utility {
 
     public static int getCityIndex(Resources res, String location) {
         String[] cityValues = res.getStringArray(R.array.pref_location_values);
-        int index = Arrays.asList(cityValues).indexOf(location);
-        return index;
+        return Arrays.asList(cityValues).indexOf(location);
     }
 
     public static float getConvertedPressure(float rawPressure) {

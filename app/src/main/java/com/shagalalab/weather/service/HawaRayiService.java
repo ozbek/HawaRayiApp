@@ -248,6 +248,12 @@ public class HawaRayiService extends IntentService {
             cVVector.add(weatherValues);
         }
         if (cVVector.size() > 0) {
+            // removing old data
+            String selection = WeatherContract.WeatherEntry.COLUMN_LOC_KEY + " = ? AND " +
+                    WeatherContract.WeatherEntry.COLUMN_DATETEXT + " < ? ";
+            String[] selectionArgs = new String[]{ Long.toString(locationID), Utility.getDbDateString(new Date())};
+            getContentResolver().delete(WeatherContract.WeatherEntry.CONTENT_URI, selection, selectionArgs);
+            // saving data to DB
             ContentValues[] cvArray = new ContentValues[cVVector.size()];
             cVVector.toArray(cvArray);
             getContentResolver().bulkInsert(WeatherContract.WeatherEntry.CONTENT_URI, cvArray);
