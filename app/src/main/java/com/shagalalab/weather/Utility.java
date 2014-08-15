@@ -35,6 +35,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class Utility {
     public static String COMMUNICATE_WITH_MAIN_INTENT_FILTER = "COMMUNICATE_WITH_MAIN_INTENT_FILTER";
@@ -59,12 +60,6 @@ public class Utility {
     public static String getPreferredLocation(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getString(context.getString(R.string.pref_location_key),
-                context.getString(R.string.pref_location_default));
-    }
-
-    public static String getPreferredWidgetLocation(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return prefs.getString(context.getString(R.string.pref_widget_location_key),
                 context.getString(R.string.pref_location_default));
     }
 
@@ -383,6 +378,16 @@ public class Utility {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static String getFormattedLastUpdate(Context context, Long timestamp) {
+        Date date = new Date(timestamp);
+        TimeZone tz = TimeZone.getDefault();
+        Calendar c = Calendar.getInstance(tz);
+        c.setTime(date);
+        String[] months = context.getResources().getStringArray(R.array.months);
+        return c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ", " +
+                c.get(Calendar.DAY_OF_MONTH) + "-" + months[c.get(Calendar.MONTH)];
     }
 
     public static void insertWidgetLocationInDatabase(Context context, String locationSetting, int appWidgetId) {

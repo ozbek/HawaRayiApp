@@ -269,6 +269,7 @@ public class HawaRayiService extends IntentService {
      */
     private long insertLocationInDatabase(String locationSetting, int cityIdx) {
         long result;
+        long epoch = System.currentTimeMillis();
 
         // First, check if the location with this city name exists in the db
         Cursor cursor = getContentResolver().query(
@@ -281,10 +282,19 @@ public class HawaRayiService extends IntentService {
         if (cursor.moveToFirst()) {
             int locationIdIndex = cursor.getColumnIndex(WeatherContract.LocationEntry._ID);
             result = cursor.getLong(locationIdIndex);
+            // updating last update time
+            ContentValues updatedValues = new ContentValues();
+            updatedValues.put(WeatherContract.LocationEntry._ID, result);
+            updatedValues.put(WeatherContract.LocationEntry.COLUMN_LAST_UPDATED, epoch);
+
+            int count = getContentResolver().update(
+                    WeatherContract.LocationEntry.CONTENT_URI, updatedValues, WeatherContract.LocationEntry._ID + "= ?",
+                    new String[] { Long.toString(result)});
         } else {
             ContentValues locationValues = new ContentValues();
             locationValues.put(WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING, locationSetting);
             locationValues.put(WeatherContract.LocationEntry.COLUMN_CITY_ID, cityIdx);
+            locationValues.put(WeatherContract.LocationEntry.COLUMN_LAST_UPDATED, epoch);
 
             Uri locationInsertUri = getContentResolver()
                     .insert(WeatherContract.LocationEntry.CONTENT_URI, locationValues);

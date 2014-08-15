@@ -44,6 +44,7 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
                 WeatherContract.LocationEntry._ID + " INTEGER PRIMARY KEY," +
                 WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " TEXT UNIQUE NOT NULL, " +
                 WeatherContract.LocationEntry.COLUMN_CITY_ID + " TEXT NOT NULL, " +
+                WeatherContract.LocationEntry.COLUMN_LAST_UPDATED + " TEXT NOT NULL, " +
                 "UNIQUE (" + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING +") ON CONFLICT IGNORE"+
                 " );";
 

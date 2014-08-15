@@ -77,6 +77,8 @@ public class WeatherContract {
 
         public static final String COLUMN_APP_WIDGET_ID = "app_widget_id";
 
+        public static final String COLUMN_LAST_UPDATED = "last_updated";
+
         public static Uri buildLocationUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
@@ -121,7 +123,6 @@ public class WeatherContract {
 
         // Degrees are meteorological degrees (e.g, 0 is north, 180 is south).  Stored as floats.
         public static final String COLUMN_DEGREES = "degrees";
-
 
         public static Uri buildWeatherUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);

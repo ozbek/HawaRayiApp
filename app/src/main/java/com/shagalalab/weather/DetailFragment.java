@@ -67,7 +67,8 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             // This works because the WeatherProvider returns location data joined with
             // weather data, even though they're stored in two different tables.
             WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING,
-            WeatherContract.LocationEntry.COLUMN_CITY_ID
+            WeatherContract.LocationEntry.COLUMN_CITY_ID,
+            WeatherContract.LocationEntry.COLUMN_LAST_UPDATED
     };
 
     private ImageView mIconView;
@@ -80,6 +81,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     private TextView mWindView;
     private TextView mPressureView;
     private TextView mCityView;
+    private TextView mLastUpdated;
 
     public DetailFragment() {
         setHasOptionsMenu(true);
@@ -117,6 +119,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         mWindView = (TextView) rootView.findViewById(R.id.detail_wind_textview);
         mPressureView = (TextView) rootView.findViewById(R.id.detail_pressure_textview);
         mCityView = (TextView) rootView.findViewById(R.id.detail_city_textview);
+        mLastUpdated = (TextView) rootView.findViewById(R.id.updated_at);
 
         Log.w(LOG_TAG, "onCreateView - end");
         return rootView;
@@ -240,6 +243,10 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             float rawPressure = data.getFloat(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_PRESSURE));
             float pressure = Utility.getConvertedPressure(rawPressure);
             mPressureView.setText(getActivity().getString(R.string.format_pressure, pressure));
+
+            long lastUpdated = data.getLong(data.getColumnIndex(WeatherContract.LocationEntry.COLUMN_LAST_UPDATED));
+            String formattedLastUpdated = Utility.getFormattedLastUpdate(getActivity(), lastUpdated);
+            mLastUpdated.setText(getActivity().getString(R.string.format_last_updated, formattedLastUpdated));
 
             mForecastStr = String.format("%s - %s - %s/%s",
                     dateText, description, highString, lowString);

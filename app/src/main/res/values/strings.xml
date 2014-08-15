@@ -83,6 +83,8 @@
         <xliff:g id="low">%4$s</xliff:g>
     </string>
 
+    <string name="format_last_updated">Ақырғы жаңаланған ўақыт: <xliff:g id="time">%1$s</xliff:g></string>
+
     <string name="content_authority">"com.shagalalab.weather"</string>
 
     <!-- Weather conditions CHAR LIMIT=25]-->

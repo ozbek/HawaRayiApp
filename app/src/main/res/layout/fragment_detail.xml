@@ -1,7 +1,8 @@
 <!-- Master layout. -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <LinearLayout
         android:gravity="center_vertical"
@@ -49,7 +50,7 @@
         <!-- Main content: high, low, art, weather state -->
         <LinearLayout
             android:gravity="center_horizontal"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:orientation="horizontal">
@@ -99,7 +100,8 @@
 
         <!-- Humidity, wind, pressure -->
         <LinearLayout
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_marginRight="0dp"
             android:layout_marginTop="16dp"
             android:layout_width="match_parent"
@@ -132,5 +134,13 @@
                     android:singleLine="true"
                     android:textAppearance="?android:textAppearanceLarge" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/updated_at"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="@color/grey_700" />
     </LinearLayout>
 </ScrollView>
