@@ -22,6 +22,7 @@ import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
@@ -281,6 +282,20 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
                 // If we don't need to restart the loader, and there's a desired position to restore
                 // to, do so now.
                 mListView.smoothScrollToPosition(mPosition);
+            } else {
+                // If app started first time and in dual (tablet) mode, select first item automatically
+                if (!mUseTodayLayout) {
+                    mListView.setItemChecked(0, true);
+                    new Handler().post(new Runnable() {
+                        @Override
+                        public void run() {
+                            mListView.performItemClick(
+                                    mListView.getChildAt(0),
+                                    0,
+                                    mListView.getAdapter().getItemId(0));
+                        }
+                    });
+                }
             }
         }
         Log.w(LOG_TAG, "onLoadFinished - end");
