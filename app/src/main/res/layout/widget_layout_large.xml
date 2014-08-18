@@ -51,7 +51,7 @@
                         android:fontFamily="sans-serif-condensed"
                         android:textColor="@color/white"
                         android:textSize="36sp"
-                        android:gravity="center"
+                        android:gravity="end"
                         android:layout_gravity="center">
                     </TextView>
 
