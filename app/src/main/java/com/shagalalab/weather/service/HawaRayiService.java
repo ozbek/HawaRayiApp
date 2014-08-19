@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.shagalalab.weather.Credentials;
 import com.shagalalab.weather.Utility;
 import com.shagalalab.weather.data.WeatherContract;
 
@@ -31,7 +32,6 @@ import java.util.Vector;
  */
 public class HawaRayiService extends IntentService {
     private String LOG_TAG = HawaRayiService.class.getSimpleName();
-    private final String APP_ID = "e6350df66ddd09845446a686f9383be8";
     public static final String LOCATION_QUERY_EXTRA = "lqe";
 
     public HawaRayiService() {
@@ -75,7 +75,7 @@ public class HawaRayiService extends IntentService {
                     .appendQueryParameter(FORMAT_PARAM, format)
                     .appendQueryParameter(UNITS_PARAM, units)
                     .appendQueryParameter(DAYS_PARAM, Integer.toString(numDays))
-                    .appendQueryParameter(APPID_PARAM, APP_ID)
+                    .appendQueryParameter(APPID_PARAM, Credentials.APP_ID)
                     .build();
 
             URL url = new URL(builtUri.toString());
