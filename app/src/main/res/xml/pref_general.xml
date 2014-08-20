@@ -3,14 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ListPreference
+    <com.shagalalab.weather.CustomListPreference
         android:title="@string/pref_location_label"
         android:key="@string/pref_location_key"
         android:defaultValue="@string/pref_location_default"
         android:entryValues="@array/pref_location_values"
         android:entries="@array/pref_location_options" />
 
-    <ListPreference
+    <com.shagalalab.weather.CustomListPreference
         android:title="@string/pref_interface_label"
         android:key="@string/pref_interface_key"
         android:defaultValue="@string/pref_interface_default"
