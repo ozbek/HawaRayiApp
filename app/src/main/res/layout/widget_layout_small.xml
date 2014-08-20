@@ -2,7 +2,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/widget_margin">
+    android:paddingTop="@dimen/widget_margin_top"
+    android:paddingBottom="@dimen/widget_margin_top"
+    android:paddingLeft="@dimen/widget_margin"
+    android:paddingRight="@dimen/widget_margin">
 
     <LinearLayout
         android:id="@+id/layout"
