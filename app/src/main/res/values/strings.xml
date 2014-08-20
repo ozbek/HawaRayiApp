@@ -1,63 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!--
-         Used in Action Bar, and in AndroidManifest to tell the device the name of this app.
-         It's to keep this short, so your launcher icon isn't displayed with "The greatest Wea"
-         or something similar.
-    -->
-    <string name="app_name">Hawa Rayi</string>
+    <!-- Non-translatable strings -->
+    <string name="pref_location_key" translatable="false">location</string>
+    <string name="pref_location_default" translatable="false">nukus</string>
+    <string name="pref_last_notification">last_sync</string>
+    <string name="pref_enable_notifications_key" translatable="false">enable_notifications</string>
+    <string name="pref_enable_notifications_default" translatable="false">true</string>
+    <string name="format_full_friendly_date">
+        <xliff:g id="month">%1$s</xliff:g>, <xliff:g id="day">%2$s</xliff:g>
+    </string>
+    <string name="format_temperature"><xliff:g id="temp">%1.0f</xliff:g>\u00B0</string>
+    <string name="content_authority">"com.shagalalab.weather"</string>
+    <string name="pref_interface_key" translatable="false">interface</string>
+    <string name="pref_interface_default" translatable="false">cyrillic</string>
+    <string name="pref_widget_location_key" translatable="false">location_widget</string>
+    <string name="pref_widget_interface_key" translatable="false">widget_interface</string>
+    <string name="pref_update_key" translatable="false">widget_update</string>
+    <string name="pref_update_default" translatable="false">manual</string>
 
-    <!--
-         By convention, "action" denotes that this String will be used as the label for an Action,
-         typically from the action bar.  The ActionBar is limited real estate, so shorter is better.
-    -->
+
+    <!-- Translatable strings -->
+    <string name="app_name">Hawa Rayi</string>
     <string name="action_settings">Сазлаўлар</string>
     <string name="action_share">Бөлисиў</string>
     <string name="action_refresh">Жаңалаў</string>
-
     <string name="title_activity_detail">Толық</string>
     <string name="title_activity_settings">Сазлаўлар</string>
-
-    <!-- Label for the location preference [CHAR LIMIT=30] -->
     <string name="pref_location_label">Қала</string>
-    <string name="pref_location_key" translatable="false">location</string>
-    <string name="pref_location_default" translatable="false">nukus</string>
-
-    <!-- Strings related to Notification preference -->
-    <string name="pref_last_notification">last_sync</string>
-
-    <!-- Notification Format -->
     <string name="format_notification">
         Forecast: <xliff:g id="condition">%1$s</xliff:g> High: <xliff:g id="high">%2$s</xliff:g>
         Low: <xliff:g id="low">%3$s</xliff:g>
     </string>
-
-     <!-- Strings related to Notification Enabled preference -->
-     <string name="pref_enable_notifications_key" translatable="false">enable_notifications</string>
-     <string name="pref_enable_notifications_label">Ҳаўа райы хабарландырыӯы</string>
-
-     <string name="pref_enable_notifications_true">Қосылған</string>
-     <string name="pref_enable_notifications_false">Өширилген</string>
-     <string name="pref_enable_notifications_default" translatable="false">true</string>
-
-    <!-- Language-specific constants -->
+    <string name="pref_enable_notifications_label">Ҳаўа райы хабарландырыӯы</string>
+    <string name="pref_enable_notifications_true">Қосылған</string>
+    <string name="pref_enable_notifications_false">Өширилген</string>
     <string name="today">Бүгүн</string>
-
-    <!-- For labelling tomorrow's forecast [CHAR LIMIT=15] -->
     <string name="tomorrow">Ертең</string>
-
-    <!-- Date format [CHAR LIMIT=NONE] -->
-    <string name="format_full_friendly_date">
-        <xliff:g id="month">%1$s</xliff:g>, <xliff:g id="day">%2$s</xliff:g>
-    </string>
-
-    <!-- Strings for formatting weather-related data -->
-    <!-- Temperature format [CHAR LIMIT=5] -->
-    <string name="format_temperature"><xliff:g id="temp">%1.0f</xliff:g>\u00B0</string>
-
-    <!-- Windspeed formats -->
-    <!-- Wind in kph [CHAR LIMIT=25] -->
     <string name="format_wind_kmh">
         Самал: <xliff:g id="speed">%1$1.0f</xliff:g> м/с, <xliff:g id="direction">%2$s</xliff:g>
     </string>
@@ -69,25 +48,15 @@
     <string name="wind_direction_south_west">қубла-батыс</string>
     <string name="wind_direction_west">батыс</string>
     <string name="wind_direction_north_west">арқа-батыс</string>
-
-    <!-- Pressure format CHAR LIMIT=25] -->
     <string name="format_pressure">Басым: <xliff:g id="pressure">%1.0f</xliff:g> мм. сынап бағанасы</string>
-
-    <!-- Humidity format CHAR LIMIT=25]-->
     <string name="format_humidity">Ығаллық: <xliff:g id="humidity">%1.0f</xliff:g>%%</string>
-
-    <!-- Share format [CHAR LIMIT=NONE]-->
     <string name="format_share">
         Weather for <xliff:g id="date">%1$s</xliff:g> in <xliff:g id="location">%2$s</xliff:g>:
         A high of <xliff:g id="high">%3$s</xliff:g> and low of
         <xliff:g id="low">%4$s</xliff:g>
     </string>
-
     <string name="format_last_updated">Ақырғы жаңаланған ўақыт: <xliff:g id="time">%1$s</xliff:g></string>
 
-    <string name="content_authority">"com.shagalalab.weather"</string>
-
-    <!-- Weather conditions CHAR LIMIT=25]-->
     <string name="storm">Дүбелей</string>
     <string name="light_rain">Киши жаӯын</string>
     <string name="rain">Жаӯын</string>
@@ -101,16 +70,10 @@
     <string name="no_network">Интернет байланысы табылмады. Интернетке қосылғаныңызда, қайтадан ҳәрекет етип көриң.</string>
 
     <string name="pref_interface_label">Бағдарлама интерфейси</string>
-    <string name="pref_interface_key" translatable="false">interface</string>
-    <string name="pref_interface_default" translatable="false">cyrillic</string>
 
     <string name="title_widget_settings">Widget сазлаўлары</string>
-    <string name="pref_widget_location_key" translatable="false">location_widget</string>
     <string name="pref_widget_interface_label">Widget интерфейси</string>
-    <string name="pref_widget_interface_key" translatable="false">widget_interface</string>
     <string name="pref_update">Бағдарламаның жаңаланыӯ жийилиги</string>
-    <string name="pref_update_key" translatable="false">widget_update</string>
-    <string name="pref_update_default" translatable="false">manual</string>
 
     <string name="create_widget">Widget жаратыӯ</string>
 
