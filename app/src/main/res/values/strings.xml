@@ -18,7 +18,8 @@
     <string name="pref_widget_interface_key" translatable="false">widget_interface</string>
     <string name="pref_update_key" translatable="false">widget_update</string>
     <string name="pref_update_default" translatable="false">manual</string>
-
+    <string name="widget_label_small">2x1 Hawa Rayi Widget</string>
+    <string name="widget_label_large">4x1 Hawa Rayi Widget</string>
 
     <!-- Translatable strings -->
     <string name="app_name">Hawa Rayi</string>
@@ -76,9 +77,6 @@
     <string name="pref_update">Бағдарламаның жаңаланыӯ жийилиги</string>
 
     <string name="create_widget">Widget жаратыӯ</string>
-
-    <string name="widget_label_small">2x1 Hawa Rayi Widget</string>
-    <string name="widget_label_large">4x1 Hawa Rayi Widget</string>
 
     <string name="preference_setting_cancel">Бийкар етиӯ</string>
 

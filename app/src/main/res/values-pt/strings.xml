@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Translatable strings -->
+    <string name="app_name">Hawa Rayi</string>
+    <string name="action_settings">Sazlawlar</string>
+    <string name="action_share">Bo\'lisiw</string>
+    <string name="action_refresh">Jan\'alaw</string>
+    <string name="title_activity_detail">Tolıq</string>
+    <string name="title_activity_settings">Sazlawlar</string>
+    <string name="pref_location_label">Qala</string>
+    <string name="format_notification">
+        Forecast: <xliff:g id="condition">%1$s</xliff:g> High: <xliff:g id="high">%2$s</xliff:g>
+        Low: <xliff:g id="low">%3$s</xliff:g>
+    </string>
+    <string name="pref_enable_notifications_label">Hawa rayı xabarlandırıwı</string>
+    <string name="pref_enable_notifications_true">Qosılg\'an</string>
+    <string name="pref_enable_notifications_false">O\'shirilgen</string>
+    <string name="today">Bu\'gu\'n</string>
+    <string name="tomorrow">Erten\'</string>
+    <string name="format_wind_kmh">
+        Samal: <xliff:g id="speed">%1$1.0f</xliff:g> m/s, <xliff:g id="direction">%2$s</xliff:g>
+    </string>
+    <string name="wind_direction_north">arqa</string>
+    <string name="wind_direction_north_east">arqa-shıg\'ıs</string>
+    <string name="wind_direction_east">shıg\'ıs</string>
+    <string name="wind_direction_south_east">qubla-shıg\'ıs</string>
+    <string name="wind_direction_south">qubla</string>
+    <string name="wind_direction_south_west">qubla-batıs</string>
+    <string name="wind_direction_west">batıs</string>
+    <string name="wind_direction_north_west">arqa-batıs</string>
+    <string name="format_pressure">Basım: <xliff:g id="pressure">%1.0f</xliff:g> mm. sınap bag\'anası</string>
+    <string name="format_humidity">Ig\'allıq: <xliff:g id="humidity">%1.0f</xliff:g>%%</string>
+    <string name="format_share">
+        Weather for <xliff:g id="date">%1$s</xliff:g> in <xliff:g id="location">%2$s</xliff:g>:
+        A high of <xliff:g id="high">%3$s</xliff:g> and low of
+        <xliff:g id="low">%4$s</xliff:g>
+    </string>
+    <string name="format_last_updated">Aqırg\'ı jan\'alang\'an waqıt: <xliff:g id="time">%1$s</xliff:g></string>
+
+    <string name="storm">Du\'beley</string>
+    <string name="light_rain">Kishi jawın</string>
+    <string name="rain">Jawın</string>
+    <string name="snow">Qar</string>
+    <string name="fog">Duman</string>
+    <string name="clear">Ashıq aspan</string>
+    <string name="light_clouds">Bultlı</string>
+    <string name="cloudy">Bultlı</string>
+
+    <string name="no_network_no_data">Интернет байланысы табылмады. Интернетке қосылғаныңызда, бағдарламаны қайта жүклең, ямаса \'Жаңалаӯ\' менюинен пайдаланың.</string>
+    <string name="no_network">Интернет байланысы табылмады. Интернетке қосылғаныңызда, қайтадан ҳәрекет етип көриң.</string>
+
+    <string name="pref_interface_label">Bag\'darlama interfeysi</string>
+
+    <string name="title_widget_settings">Widget sazlawları</string>
+    <string name="pref_widget_interface_label">Widget interfeysi</string>
+    <string name="pref_update">Bag\'darlamanın\' jan\'alanıw jiyiligi</string>
+
+    <string name="create_widget">Widget jaratıw</string>
+
+    <string name="preference_setting_cancel">Biykar etiw</string>
+</resources>

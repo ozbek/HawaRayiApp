@@ -16,7 +16,7 @@
     </array>
 
     <array name="day_of_week">
-        <item>Yekshembi</item>
+        <item>Ekshembi</item>
         <item>Du\'yshembi</item>
         <item>Shiyshembi</item>
         <item>Sa\'rshembi</item>
@@ -27,19 +27,19 @@
 
     <array name="pref_location_options">
         <item>No\'kis</item>
-        <item>Aqmang\'i\'t</item>
+        <item>Aqmang\'ıt</item>
         <item>Beruniy</item>
         <item>Bostan</item>
         <item>Kegeyli</item>
-        <item>Qanli\'ko\'l</item>
+        <item>Qanlıko\'l</item>
         <item>Qarao\'zek</item>
-        <item>Qon\'i\'rat</item>
-        <item>Mang\'i\'t</item>
+        <item>Qon\'ırat</item>
+        <item>Mang\'ıt</item>
         <item>Moynaq</item>
         <item>Taxtako\'pir</item>
         <item>To\'rtku\'l</item>
         <item>Xojeli</item>
-        <item>Shi\'mbay</item>
+        <item>Shımbay</item>
         <item>Shomanay</item>
         <item>Tashkent</item>
     </array>
@@ -65,7 +65,7 @@
 
     <array name="pref_interface_options">
         <item>Kirill a\'lipbesi</item>
-        <item>Lati\'n a\'lipbesi</item>
+        <item>Latın a\'lipbesi</item>
     </array>
 
     <array name="pref_interface_values">

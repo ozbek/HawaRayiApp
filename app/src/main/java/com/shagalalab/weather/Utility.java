@@ -345,7 +345,7 @@ public class Utility {
     }
 
     public static void changeLocale(Context context) {
-        Locale locale = new Locale("ru");
+        Locale locale = new Locale("pt");
         Locale.setDefault(locale);
         Configuration config = new Configuration();
         config.locale = locale;
