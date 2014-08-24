@@ -16,6 +16,7 @@
 package com.shagalalab.weather;
 
 import android.app.AlarmManager;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
@@ -26,6 +27,8 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 
 import com.shagalalab.weather.data.WeatherContract;
 
@@ -44,6 +47,7 @@ public class Utility {
     public static boolean NEED_RESTART = false;
     public static String UPDATE_WIDGET = "updateWidget";
     public static String APP_WIDGET_ID = "appWidgetId";
+    private static int NOTIFICATION_ID = 3456;
 
     public static final String[] WIDGET_FORECAST_COLUMNS = {
             WeatherContract.WeatherEntry.TABLE_NAME + "." + WeatherContract.WeatherEntry._ID,
@@ -436,5 +440,86 @@ public class Utility {
         }
 
         return result;
+    }
+
+    public static void showNotification(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String locationKey = context.getString(R.string.pref_location_key);
+
+        // Getting saved location
+        String locationDefault = context.getString(R.string.pref_location_default);
+        String location = prefs.getString(locationKey, locationDefault);
+
+        // Get all saved data for location
+        Date todayDate = new Date();
+        Cursor cursor = Utility.getForecastCursor(context, location, todayDate);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int weatherId = cursor.getInt(cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_WEATHER_ID));
+
+            String date = cursor.getString(cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_DATETEXT));
+            String dateText = Utility.getFormattedMonthDay(context, date);
+
+            int cityId = cursor.getInt(cursor.getColumnIndex(WeatherContract.LocationEntry.COLUMN_CITY_ID));
+            String city = context.getResources().getStringArray(R.array.pref_location_options)[cityId];
+
+            double high = cursor.getDouble(cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_MAX_TEMP));
+            String highString = Utility.formatTemperature(context, high);
+
+            double low = cursor.getDouble(cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_MIN_TEMP));
+            String lowString = Utility.formatTemperature(context, low);
+
+            int iconId = Utility.getIconResourceForWeatherCondition(weatherId);
+            String title = context.getString(R.string.format_notification_title, city);
+
+            String notificationText = context.getString(R.string.format_notification, dateText, highString, lowString);
+
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+                            .setSmallIcon(iconId)
+                            .setContentTitle(title)
+                            .setContentText(notificationText)
+                            .setStyle(new NotificationCompat.BigTextStyle().bigText(notificationText));
+            // Creates an explicit intent for an Activity in your app
+            Intent resultIntent = new Intent(context, MainActivity.class);
+
+            // The stack builder object will contain an artificial back stack for the
+            // started Activity.
+            // This ensures that navigating backward from the Activity leads out of
+            // your application to the Home screen.
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+            // Adds the back stack for the Intent (but not the Intent itself)
+            stackBuilder.addParentStack(MainActivity.class);
+            // Adds the Intent that starts the Activity to the top of the stack
+            stackBuilder.addNextIntent(resultIntent);
+            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(
+                            0,
+                            PendingIntent.FLAG_UPDATE_CURRENT
+                    );
+            mBuilder.setContentIntent(resultPendingIntent);
+            NotificationManager mNotificationManager =
+                    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            // mId allows you to update the notification later on.
+            mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+        }
+    }
+
+    public static void hideNotification(Context context) {
+        NotificationManager mNotificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.cancel(NOTIFICATION_ID);
+    }
+
+    public static Cursor getForecastCursor(Context context, String location, Date date) {
+        String dateStr = Utility.getDbDateString(date);
+        Uri weatherForLocationUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(
+                location, dateStr);
+        String sortOrder = WeatherContract.WeatherEntry.COLUMN_DATETEXT + " ASC";
+        return context.getContentResolver().query(
+                weatherForLocationUri,
+                Utility.WIDGET_FORECAST_COLUMNS,
+                null,
+                null,
+                sortOrder
+        );
     }
 }

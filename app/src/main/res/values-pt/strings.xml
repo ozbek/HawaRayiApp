@@ -9,10 +9,6 @@
     <string name="title_activity_detail">Tolıq</string>
     <string name="title_activity_settings">Sazlawlar</string>
     <string name="pref_location_label">Qala</string>
-    <string name="format_notification">
-        Forecast: <xliff:g id="condition">%1$s</xliff:g> High: <xliff:g id="high">%2$s</xliff:g>
-        Low: <xliff:g id="low">%3$s</xliff:g>
-    </string>
     <string name="pref_enable_notifications_label">Hawa rayı xabarlandırıwı</string>
     <string name="pref_enable_notifications_true">Qosılg\'an</string>
     <string name="pref_enable_notifications_false">O\'shirilgen</string>
@@ -36,6 +32,7 @@
         A high of <xliff:g id="high">%3$s</xliff:g> and low of
         <xliff:g id="low">%4$s</xliff:g>
     </string>
+    <string name="format_notification_title"><xliff:g id="city">%1$s</xliff:g> ushın hawa rayı</string>
     <string name="format_last_updated">Aqırg\'ı jan\'alang\'an waqıt: <xliff:g id="time">%1$s</xliff:g></string>
 
     <string name="storm">Du\'beley</string>

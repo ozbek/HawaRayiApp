@@ -71,6 +71,7 @@ public class SettingsActivity extends PreferenceActivity
         // updated when the preference changes.
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_location_key)));
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_interface_key)));
+        bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_enable_notifications_key)));
     }
 
     /**
@@ -86,10 +87,17 @@ public class SettingsActivity extends PreferenceActivity
 
         // Trigger the listener immediately with the preference's
         // current value.
-        onPreferenceChange(preference,
-                PreferenceManager
-                        .getDefaultSharedPreferences(preference.getContext())
-                        .getString(preference.getKey(), ""));
+        if (preference.getKey().equals(getString(R.string.pref_enable_notifications_key))) {
+            onPreferenceChange(preference,
+                    PreferenceManager
+                            .getDefaultSharedPreferences(preference.getContext())
+                            .getBoolean(preference.getKey(), false));
+        } else {
+            onPreferenceChange(preference,
+                    PreferenceManager
+                            .getDefaultSharedPreferences(preference.getContext())
+                            .getString(preference.getKey(), ""));
+        }
 
         mBindingPreference = false;
     }
@@ -107,6 +115,12 @@ public class SettingsActivity extends PreferenceActivity
             } else if (preference.getKey().equals(getString(R.string.pref_interface_key))) {
                 Utility.NEED_RESTART = true;
                 finish();
+            } else if (preference.getKey().equals(getString(R.string.pref_enable_notifications_key))) {
+                if (newValue.equals("true")) {
+                    Utility.showNotification(this);
+                } else {
+                    Utility.hideNotification(this);
+                }
             } else {
                 // notify code that weather may be effected
                 getContentResolver().notifyChange(WeatherContract.WeatherEntry.CONTENT_URI, null);

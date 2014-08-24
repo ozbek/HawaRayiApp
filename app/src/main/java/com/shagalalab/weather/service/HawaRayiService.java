@@ -5,12 +5,15 @@ import android.appwidget.AppWidgetManager;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.shagalalab.weather.Credentials;
+import com.shagalalab.weather.R;
 import com.shagalalab.weather.Utility;
 import com.shagalalab.weather.data.WeatherContract;
 
@@ -262,6 +265,18 @@ public class HawaRayiService extends IntentService {
             Intent update = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
             update.putExtra(Utility.UPDATE_WIDGET, true);
             sendBroadcast(update);
+
+            // show notification if enabled in preferences...
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            String displayNotificationsKey = getString(R.string.pref_enable_notifications_key);
+            boolean defaultForNotifications =
+                    Boolean.parseBoolean(getString(R.string.pref_enable_notifications_default));
+            boolean notificationsEnabled =
+                    prefs.getBoolean(displayNotificationsKey, defaultForNotifications);
+
+            if (notificationsEnabled) {
+                Utility.showNotification(this);
+            }
         }
         Log.w(LOG_TAG, "getWeatherDataFromJson - end");
     }

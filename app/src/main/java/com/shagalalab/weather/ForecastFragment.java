@@ -238,7 +238,7 @@ public class ForecastFragment extends Fragment implements LoaderCallbacks<Cursor
         String action = getActivity().getIntent().getAction();
         int appWidgetId = getActivity().getIntent().getIntExtra(Utility.APP_WIDGET_ID, -1);
 
-        if (action.equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE) && appWidgetId > -1) {
+        if (action!= null && action.equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE) && appWidgetId > -1) {
             mLocation = Utility.getWidgetLocation(getActivity(), appWidgetId);
         } else {
             mLocation = Utility.getPreferredLocation(getActivity());

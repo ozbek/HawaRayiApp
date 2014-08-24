@@ -52,17 +52,7 @@ public class HawaRayiWidgetProviderSmall extends AppWidgetProvider {
             // to the button
             String mLocation = Utility.getWidgetLocation(context, appWidgetId);
             Date todayDate = new Date();
-            String todayStr = Utility.getDbDateString(todayDate);
-            Uri weatherForLocationUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(
-                    mLocation, todayStr);
-            String sortOrder = WeatherContract.WeatherEntry.COLUMN_DATETEXT + " ASC";
-            Cursor cursor = context.getContentResolver().query(
-                    weatherForLocationUri,
-                    Utility.WIDGET_FORECAST_COLUMNS,
-                    null,
-                    null,
-                    sortOrder
-            );
+            Cursor cursor = Utility.getForecastCursor(context, mLocation, todayDate);
 
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout_small);
 
