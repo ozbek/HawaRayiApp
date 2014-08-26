@@ -4,6 +4,6 @@
     android:minHeight="40dp"
     android:minWidth="250dp"
     android:configure="com.shagalalab.weather.widget.HawaRayiWidgetConfigure"
-    android:updatePeriodMillis="1800000" >
+    android:updatePeriodMillis="0" >
 
 </appwidget-provider> 
