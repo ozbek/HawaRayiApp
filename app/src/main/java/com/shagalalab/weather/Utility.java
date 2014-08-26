@@ -554,4 +554,30 @@ public class Utility {
                 sortOrder
         );
     }
+
+    public static void setAlarm(Context context) {
+        AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);;
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+
+        // Set the alarm to start at 00:05
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 5);
+
+        alarmMgr.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY, alarmIntent);
+    }
+
+    public static void cancelAlarm(Context context) {
+        AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);;
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+
+        // If the alarm has been set, cancel it.
+        if (alarmMgr!= null) {
+            alarmMgr.cancel(alarmIntent);
+        }
+    }
 }
