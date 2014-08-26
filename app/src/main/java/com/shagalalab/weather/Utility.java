@@ -18,10 +18,12 @@ package com.shagalalab.weather;
 import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -501,12 +503,42 @@ public class Utility {
             // mId allows you to update the notification later on.
             mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
         }
+
+        // enabling receiver to show notification after reboot
+        ComponentName receiver = new ComponentName(context, BootReceiver.class);
+        PackageManager pm = context.getPackageManager();
+
+        pm.setComponentEnabledSetting(receiver,
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                PackageManager.DONT_KILL_APP);
     }
 
     public static void hideNotification(Context context) {
         NotificationManager mNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.cancel(NOTIFICATION_ID);
+
+        // disabling receiver to show notification after reboot
+        ComponentName receiver = new ComponentName(context, BootReceiver.class);
+        PackageManager pm = context.getPackageManager();
+
+        pm.setComponentEnabledSetting(receiver,
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP);
+    }
+
+    public static void showNotificationIfEnabled(Context context) {
+        // show notification if enabled in preferences...
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String displayNotificationsKey = context.getString(R.string.pref_enable_notifications_key);
+        boolean defaultForNotifications =
+                Boolean.parseBoolean(context.getString(R.string.pref_enable_notifications_default));
+        boolean notificationsEnabled =
+                prefs.getBoolean(displayNotificationsKey, defaultForNotifications);
+
+        if (notificationsEnabled) {
+            showNotification(context);
+        }
     }
 
     public static Cursor getForecastCursor(Context context, String location, Date date) {

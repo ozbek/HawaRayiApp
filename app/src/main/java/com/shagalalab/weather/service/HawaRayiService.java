@@ -266,17 +266,7 @@ public class HawaRayiService extends IntentService {
             update.putExtra(Utility.UPDATE_WIDGET, true);
             sendBroadcast(update);
 
-            // show notification if enabled in preferences...
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            String displayNotificationsKey = getString(R.string.pref_enable_notifications_key);
-            boolean defaultForNotifications =
-                    Boolean.parseBoolean(getString(R.string.pref_enable_notifications_default));
-            boolean notificationsEnabled =
-                    prefs.getBoolean(displayNotificationsKey, defaultForNotifications);
-
-            if (notificationsEnabled) {
-                Utility.showNotification(this);
-            }
+            Utility.showNotificationIfEnabled(this);
         }
         Log.w(LOG_TAG, "getWeatherDataFromJson - end");
     }
