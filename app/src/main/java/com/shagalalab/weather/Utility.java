@@ -479,8 +479,7 @@ public class Utility {
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
                             .setSmallIcon(iconId)
                             .setContentTitle(title)
-                            .setContentText(notificationText)
-                            .setStyle(new NotificationCompat.BigTextStyle().bigText(notificationText));
+                            .setContentText(notificationText);
             // Creates an explicit intent for an Activity in your app
             Intent resultIntent = new Intent(context, MainActivity.class);
 
