@@ -118,7 +118,7 @@ public class SettingsActivity extends PreferenceActivity
             } else if (preference.getKey().equals(getString(R.string.pref_enable_notifications_key))) {
                 if (newValue.equals("true")) {
                     Utility.showNotification(this);
-                    // set alarm to update notification at 00.05 daily
+                    // set alarm to update notification daily
                     Utility.setAlarm(this);
                 } else {
                     Utility.hideNotification(this);

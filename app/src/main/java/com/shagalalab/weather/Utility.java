@@ -556,15 +556,15 @@ public class Utility {
     }
 
     public static void setAlarm(Context context) {
-        AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);;
+        AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReceiver.class);
         PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 
-        // Set the alarm to start at 00:05
+        // Set the alarm to start at 00:01
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 5);
+        calendar.set(Calendar.MINUTE, 1);
 
         alarmMgr.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(),
                 AlarmManager.INTERVAL_DAY, alarmIntent);

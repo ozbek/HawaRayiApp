@@ -85,5 +85,7 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
+        <receiver  android:process=":remote" android:name=".AlarmReceiver" />
     </application>
 </manifest>
