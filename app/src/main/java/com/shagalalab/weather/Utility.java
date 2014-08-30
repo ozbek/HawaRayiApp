@@ -474,7 +474,7 @@ public class Utility {
             int iconId = Utility.getIconResourceForWeatherCondition(weatherId);
             String title = context.getString(R.string.format_notification_title, city);
 
-            String notificationText = context.getString(R.string.format_notification, dateText, highString, lowString);
+            String notificationText = context.getString(R.string.format_notification, dateText, highString + "C", lowString + "C");
 
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
                             .setSmallIcon(iconId)
