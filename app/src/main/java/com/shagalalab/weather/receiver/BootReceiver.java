@@ -1,8 +1,10 @@
-package com.shagalalab.weather;
+package com.shagalalab.weather.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
+import com.shagalalab.weather.Utility;
 
 /**
  * Created by atabek on 08/27/14.

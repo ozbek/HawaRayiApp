@@ -33,6 +33,8 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
 import com.shagalalab.weather.data.WeatherContract;
+import com.shagalalab.weather.receiver.AlarmReceiver;
+import com.shagalalab.weather.receiver.BootReceiver;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -391,8 +393,8 @@ public class Utility {
         Calendar c = Calendar.getInstance(tz);
         c.setTime(date);
         String[] months = context.getResources().getStringArray(R.array.months);
-        return c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ", " +
-                c.get(Calendar.DAY_OF_MONTH) + "-" + months[c.get(Calendar.MONTH)];
+        return String.format("%02d:%02d, %s-%s", c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE),
+                c.get(Calendar.DAY_OF_MONTH), months[c.get(Calendar.MONTH)]);
     }
 
     public static void insertWidgetLocationInDatabase(Context context, String locationSetting, int appWidgetId) {
@@ -503,6 +505,10 @@ public class Utility {
             mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
         }
 
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+
         // enabling receiver to show notification after reboot
         ComponentName receiver = new ComponentName(context, BootReceiver.class);
         PackageManager pm = context.getPackageManager();
@@ -570,7 +576,7 @@ public class Utility {
     }
 
     public static void cancelAlarm(Context context) {
-        AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);;
+        AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReceiver.class);
         PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 
