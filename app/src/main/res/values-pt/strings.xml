@@ -28,9 +28,8 @@
     <string name="format_pressure">Basım: <xliff:g id="pressure">%1.0f</xliff:g> mm. sınap bag\'anası</string>
     <string name="format_humidity">Ig\'allıq: <xliff:g id="humidity">%1.0f</xliff:g>%%</string>
     <string name="format_share">
-        Weather for <xliff:g id="date">%1$s</xliff:g> in <xliff:g id="location">%2$s</xliff:g>:
-        A high of <xliff:g id="high">%3$s</xliff:g> and low of
-        <xliff:g id="low">%4$s</xliff:g>
+        <xliff:g id="city">%1$s</xliff:g> ushın hawa rayı: <xliff:g id="dateText">%2$s</xliff:g>, <xliff:g id="description">%3$s</xliff:g>,
+        <xliff:g id="highString">%4$s</xliff:g>/<xliff:g id="lowString">%5$s</xliff:g>
     </string>
     <string name="format_notification_title"><xliff:g id="city">%1$s</xliff:g> ushın hawa rayı</string>
     <string name="format_last_updated">Aqırg\'ı jan\'alang\'an waqıt: <xliff:g id="time">%1$s</xliff:g></string>

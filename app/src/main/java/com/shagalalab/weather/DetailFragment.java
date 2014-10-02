@@ -248,8 +248,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             String formattedLastUpdated = Utility.getFormattedLastUpdate(getActivity(), lastUpdated);
             mLastUpdated.setText(getActivity().getString(R.string.format_last_updated, formattedLastUpdated));
 
-            mForecastStr = String.format("%s - %s - %s/%s",
-                    dateText, description, highString, lowString);
+            mForecastStr = getActivity().getString(R.string.format_share, city, dateText, description.toLowerCase(), highString, lowString);
         }
         Log.w(LOG_TAG, "onLoadFinished - end");
     }
