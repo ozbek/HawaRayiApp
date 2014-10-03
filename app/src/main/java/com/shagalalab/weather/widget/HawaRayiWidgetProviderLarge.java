@@ -24,7 +24,7 @@ import java.util.Date;
 public class HawaRayiWidgetProviderLarge extends AppWidgetProvider {
     private String LOG_TAG = HawaRayiWidgetProviderLarge.class.getSimpleName();
 
-    public static final int[] widgetDays = { -1, R.id.widget_large_tomorrow_day, R.id.widget_large_tomorrow2_day, R.id.widget_large_tomorrow3_day };
+    public static final int[] widgetDays = { R.id.widget_large_tomorrow_day, R.id.widget_large_tomorrow2_day, R.id.widget_large_tomorrow3_day };
     public static final int[] widgetIcons = { R.id.widget_large_today_icon, R.id.widget_large_tomorrow_icon, R.id.widget_large_tomorrow2_icon, R.id.widget_large_tomorrow3_icon };
     public static final int[] widgetTemperature = { R.id.widget_large_today_temp_high, R.id.widget_large_tomorrow_temp, R.id.widget_large_tomorrow2_temp, R.id.widget_large_tomorrow3_temp };
 
@@ -94,17 +94,15 @@ public class HawaRayiWidgetProviderLarge extends AppWidgetProvider {
                         String city = context.getResources().getStringArray(R.array.pref_location_options)[cityId];
                         views.setTextViewText(R.id.widget_large_city, city);
 
-                        dateText = Utility.getFormattedMonthDay(context, date);
-
                         temperature = highString;
                     } else {
                         dateText = Utility.getWeekOfDay(context, date).substring(0, 3);
+                        views.setTextViewText(widgetDays[cursor.getPosition() - 1], dateText);
 
                         temperature = highString + "/" + lowString;
                     }
 
                     views.setTextViewText(widgetTemperature[cursor.getPosition()], temperature);
-                    views.setTextViewText(widgetDays[cursor.getPosition()], dateText);
                     views.setImageViewResource(widgetIcons[cursor.getPosition()], Utility.getArtResourceForWeatherCondition(weatherId));
                 }
 

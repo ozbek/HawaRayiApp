@@ -61,7 +61,7 @@ public class HawaRayiWidgetConfigure extends PreferenceActivity implements Prefe
             @Override
             public void onClick(View view) {
                 parseCursor();
-                // set alarm to update widget at 00.05 daily
+                // set alarm to update widget at 00.01 daily
                 Utility.setAlarm(getApplicationContext());
 
                 Intent resultValue = new Intent();
@@ -169,17 +169,15 @@ public class HawaRayiWidgetConfigure extends PreferenceActivity implements Prefe
                         String city = getResources().getStringArray(R.array.pref_location_options)[cityId];
                         views.setTextViewText(R.id.widget_large_city, city);
 
-                        dateText = Utility.getFormattedMonthDay(this, date);
-
                         temperature = highString;
                     } else {
                         dateText = Utility.getWeekOfDay(this, date).substring(0, 3);
+                        views.setTextViewText(HawaRayiWidgetProviderLarge.widgetDays[cursor.getPosition() - 1], dateText);
 
                         temperature = highString + "/" + lowString;
                     }
 
                     views.setTextViewText(HawaRayiWidgetProviderLarge.widgetTemperature[cursor.getPosition()], temperature);
-                    views.setTextViewText(HawaRayiWidgetProviderLarge.widgetDays[cursor.getPosition()], dateText);
                     views.setImageViewResource(HawaRayiWidgetProviderLarge.widgetIcons[cursor.getPosition()], Utility.getArtResourceForWeatherCondition(weatherId));
                     appWidgetManager.updateAppWidget(mAppWidgetId, views);
                 }
