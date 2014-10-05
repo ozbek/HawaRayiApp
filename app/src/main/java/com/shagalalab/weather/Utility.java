@@ -240,6 +240,35 @@ public class Utility {
         return -1;
     }
 
+    public static int getNotificationIconResourceForWeatherCondition(int weatherId) {
+        // Based on weather code data found at:
+        // http://bugs.openweathermap.org/projects/api/wiki/Weather_Condition_Codes
+        if (weatherId >= 200 && weatherId <= 232) {
+            return R.drawable.ic_noti_storm;
+        } else if (weatherId >= 300 && weatherId <= 321) {
+            return R.drawable.ic_noti_light_rain;
+        } else if (weatherId >= 500 && weatherId <= 504) {
+            return R.drawable.ic_noti_rain;
+        } else if (weatherId == 511) {
+            return R.drawable.ic_noti_snow;
+        } else if (weatherId >= 520 && weatherId <= 531) {
+            return R.drawable.ic_noti_rain;
+        } else if (weatherId >= 600 && weatherId <= 622) {
+            return R.drawable.ic_noti_snow;
+        } else if (weatherId >= 701 && weatherId <= 761) {
+            return R.drawable.ic_noti_fog;
+        } else if (weatherId == 761 || weatherId == 781) {
+            return R.drawable.ic_noti_storm;
+        } else if (weatherId == 800) {
+            return R.drawable.ic_noti_clear;
+        } else if (weatherId == 801) {
+            return R.drawable.ic_noti_light_clouds;
+        } else if (weatherId >= 802 && weatherId <= 804) {
+            return R.drawable.ic_noti_cloudy;
+        }
+        return -1;
+    }
+
     /**
      * Helper method to provide the art resource id according to the weather condition id returned
      * by the OpenWeatherMap call.
@@ -473,7 +502,7 @@ public class Utility {
             double low = cursor.getDouble(cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_MIN_TEMP));
             String lowString = Utility.formatTemperature(context, low);
 
-            int iconId = Utility.getIconResourceForWeatherCondition(weatherId);
+            int iconId = Utility.getNotificationIconResourceForWeatherCondition(weatherId);
             String title = context.getString(R.string.format_notification_title, city);
 
             String notificationText = context.getString(R.string.format_notification, dateText, highString + "C", lowString + "C");
