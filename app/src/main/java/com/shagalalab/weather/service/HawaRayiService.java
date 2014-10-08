@@ -5,15 +5,12 @@ import android.appwidget.AppWidgetManager;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
-import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.shagalalab.weather.Credentials;
-import com.shagalalab.weather.R;
 import com.shagalalab.weather.Utility;
 import com.shagalalab.weather.data.WeatherContract;
 
@@ -252,9 +249,8 @@ public class HawaRayiService extends IntentService {
         }
         if (cVVector.size() > 0) {
             // removing old data
-            String selection = WeatherContract.WeatherEntry.COLUMN_LOC_KEY + " = ? AND " +
-                    WeatherContract.WeatherEntry.COLUMN_DATETEXT + " < ? ";
-            String[] selectionArgs = new String[]{ Long.toString(locationID), Utility.getDbDateString(new Date())};
+            String selection = WeatherContract.WeatherEntry.COLUMN_DATETEXT + " < ? ";
+            String[] selectionArgs = new String[]{ Utility.getDbDateString(new Date())};
             getContentResolver().delete(WeatherContract.WeatherEntry.CONTENT_URI, selection, selectionArgs);
             // saving data to DB
             ContentValues[] cvArray = new ContentValues[cVVector.size()];
