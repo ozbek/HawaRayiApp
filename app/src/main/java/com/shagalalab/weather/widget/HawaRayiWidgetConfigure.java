@@ -179,8 +179,8 @@ public class HawaRayiWidgetConfigure extends PreferenceActivity implements Prefe
 
                     views.setTextViewText(HawaRayiWidgetProviderLarge.widgetTemperature[cursor.getPosition()], temperature);
                     views.setImageViewResource(HawaRayiWidgetProviderLarge.widgetIcons[cursor.getPosition()], Utility.getArtResourceForWeatherCondition(weatherId));
-                    appWidgetManager.updateAppWidget(mAppWidgetId, views);
                 }
+                appWidgetManager.updateAppWidget(mAppWidgetId, views);
             } else {
                 Intent serviceIntent = new Intent(this, HawaRayiService.class);
                 serviceIntent.putExtra(HawaRayiService.LOCATION_QUERY_EXTRA, selectedCity);
