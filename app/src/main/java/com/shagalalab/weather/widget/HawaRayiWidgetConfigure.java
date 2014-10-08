@@ -62,7 +62,7 @@ public class HawaRayiWidgetConfigure extends PreferenceActivity implements Prefe
             public void onClick(View view) {
                 parseCursor();
                 // set alarm to update widget at 00.01 daily
-                Utility.setAlarm(getApplicationContext());
+                Utility.setAlarmIfNotRunning(getApplicationContext());
 
                 Intent resultValue = new Intent();
                 resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);

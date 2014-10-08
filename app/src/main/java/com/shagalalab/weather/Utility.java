@@ -589,7 +589,7 @@ public class Utility {
         );
     }
 
-    public static void setAlarm(Context context) {
+    private static void setAlarm(Context context) {
         AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReceiver.class);
         PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
@@ -602,6 +602,16 @@ public class Utility {
 
         alarmMgr.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(),
                 AlarmManager.INTERVAL_DAY, alarmIntent);
+    }
+
+    public static void setAlarmIfNotRunning(Context context) {
+        Intent intent = new Intent(context, AlarmReceiver.class);
+
+        boolean alarmUp = (PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_NO_CREATE) != null);
+
+        if (!alarmUp) {
+            setAlarm(context);
+        }
     }
 
     public static void cancelAlarm(Context context) {

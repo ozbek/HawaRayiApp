@@ -119,7 +119,7 @@ public class SettingsActivity extends PreferenceActivity
                 if (newValue.equals("true")) {
                     Utility.showNotification(this);
                     // set alarm to update notification daily
-                    Utility.setAlarm(this);
+                    Utility.setAlarmIfNotRunning(this);
                 } else {
                     Utility.hideNotification(this);
                 }

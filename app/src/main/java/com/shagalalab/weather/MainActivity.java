@@ -69,7 +69,7 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
         }
 
         Utility.showNotificationIfEnabled(this);
-        Utility.setAlarm(this);
+        Utility.setAlarmIfNotRunning(this);
 
         ForecastFragment forecastFragment = ((ForecastFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_forecast));

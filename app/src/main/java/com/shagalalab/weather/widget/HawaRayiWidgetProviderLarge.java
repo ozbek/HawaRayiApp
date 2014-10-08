@@ -57,6 +57,9 @@ public class HawaRayiWidgetProviderLarge extends AppWidgetProvider {
             // Get the layout for the App Widget and attach an on-click listener
             // to the button
             String mLocation = Utility.getWidgetLocation(context, appWidgetId);
+            if (mLocation == null) {
+                continue;
+            }
             Date todayDate = new Date();
             String todayStr = Utility.getDbDateString(todayDate);
             Uri weatherForLocationUri = WeatherContract.WeatherEntry.buildWeatherLocationWithStartDate(
