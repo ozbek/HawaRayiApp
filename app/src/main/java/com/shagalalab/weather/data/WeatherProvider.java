@@ -138,6 +138,30 @@ public class WeatherProvider extends ContentProvider {
     }
 
     @Override
+    public String getType(Uri uri) {
+
+        // Use the Uri Matcher to determine what kind of URI this is.
+        final int match = sUriMatcher.match(uri);
+
+        switch (match) {
+            case WEATHER_WITH_LOCATION_AND_DATE:
+                return WeatherContract.WeatherEntry.CONTENT_ITEM_TYPE;
+            case WEATHER_WITH_LOCATION:
+                return WeatherContract.WeatherEntry.CONTENT_TYPE;
+            case WEATHER:
+                return WeatherContract.WeatherEntry.CONTENT_TYPE;
+            case LOCATION:
+                return WeatherContract.LocationEntry.CONTENT_TYPE;
+            case LOCATION_ID:
+                return WeatherContract.LocationEntry.CONTENT_ITEM_TYPE;
+            case WIDGET:
+                return WeatherContract.LocationEntry.CONTENT_TYPE_WIDGET;
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+    }
+
+    @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
                         String sortOrder) {
         Log.w(LOG_TAG, "query - start");
@@ -216,30 +240,6 @@ public class WeatherProvider extends ContentProvider {
         retCursor.setNotificationUri(getContext().getContentResolver(), uri);
         Log.w(LOG_TAG, "query - end");
         return retCursor;
-    }
-
-    @Override
-    public String getType(Uri uri) {
-
-        // Use the Uri Matcher to determine what kind of URI this is.
-        final int match = sUriMatcher.match(uri);
-
-        switch (match) {
-            case WEATHER_WITH_LOCATION_AND_DATE:
-                return WeatherContract.WeatherEntry.CONTENT_ITEM_TYPE;
-            case WEATHER_WITH_LOCATION:
-                return WeatherContract.WeatherEntry.CONTENT_TYPE;
-            case WEATHER:
-                return WeatherContract.WeatherEntry.CONTENT_TYPE;
-            case LOCATION:
-                return WeatherContract.LocationEntry.CONTENT_TYPE;
-            case LOCATION_ID:
-                return WeatherContract.LocationEntry.CONTENT_ITEM_TYPE;
-            case WIDGET:
-                return WeatherContract.LocationEntry.CONTENT_TYPE_WIDGET;
-            default:
-                throw new UnsupportedOperationException("Unknown uri: " + uri);
-        }
     }
 
     @Override

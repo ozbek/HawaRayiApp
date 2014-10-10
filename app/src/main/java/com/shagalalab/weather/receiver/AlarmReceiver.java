@@ -13,6 +13,9 @@ import com.shagalalab.weather.Utility;
 public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
+        // update weather data if needed
+        Utility.updateWeatherData(context);
+
         // update widget
         Intent update = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         update.putExtra(Utility.UPDATE_WIDGET, true);

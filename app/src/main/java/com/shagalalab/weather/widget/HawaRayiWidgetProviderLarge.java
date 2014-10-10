@@ -15,7 +15,6 @@ import com.shagalalab.weather.MainActivity;
 import com.shagalalab.weather.R;
 import com.shagalalab.weather.Utility;
 import com.shagalalab.weather.data.WeatherContract;
-import com.shagalalab.weather.service.HawaRayiService;
 
 import java.util.Date;
 
@@ -75,7 +74,7 @@ public class HawaRayiWidgetProviderLarge extends AppWidgetProvider {
 
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout_large);
 
-            if (cursor != null && cursor.getCount() > 3){
+            if (cursor != null && cursor.getCount() > 0){
                 while (cursor.moveToNext()) {
                     if (cursor.getPosition() > 3) {
                         break;
@@ -120,10 +119,6 @@ public class HawaRayiWidgetProviderLarge extends AppWidgetProvider {
                 views.setOnClickPendingIntent(R.id.large_layout, pendingIntent);
                 // Tell the AppWidgetManager to perform an update on the current app widget
                 appWidgetManager.updateAppWidget(appWidgetId, views);
-            } else {
-                Intent serviceIntent = new Intent(context, HawaRayiService.class);
-                serviceIntent.putExtra(HawaRayiService.LOCATION_QUERY_EXTRA, mLocation);
-                context.startService(serviceIntent);
             }
 
             if (cursor != null && !cursor.isClosed()) {
