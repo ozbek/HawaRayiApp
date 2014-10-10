@@ -35,6 +35,7 @@ import android.support.v4.app.TaskStackBuilder;
 import com.shagalalab.weather.data.WeatherContract;
 import com.shagalalab.weather.receiver.AlarmReceiver;
 import com.shagalalab.weather.receiver.BootReceiver;
+import com.shagalalab.weather.service.HawaRayiService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -622,6 +623,51 @@ public class Utility {
         // If the alarm has been set, cancel it.
         if (alarmMgr!= null) {
             alarmMgr.cancel(alarmIntent);
+        }
+    }
+
+    public static void updateWeatherData(Context context) {
+        Uri locationUri = WeatherContract.LocationEntry.CONTENT_URI;
+        Cursor cursor = context.getContentResolver().query(
+                locationUri,
+                new String[] { WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING },
+                null,
+                null,
+                null
+        );
+
+        if (cursor != null && cursor.moveToFirst()) {
+            String location = cursor.getString(cursor.getColumnIndex(WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING));
+            String startDate = Utility.getDbDateString(new Date());
+
+            // Sort order:  Ascending, by date.
+            String sortOrder = WeatherContract.WeatherEntry.COLUMN_DATETEXT + " ASC";
+
+            Uri weatherForLocationUri = WeatherContract.WeatherEntry.buildWeatherLocationWithStartDate(
+                    location, startDate);
+
+            Cursor cursorLocation = context.getContentResolver().query(
+                    weatherForLocationUri,
+                    new String[] { WeatherContract.WeatherEntry.COLUMN_DATETEXT,
+                            WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING },
+                    null,
+                    null,
+                    sortOrder
+            );
+
+            if (cursorLocation.getCount() < 4) {
+                Intent serviceIntent = new Intent(context, HawaRayiService.class);
+                serviceIntent.putExtra(HawaRayiService.LOCATION_QUERY_EXTRA, location);
+                context.startService(serviceIntent);
+            }
+
+            if (cursorLocation != null && !cursorLocation.isClosed()) {
+                cursorLocation.close();
+            }
+        }
+
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
         }
     }
 }

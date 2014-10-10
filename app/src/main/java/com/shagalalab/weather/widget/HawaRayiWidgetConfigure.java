@@ -146,7 +146,7 @@ public class HawaRayiWidgetConfigure extends PreferenceActivity implements Prefe
                     sortOrder
             );
 
-            if (cursor != null && cursor.getCount() > 3){
+            if (cursor != null && cursor.getCount() > 0){
                 while (cursor.moveToNext()) {
                     if (cursor.getPosition() > 3) {
                         break;
