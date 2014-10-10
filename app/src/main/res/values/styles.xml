@@ -4,18 +4,9 @@
         <item name="actionBarStyle">@style/ActionBar.Solid.Sunshine</item>
     </style>
 
-    <style name="ForecastTheme" parent="AppTheme">
-        <item name="actionBarStyle">@style/ActionBar.Solid.Sunshine.NoTitle</item>
-    </style>
-
     <style name="ActionBar.Solid.Sunshine" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="background">@color/sunshine_blue</item>
         <item name="logo">@mipmap/ic_launcher</item>
-    </style>
-
-    <style name="ActionBar.Solid.Sunshine.NoTitle" parent="@style/ActionBar.Solid.Sunshine">
-        <item name="displayOptions">useLogo|showHome</item>
-        <item name="logo">@drawable/ic_logo</item>
     </style>
 
     <!-- Style for forecast listview -->
