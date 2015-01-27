@@ -37,12 +37,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.shagalalab.weather.MainActivity" />
         </activity>
-        <activity android:name=".widget.HawaRayiWidgetConfigure"
-            android:label="@string/title_widget_settings">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
-            </intent-filter>
-        </activity>
 
         <provider
             android:authorities="@string/content_authority"
@@ -50,32 +44,6 @@
             android:exported="false"
             android:syncable="true" />
         <service android:name=".service.HawaRayiService" />
-
-        <receiver
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/widget_label_small"
-            android:name=".widget.HawaRayiWidgetProviderSmall" >
-            <intent-filter >
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_info_small" />
-        </receiver>
-
-        <receiver
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/widget_label_large"
-            android:name=".widget.HawaRayiWidgetProviderLarge" >
-            <intent-filter >
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_info_large" />
-        </receiver>
 
         <receiver
             android:name=".receiver.BootReceiver"
