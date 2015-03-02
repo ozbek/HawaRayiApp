@@ -73,7 +73,14 @@ public class Utility {
     }
 
     public static String formatTemperature(Context context, double temperature) {
-        return context.getString(R.string.format_temperature, temperature);
+        double temp;
+
+        if (temperature < 0 && temperature > -1) {
+            temp = 0.0;
+        } else {
+            temp = temperature;
+        }
+        return context.getString(R.string.format_temperature, temp);
     }
 
     /**
@@ -425,30 +432,6 @@ public class Utility {
         String[] months = context.getResources().getStringArray(R.array.months);
         return String.format("%02d:%02d, %s-%s", c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE),
                 c.get(Calendar.DAY_OF_MONTH), months[c.get(Calendar.MONTH)]);
-    }
-
-    public static void insertWidgetLocationInDatabase(Context context, String locationSetting, int appWidgetId) {
-
-        // First, check if the location with this city name exists in the db
-        Cursor cursor = context.getContentResolver().query(
-                WeatherContract.LocationEntry.CONTENT_WIDGET_URI,
-                new String[]{WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING},
-                WeatherContract.LocationEntry.COLUMN_APP_WIDGET_ID + " = ?",
-                new String[]{Integer.toString(appWidgetId)},
-                null);
-
-        if (!cursor.moveToFirst()) {
-            ContentValues locationValues = new ContentValues();
-            locationValues.put(WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING, locationSetting);
-            locationValues.put(WeatherContract.LocationEntry.COLUMN_APP_WIDGET_ID, appWidgetId);
-
-            Uri locationInsertUri = context.getContentResolver()
-                    .insert(WeatherContract.LocationEntry.CONTENT_WIDGET_URI, locationValues);
-        }
-
-        if (cursor != null && !cursor.isClosed()) {
-            cursor.close();
-        }
     }
 
     public static String getWidgetLocation(Context context, int appWidgetId) {

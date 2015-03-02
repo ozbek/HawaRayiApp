@@ -75,7 +75,7 @@ public class HawaRayiService extends IntentService {
                     .appendQueryParameter(FORMAT_PARAM, format)
                     .appendQueryParameter(UNITS_PARAM, units)
                     .appendQueryParameter(DAYS_PARAM, Integer.toString(numDays))
-                    .appendQueryParameter(APPID_PARAM, Credentials.APP_ID)
+                    .appendQueryParameter(APPID_PARAM, Credentials.APP_ID) // use empty string ("") instead of Credentials.APP_ID, if compile error
                     .build();
 
             URL url = new URL(builtUri.toString());
