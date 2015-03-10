@@ -37,6 +37,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.shagalalab.weather.MainActivity" />
         </activity>
+        <activity
+            android:label="@string/title_activity_about"
+            android:name="com.shagalalab.weather.AboutActivity"
+            android:parentActivityName="com.shagalalab.weather.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.shagalalab.weather.MainActivity" />
+        </activity>
 
         <provider
             android:authorities="@string/content_authority"

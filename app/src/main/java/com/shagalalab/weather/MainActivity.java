@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
@@ -32,6 +33,7 @@ import android.view.Window;
 
 public class MainActivity extends ActionBarActivity implements ForecastFragment.Callback {
 
+    public final static String DEVELOPER_PLAY_LINK = "market://search?q=pub:Shag'ala Lab";
     private final String LOG_TAG = MainActivity.class.getSimpleName();
 
     private boolean mTwoPane;
@@ -122,6 +124,14 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
+            return true;
+        } else if (id == R.id.action_about) {
+            startActivity(new Intent(this, AboutActivity.class));
+            return true;
+        } else if (id == R.id.action_other_apps) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(DEVELOPER_PLAY_LINK));
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

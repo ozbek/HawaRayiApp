@@ -55,4 +55,14 @@
     <string name="create_widget">Widget jaratıw</string>
 
     <string name="preference_setting_cancel">Biykar etiw</string>
+
+    <string name="action_about">Haqqında</string>
+    <string name="action_other_apps">Basqa jumıslarımız</string>
+    <string name="title_activity_about">Bag\'darlama haqqında</string>
+
+    <string name="about_title">Android mobil operatsion sisteması ushın hawa rayı bag\'darlaması</string>
+    <string name="about_app_name">Hawa Rayi v.1.0\n\n by</string>
+    <string name="about_developer">Shag\'ala Lab</string>
+    <string name="about_content_source">Hawa Rayi ― ashıq-derekli (open-source) <a href="https://github.com/udacity/Sunshine">Sunshine</a> bag\'darlamasına tiykarlang\'an bolıp, Sunshine\'nan o\'zgeshiligi qaraqalpaq tilindegi interfeys ha\'m Qaraqalpaqstan qalalarındag\'ı hawa rayın ko\'riw mu\'mkinshiligi qosılg\'an. Bag\'darlamanın\' o\'zi de ashıq-derekli bolıp, qa\'lewshiler yaki u\'les qosaman deytug\'ınlar deregin <a href="https://github.com/shagalalab/HawaRayiApp">https://github.com/shagalalab/HawaRayiApp</a> adresine o\'tiw arqalı ko\'riwi mu\'mkin.</string>
+    <string name="about_contact">Bag\'darlama jaratıwshıları menen info@shagalalab.com email adresine xat jazıw, yamasa www.shagalalab.com saytındag\'i \'Baylanıs\' betinde jaylasqan formanı toltırıw arqalı baylanısıwın\'ızg\'a boladı.</string>
 </resources>

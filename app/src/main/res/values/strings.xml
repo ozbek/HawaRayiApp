@@ -77,4 +77,14 @@
 
     <string name="preference_setting_cancel">Бийкар етиӯ</string>
 
+    <string name="action_about">Ҳаққында</string>
+    <string name="action_other_apps">Басқа жумысларымыз</string>
+    <string name="title_activity_about">Бағдарлама ҳаққында</string>
+
+    <string name="about_title">Android мобиль операцион системасы ушын ҳаӯа райы бағдарламасы</string>
+    <string name="about_app_name">Hawa Rayi v.1.0\n\n by</string>
+    <string name="about_developer">Shag\'ala Lab</string>
+    <string name="about_content_source">Hawa Rayi ― ашық-дерекли (open-source) <a href="https://github.com/udacity/Sunshine">Sunshine</a> бағдарламасына тийкарланған болып, Sunshine\'нан өзгешилиги қарақалпақ тилиндеги интерфейс ҳәм Қарақалпақстан қалаларындағы ҳаӯа райын көриӯ мүмкиншилиги қосылған. Бағдарламаның өзи де ашық-дерекли болып, қәлеӯшилер яки үлес қосаман дейтуғынлар дерегин <a href="https://github.com/shagalalab/HawaRayiApp">https://github.com/shagalalab/HawaRayiApp</a> адресине өтиӯ арқалы көриӯи мүмкин.</string>
+    <string name="about_contact">Бағдарлама жаратыӯшылары менен info@shagalalab.com email адресине хат жазыӯ, ямаса www.shagalalab.com сайтындағы \'Байланыс\' бетинде жайласқан форманы толтырыӯ арқалы байланысыӯыңызға болады.</string>
+
 </resources>
