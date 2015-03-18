@@ -44,6 +44,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     private static final String LOG_TAG = DetailFragment.class.getSimpleName();
 
     private static final String FORECAST_SHARE_HASHTAG = " #HawaRayi #ShagalaLab";
+    private static final String FORECAST_SHARE_PLAY_STORE_URL = " http://bit.ly/shagala";
 
     private static final String LOCATION_KEY = "location";
     private static final String FORECAST_KEY = "forecast";
@@ -161,7 +162,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_TEXT,
-                mForecastStr + FORECAST_SHARE_HASHTAG);
+                mForecastStr + FORECAST_SHARE_HASHTAG + FORECAST_SHARE_PLAY_STORE_URL);
         return shareIntent;
     }
 
