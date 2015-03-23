@@ -33,7 +33,7 @@
     <string name="pref_enable_notifications_label">Ҳаўа райы хабарландырыӯы</string>
     <string name="pref_enable_notifications_true">Қосылған</string>
     <string name="pref_enable_notifications_false">Өширилген</string>
-    <string name="today">Бүгүн</string>
+    <string name="today">Бүгин</string>
     <string name="tomorrow">Ертең</string>
     <string name="format_wind_kmh">
         Самал: <xliff:g id="speed">%1$1.0f</xliff:g> м/с, <xliff:g id="direction">%2$s</xliff:g>
