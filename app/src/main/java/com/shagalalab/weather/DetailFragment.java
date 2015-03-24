@@ -53,6 +53,8 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     private String mLocation;
     private String mDateStr;
 
+    private ShareActionProvider mShareActionProvider;
+
     private static final int DETAIL_LOADER = 0;
 
     private static final String[] FORECAST_COLUMNS = {
@@ -145,9 +147,12 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         MenuItem menuItem = menu.findItem(R.id.action_share);
 
         // Get the provider and hold onto it to set/change the share intent.
-        ShareActionProvider mShareActionProvider =
-                (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
 
+        doShare();
+    }
+
+    private void doShare() {
         // Attach an intent to this ShareActionProvider.  You can update this at any time,
         // like when the user selects a new piece of data they might like to share.
         if (mShareActionProvider != null ) {
@@ -250,6 +255,8 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             mLastUpdated.setText(getActivity().getString(R.string.format_last_updated, formattedLastUpdated));
 
             mForecastStr = getActivity().getString(R.string.format_share, city, dateText, description.toLowerCase(), highString, lowString);
+
+            doShare();
         }
         Log.w(LOG_TAG, "onLoadFinished - end");
     }
