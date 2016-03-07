@@ -68,7 +68,7 @@ public class HawaRayiService extends IntentService {
             final String FORMAT_PARAM = "mode";
             final String UNITS_PARAM = "units";
             final String DAYS_PARAM = "cnt";
-            final String APPID_PARAM = "APP_ID";
+            final String APPID_PARAM = "APPID";
 
             Uri builtUri = Uri.parse(FORECAST_BASE_URL).buildUpon()
                     .appendQueryParameter(isLocationInteger? ID_PARAM : QUERY_PARAM, locationQuery)
